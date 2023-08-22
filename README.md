@@ -1,18 +1,18 @@
-# [Nome do projeto]
+# [Complemento]
 
-[Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
+[O trabalho tem como objetivo construir um sistema de gerenciamento de estoque para uma loja física de roupa de moda feminina]
 
 ## Alunos integrantes da equipe
 
-* [Nome completo do aluno 1]
-* [Nome completo do aluno 2]
-* [Nome completo do aluno 3]
-* [Nome completo do aluno 4]
+- [Diego Machado Cordeiro]
+- [Gabriel Estevão Nogueira Sobrinho]
+- [Luana Fleury Braz]
+- [Vinicius Gonzaga Guilherme]
 
 ## Professores responsáveis
 
-* [Nome completo do professor 1]
-* [Nome completo do professor 2]
+- [Soraia Lúcia da Silva]
+- [Lucila Ishitani]
 
 ## Instruções de utilização
 
