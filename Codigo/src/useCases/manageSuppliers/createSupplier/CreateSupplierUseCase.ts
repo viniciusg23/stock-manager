@@ -9,7 +9,7 @@ export class CreateSupplierUseCase {
         this.supplierRepository = supplierRepository;
     }
     
-    async execute(data: ICreateSupplierRequestDTO){
+    async execute(data: ICreateSupplierRequestDTO): Promise<void>{
         const supplierAlreadyExists = await this.supplierRepository.findByName(data.name);
 
         if(supplierAlreadyExists){

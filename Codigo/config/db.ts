@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import config from "config";
 import Logger from "./logger";
 
-async function connect(){
+export async function connect(){
     const dbUri = config.get<string>("dbUri");
 
     try {
@@ -15,4 +15,12 @@ async function connect(){
     }
 }
 
-export default connect;
+export async function disconnect(){
+    try {
+        await mongoose.disconnect();
+    } catch (error) {
+        Logger.error("db did not connect!");
+        Logger.error(`${error}`);
+        process.exit(0);
+    }
+}

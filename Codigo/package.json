@@ -4,10 +4,10 @@
   "description": "Mantenha neste diretório todo o código do projeto. Se necessário, descreva neste arquivo aspectos relevantes da estrutura de diretórios criada para organização do código.",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "set ENV=test && vitest",
     "setup": "npm i && npm i --prefix client",
-    "dev": "concurrently \"npx ts-node ./src/App.ts\" \"npm run start --prefix client\"",
-    "dev-server": "ts-node-dev --respawn --transpile-only ./src/App.ts",
+    "dev": "set ENV=development && concurrently \"npx ts-node ./src/App.ts\" \"npm run start --prefix client\"",
+    "dev-server": "set ENV=development && ts-node-dev --respawn --transpile-only ./src/App.ts",
     "dev-client": "npm run start --prefix client",
     "build-server": "tsc",
     "build-client": "npm run build --prefix client",
@@ -25,11 +25,14 @@
   },
   "devDependencies": {
     "@types/config": "^3.3.0",
+    "@types/cors": "^2.8.14",
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.5",
     "@types/winston": "^2.4.4",
     "concurrently": "^8.2.1",
+    "cors": "^2.8.5",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.5"
   }
 }
