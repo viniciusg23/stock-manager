@@ -3,7 +3,10 @@ import { Alert, Box, Button, TextField } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
-function Register() {
+
+
+
+function Register(props: {option: React.Dispatch<React.SetStateAction<"login" | "register">>}) {
 
     const navigate = useNavigate();
 
@@ -25,9 +28,18 @@ function Register() {
 
     const handleRegister = async () => {
         //TODO: implement register request
+        const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: `{"name":"${username}","password":"${password}"}`
+          };
+          
+        const data = await fetch('/user/register', options);
+
+        if(data.ok){
+            props.option("login");
+        }
     };
-
-
     
 
     return (

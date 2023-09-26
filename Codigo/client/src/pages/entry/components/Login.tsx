@@ -19,11 +19,29 @@ function Login() {
         setPassword(event.target.value);
     };
 
+    useEffect(() => {
+        //TODO: verificar se ja existe token de login no localstorage
+    }, []);
+
     const handleLogin = async () => {
+        const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: `{"name":"${username}","password":"${password}"}`
+        };
+          
+        const data = await fetch('/user/login', options);
+        const jsonData = await data.json();
 
+        console.log(jsonData);
+
+        if(!data.ok){
+            alert(jsonData.message);
+        }
+
+        window.localStorage.setItem("authorization", jsonData.authorization);
+        return navigate("/home");
     };
-
-    
 
     return (
         <Box>
