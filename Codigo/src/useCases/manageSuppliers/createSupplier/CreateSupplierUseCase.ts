@@ -1,5 +1,5 @@
-import { Supplier } from "../../../entities/Supplier";
-import { ISupplierRepository } from "../../../repository/ISupplierRepository";
+import { Supplier } from "../../../entities/supplier/Supplier";
+import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
 import { ICreateSupplierRequestDTO } from "./CreateSupplierDTO";
 
 export class CreateSupplierUseCase {

@@ -26,7 +26,7 @@ export class CreateSupplierController implements Controller{
             return res.status(201).send();
         } catch (error: any) {
             return res.status(400).json({
-                message: error.message || "Unexpected error"
+                message: error.message || "Unexpected error in Create Supplier."
             });
         }
 

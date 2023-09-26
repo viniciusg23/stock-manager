@@ -2,24 +2,26 @@ export class Supplier {
     private name: string;
     private description: string;
 
+
     public constructor(name: string, description: string){
         this.name = name;
         this.description = description;
     }
 
-    public get getName(){
+    public getName(): string {
         return this.name;
     }
 
-    public set setName(name: string){
+    public setName(name: string): void {
         this.name = name;
     }
 
-    public get getDescription(){
+    public getDescription(): string {
         return this.description;
     }
 
-    public set setDescription(description: string){
+    public setDescription(description: string): void {
         this.description = description;
     }
+
 }

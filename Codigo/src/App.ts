@@ -8,6 +8,7 @@ import {connect} from "../config/db";
 
 //routes imports
 import supplierRouter from "./routers/supplierRouter";
+import productRouter from "./routers/productRouter";
 
 
 const environment = config.get<string>("env")
@@ -26,6 +27,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/supplier", supplierRouter);
+
+app.use("/product", productRouter);
 
 
 

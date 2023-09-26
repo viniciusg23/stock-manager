@@ -1,4 +1,4 @@
-import { Supplier } from "../entities/Supplier";
+import { Supplier } from "../../entities/supplier/Supplier";
 
 /**
  * methods to interect with the database

@@ -1,6 +1,6 @@
-import { Supplier } from "../../entities/Supplier";
+import { Supplier } from "../../../entities/supplier/Supplier";
 import { ISupplierRepository } from "../ISupplierRepository";
-import { SupplierModel } from "../../models/Supplier";
+import { SupplierModel } from "../../../models/Supplier";
 
 export class MongoDBSupplierRepository implements ISupplierRepository {
 
@@ -16,11 +16,11 @@ export class MongoDBSupplierRepository implements ISupplierRepository {
 
 
     async save(supplier: Supplier): Promise<void> { 
-        if(!supplier.getName){
+        if(!supplier.getName()){
             return;
         }
 
-        await SupplierModel.create({name: supplier.getName, description: supplier.getDescription});
+        await SupplierModel.create({name: supplier.getName(), description: supplier.getDescription()});
     }
 
     

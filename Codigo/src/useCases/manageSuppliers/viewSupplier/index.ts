@@ -1,5 +1,5 @@
 
-import { MongoDBSupplierRepository } from "../../../repository/implementation/MongoDBSupplierRepository";
+import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
 import { Controller } from "../../IController";
 import { ViewSupplierController } from "./ViewSupplierController";
 import { ViewSupplierUseCase } from "./ViewSupplierUseCase";
