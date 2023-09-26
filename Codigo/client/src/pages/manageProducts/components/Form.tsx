@@ -157,8 +157,7 @@ function Form() {
                 <SupplierSelect supplierState={setSupplier}/>
             </FormControl>
 
-            <Button variant="contained" onClick={handleSubmit} sx={{mt: 3}}>Criar Fornecedor</Button>
-
+            <Button variant="contained" onClick={handleSubmit} sx={{mt: 3}}>Criar Produto</Button>
         </Box>
     );
 }

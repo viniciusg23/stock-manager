@@ -9,6 +9,7 @@ import {connect} from "../config/db";
 //routes imports
 import supplierRouter from "./routers/supplierRouter";
 import productRouter from "./routers/productRouter";
+import userRouter from "./routers/userRouter";
 
 
 const environment = config.get<string>("env")
@@ -29,6 +30,8 @@ app.get("/", (req, res) => {
 app.use("/supplier", supplierRouter);
 
 app.use("/product", productRouter);
+
+app.use("/user", userRouter);
 
 
 
