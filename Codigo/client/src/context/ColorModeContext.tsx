@@ -38,10 +38,17 @@ export function ColorModeContextProvider({children} : any){
                     mode: 'light',
                     primary: {
                         main: '#a60910',
+                        contrastText: "#fff"
                     },
                     secondary: {
                         main: '#ff4148',
                     },
+                    background: {
+                        default: "#eeeeee",
+                        paper: "#fff"
+                    },
+                    getContrastText: () => {return "#000"}
+                    
                 },
             })
         }
@@ -51,10 +58,16 @@ export function ColorModeContextProvider({children} : any){
                     mode: 'dark',
                     primary: {
                         main: '#a60910',
+                        contrastText: "#fff"
                     },
                     secondary: {
                         main: '#ff4148',
                     },
+                    background: {
+                        paper: "#424242",
+                        default: "#303030"
+                    },
+                    getContrastText: () => {return "#fff"}
                 },
             })
         }

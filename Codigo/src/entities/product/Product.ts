@@ -11,6 +11,7 @@ export class Product {
     private purchaseMonth: "Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro";
     private purchaseYear: number;
     private supplier: string
+    
 
 
     constructor(isFiscal: boolean, category: string, name: string, quantity: number, costPrice: number, salePrice: number, purchaseMonth: number, purchaseYear: number, supplier: string, code?: string) {
@@ -24,11 +25,6 @@ export class Product {
             throw new Error("Quantity of product can not negative.");
         }
         this.quantity = quantity;
-
-        if(salePrice <= costPrice) {
-            throw new Error("Sale price must be higher than cost price.");
-        }
-
         this.costPrice = costPrice;
         this.salePrice = salePrice;
 

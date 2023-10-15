@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +11,12 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #333333;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -24,7 +24,7 @@ export class CreateProductController implements Controller {
                 throw new Error("Product must has a category.");
             }
     
-            if (costPrice <= 0 || salePrice <= 0) {
+            if (costPrice < 0 || salePrice < 0) {
                 throw new Error("Invalid cost price or sale price.");
             }
 
