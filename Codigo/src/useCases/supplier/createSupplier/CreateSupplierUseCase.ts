@@ -18,7 +18,7 @@ export class CreateSupplierUseCase {
 
         const supplier = new Supplier(data.name, data.description);
 
-        await this.supplierRepository.save(supplier);
+        await this.supplierRepository.create(supplier);
 
     }
 }

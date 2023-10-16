@@ -11,11 +11,11 @@ export class MongoDBSupplierRepository implements ISupplierRepository {
             return null;
         }
 
-        return new Supplier(dbResult.name, dbResult.description);
+        return new Supplier(dbResult.name, dbResult.description, dbResult._id.toString());
     }
 
 
-    async save(supplier: Supplier): Promise<void> { 
+    async create(supplier: Supplier): Promise<void> { 
         if(!supplier.getName()){
             return;
         }
@@ -24,20 +24,19 @@ export class MongoDBSupplierRepository implements ISupplierRepository {
     }
 
     
-    async remove(name: string): Promise<void> {
-        if(!name){
-            return;
-        }
+    async remove(id: string): Promise<void> {
+        const deletedSupplier = await SupplierModel.deleteOne({_id: id});
 
-        await SupplierModel.deleteOne({name: name})
-        return;
+        if(!deletedSupplier){
+            throw new Error("Was not possible to delete this Supplier");
+        }
     }
 
     public async findAll(): Promise<Supplier[]> {
         const allSuppliers = [];
         const allSuppliersDB = await SupplierModel.find();
         for(const sup of allSuppliersDB){
-            allSuppliers.push(new Supplier(sup.name, sup.description));
+            allSuppliers.push(new Supplier(sup.name, sup.description, sup._id.toString()));
         }
 
         return allSuppliers;

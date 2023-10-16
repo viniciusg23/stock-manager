@@ -22,9 +22,11 @@ export class MongoDBProductRepository implements IProductRepository {
             getMonthValue(findProduct.purchaseMonth)!,
             findProduct.purchaseYear,
             findProduct.supplier,
-            findProduct.code
+            findProduct.code,
+            findProduct._id.toString()
         );
     }
+
     async findByCode(code: string): Promise<Product | null> {
         // throw new Error("Method not implemented.");
 
@@ -44,16 +46,24 @@ export class MongoDBProductRepository implements IProductRepository {
             getMonthValue(findProduct.purchaseMonth)!,
             findProduct.purchaseYear,
             findProduct.supplier,
-            findProduct.code
+            findProduct.code,
+            findProduct._id.toString()
         );
 
     }
     async create(product: Product): Promise<void> {
         await ProductModel.create(product);
     }
-    async remove(code: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async remove(id: string): Promise<void> {
+        const deletedProduct = await ProductModel.deleteOne({_id: id});
+
+        if(!deletedProduct){
+            throw new Error("Was not possible to delete this product");
+        }
+
     }
+
     async findAll(): Promise<Product[]> {
         const allProducts = [];
         const allProductsDB = await ProductModel.find();
@@ -69,7 +79,8 @@ export class MongoDBProductRepository implements IProductRepository {
                 getMonthValue(findProduct.purchaseMonth)!,
                 findProduct.purchaseYear,
                 findProduct.supplier,
-                findProduct.code
+                findProduct.code,
+                findProduct._id.toString()
             ));
         }
 

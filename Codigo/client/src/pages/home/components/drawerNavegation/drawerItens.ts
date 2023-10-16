@@ -38,7 +38,7 @@ export const drawerItens : Array<DrawerItem> = [
     {
         //TODO
         name: "Gerenciar Funcionários",
-        path: "employees",
+        path: "employee",
         icon: Icons.Group
     },
 

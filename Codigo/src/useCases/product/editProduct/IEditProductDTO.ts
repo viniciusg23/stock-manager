@@ -1,5 +1,5 @@
-export interface ICreateProductRequestDTO {
-    isFiscal: boolean;
+export interface IEditProductDTO {
+    id: string;
     category: string;
     name: string;
     quantity: number;

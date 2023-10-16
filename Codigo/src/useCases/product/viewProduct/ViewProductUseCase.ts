@@ -24,7 +24,7 @@ export class ViewProductUseCase {
                 getMonthValue(prod.getPurchaseMonth())!,
                 prod.getPurchaseYear(),
                 prod.getSupplier(),
-                prod.getCode(),
+                prod.getCode()
             ));
         }
 

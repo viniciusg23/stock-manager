@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Edit, Delete } from '@mui/icons-material/';
-import { ButtonGroup, Button, IconButton, Paper, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from '@mui/material';
+import { useEffect, useState } from 'react';
 import ProductController from './ProductController';
 import Table from '../../../components/Table';
 
@@ -45,8 +43,9 @@ function ProductsTable() {
                 const data = await jsonData.json();
 
                 for(const product of data.products){
+                    product.isFiscal = product.isFiscal ? "Sim" : "Não"; 
                     product.purchaseDate = formatDate(product.purchaseMonth, product.purchaseYear);
-                    product.action = <ProductController product={product} />
+                    product.action = <ProductController product={product} />;
                 }
 
                 setRows(data.products);

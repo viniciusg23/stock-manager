@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import { Box, Button } from '@mui/material';
+import { Box, Button, useTheme } from '@mui/material';
 
-interface FormValues {
+interface FormValues { 
     name: string;
-    description: string;
+    job: string;
 }
-
 
 const initialFormValues: FormValues = {
     name: "",
-    description: ""
+    job: ""
 };
 
 
-function AddSupplierForm(){
+function AddEmployeeForm(){
     const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
     const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -26,7 +25,7 @@ function AddSupplierForm(){
 
         const body: string = JSON.stringify({
             name: formValues.name,
-            description: formValues.description
+            job: formValues.job
         });
 
         const options = {
@@ -35,10 +34,11 @@ function AddSupplierForm(){
             body: body
         };
           
-        const jsonData = await fetch('/supplier/create', options);
+        const jsonData = await fetch('/employee/create', options)
         const data = await jsonData.json();
 
         alert(data.message);
+
         setFormValues(initialFormValues);
     };
 
@@ -52,10 +52,9 @@ function AddSupplierForm(){
                 gap: 2,
             }}
         >
-            <TextField color='secondary' id="name" label="Nome do Fornecedor" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
+            <TextField color='secondary' id="name" label="Nome do Funcionário" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
             
-            <TextField color='secondary' id="description" label="Descrição do Fornecedor" variant="outlined" fullWidth value={formValues.description} onChange={handleChange('description')} />
-            
+            <TextField color='secondary' id="category" label="Cargo do Funcionário" variant="outlined" fullWidth value={formValues.job} onChange={handleChange('job')} />
             
             <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Registrar
@@ -64,4 +63,6 @@ function AddSupplierForm(){
     );
 };
 
-export default AddSupplierForm;
+export default AddEmployeeForm;
+
+

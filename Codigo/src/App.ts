@@ -10,6 +10,7 @@ import {connect} from "../config/db";
 import supplierRouter from "./routers/supplierRouter";
 import productRouter from "./routers/productRouter";
 import userRouter from "./routers/userRouter";
+import employeeRouter from "./routers/employeeRouter";
 
 
 const environment = config.get<string>("env")
@@ -33,6 +34,7 @@ app.use("/product", productRouter);
 
 app.use("/user", userRouter);
 
+app.use("/employee", employeeRouter);
 
 
 

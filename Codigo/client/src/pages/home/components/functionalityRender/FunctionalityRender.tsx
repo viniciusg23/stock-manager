@@ -2,6 +2,7 @@ import { Box, Breadcrumbs, Link, Paper, Typography } from '@mui/material';
 import { drawerWidth } from '../drawerNavegation/DrawerNavegation';
 import ManageProducts from '../../subPages/manageProducts/ManageProducts';
 import ManageSuppliers from '../../subPages/manageSuppliers/ManageSuppliers';
+import ManageEmployees from '../../subPages/manageEmployees/ManageEmployees';
 
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
@@ -14,6 +15,9 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
             break;
         case "supplier": 
             componentToRender = <ManageSuppliers />
+            break;
+        case "employee": 
+            componentToRender = <ManageEmployees />
             break;
         default:
             componentToRender = <Typography>Funcionalidade não encontrada</Typography>;
