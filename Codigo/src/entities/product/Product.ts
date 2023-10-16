@@ -1,121 +1,186 @@
 import { EnumMonth } from "./EnumMonth";
 
 export class Product {
-    private code: string;
-    private isFiscal: boolean;
-    private category: string;
-    private name: string;
-    private quantity: number;
-    private costPrice: number;
-    private salePrice: number;
-    private purchaseMonth: "Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro";
-    private purchaseYear: number;
-    private supplier: string
-    
+  private code: string;
+  private isFiscal: boolean;
+  private category: string;
+  private name: string;
+  private quantity: number;
+  private costPrice: number;
+  private salePrice: number;
+  private purchaseMonth:
+    | "Janeiro"
+    | "Fevereiro"
+    | "Marco"
+    | "Abril"
+    | "Maio"
+    | "Junho"
+    | "Julho"
+    | "Agosto"
+    | "Setembro"
+    | "Outubro"
+    | "Novembro"
+    | "Dezembro";
+  private purchaseYear: number;
+  private supplier: string;
+  private qrCode: string;
 
+  constructor(
+    isFiscal: boolean,
+    category: string,
+    name: string,
+    quantity: number,
+    costPrice: number,
+    salePrice: number,
+    purchaseMonth: number,
+    purchaseYear: number,
+    supplier: string,
+    qrCode: string,
+    code?: string
+  ) {
+    this.code = code ? code : "";
 
-    constructor(isFiscal: boolean, category: string, name: string, quantity: number, costPrice: number, salePrice: number, purchaseMonth: number, purchaseYear: number, supplier: string, code?: string) {
-        this.code = code ? code : "";
+    this.isFiscal = isFiscal;
+    this.category = category;
+    this.name = name;
 
-        this.isFiscal = isFiscal;
-        this.category = category;
-        this.name = name;
-
-        if(quantity < 0){
-            throw new Error("Quantity of product can not negative.");
-        }
-        this.quantity = quantity;
-        this.costPrice = costPrice;
-        this.salePrice = salePrice;
-
-        if(purchaseMonth > 12 && purchaseMonth < 1){
-            throw new Error("Invalid urchase month.");
-        }
-        this.purchaseMonth = EnumMonth[purchaseMonth] as "Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro";
-
-        this.purchaseYear = purchaseYear;
-        this.supplier = supplier;
+    if (quantity < 0) {
+      throw new Error("Quantity of product can not negative.");
     }
+    this.quantity = quantity;
+    this.costPrice = costPrice;
+    this.salePrice = salePrice;
 
-
-    public getCode(): string {
-        return this.code;
+    if (purchaseMonth > 12 && purchaseMonth < 1) {
+      throw new Error("Invalid urchase month.");
     }
+    this.purchaseMonth = EnumMonth[purchaseMonth] as
+      | "Janeiro"
+      | "Fevereiro"
+      | "Marco"
+      | "Abril"
+      | "Maio"
+      | "Junho"
+      | "Julho"
+      | "Agosto"
+      | "Setembro"
+      | "Outubro"
+      | "Novembro"
+      | "Dezembro";
 
-    public setCode(code: string): void {
-        this.code = code;
-    }
+    this.purchaseYear = purchaseYear;
+    this.supplier = supplier;
+    this.qrCode = qrCode;
+  }
 
-    public isIsFiscal(): boolean {
-        return this.isFiscal;
-    }
+  public getQrCode(): string {
+    return this.qrCode;
+  }
+  public setQrCode(qrCode: string): void {
+    this.qrCode = qrCode;
+  }
 
-    public setIsFiscal(isFiscal: boolean): void {
-        this.isFiscal = isFiscal;
-    }
+  public getCode(): string {
+    return this.code;
+  }
 
-    public getCategory(): string {
-        return this.category;
-    }
+  public setCode(code: string): void {
+    this.code = code;
+  }
 
-    public setCategory(category: string): void {
-        this.category = category;
-    }
+  public isIsFiscal(): boolean {
+    return this.isFiscal;
+  }
 
-    public getName(): string {
-        return this.name;
-    }
+  public setIsFiscal(isFiscal: boolean): void {
+    this.isFiscal = isFiscal;
+  }
 
-    public setName(name: string): void {
-        this.name = name;
-    }
+  public getCategory(): string {
+    return this.category;
+  }
 
-    public getQuantity(): number {
-        return this.quantity;
-    }
+  public setCategory(category: string): void {
+    this.category = category;
+  }
 
-    public setQuantity(quantity: number): void {
-        this.quantity = quantity;
-    }
+  public getName(): string {
+    return this.name;
+  }
 
-    public getCostPrice(): number {
-        return this.costPrice;
-    }
+  public setName(name: string): void {
+    this.name = name;
+  }
 
-    public setCostPrice(costPrice: number): void {
-        this.costPrice = costPrice;
-    }
+  public getQuantity(): number {
+    return this.quantity;
+  }
 
-    public getSalePrice(): number {
-        return this.salePrice;
-    }
+  public setQuantity(quantity: number): void {
+    this.quantity = quantity;
+  }
 
-    public setSalePrice(salePrice: number): void {
-        this.salePrice = salePrice;
-    }
+  public getCostPrice(): number {
+    return this.costPrice;
+  }
 
-    public getPurchaseMonth(): "Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro" {
-        return this.purchaseMonth;
-    }
+  public setCostPrice(costPrice: number): void {
+    this.costPrice = costPrice;
+  }
 
-    public setPurchaseMonth(purchaseMonth: number): void {
-        this.purchaseMonth = EnumMonth[purchaseMonth] as "Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro";
-    }
+  public getSalePrice(): number {
+    return this.salePrice;
+  }
 
-    public getPurchaseYear(): number {
-        return this.purchaseYear;
-    }
+  public setSalePrice(salePrice: number): void {
+    this.salePrice = salePrice;
+  }
 
-    public setPurchaseYear(purchaseYear: number): void {
-        this.purchaseYear = purchaseYear;
-    }
+  public getPurchaseMonth():
+    | "Janeiro"
+    | "Fevereiro"
+    | "Marco"
+    | "Abril"
+    | "Maio"
+    | "Junho"
+    | "Julho"
+    | "Agosto"
+    | "Setembro"
+    | "Outubro"
+    | "Novembro"
+    | "Dezembro" {
+    return this.purchaseMonth;
+  }
 
-    public getSupplier(): string {
-        return this.supplier;
-    }
+  public setPurchaseMonth(purchaseMonth: number): void {
+    this.purchaseMonth = EnumMonth[purchaseMonth] as
+      | "Janeiro"
+      | "Fevereiro"
+      | "Marco"
+      | "Abril"
+      | "Maio"
+      | "Junho"
+      | "Julho"
+      | "Agosto"
+      | "Setembro"
+      | "Outubro"
+      | "Novembro"
+      | "Dezembro";
+  }
 
-    public setSupplier(supplier: string): void {
-        this.supplier = supplier;
-    }
+  public getPurchaseYear(): number {
+    return this.purchaseYear;
+  }
 
+  public setPurchaseYear(purchaseYear: number): void {
+    this.purchaseYear = purchaseYear;
+  }
+
+  public getSupplier(): string {
+    return this.supplier;
+  }
+
+  public setSupplier(supplier: string): void {
+    this.supplier = supplier;
+  }
 }
