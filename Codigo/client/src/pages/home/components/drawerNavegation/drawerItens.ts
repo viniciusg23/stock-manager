@@ -16,13 +16,13 @@ export const drawerItens : Array<DrawerItem> = [
     {
         //TODO
         name: "Gerenciar Produtos",
-        path: "products",
+        path: "product",
         icon: Icons.LocalMall
     },
     {
         //TODO
         name: "Gerenciar Fornecedores",
-        path: "suppliers",
+        path: "supplier",
         icon: Icons.LocalShipping
     },
     {

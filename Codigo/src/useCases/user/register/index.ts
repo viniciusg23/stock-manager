@@ -1,6 +1,6 @@
-import { IUserRepository } from "../../repository/userRepository/IUserRepository";
-import { MongoDBUserRepository } from "../../repository/userRepository/implementation/MongoDBUserRepository";
-import { Controller } from "../IController";
+import { IUserRepository } from "../../../repository/userRepository/IUserRepository";
+import { MongoDBUserRepository } from "../../../repository/userRepository/implementation/MongoDBUserRepository";
+import { Controller } from "../../IController";
 import { RegisterController } from "./RegisterController";
 import { RegisterUseCase } from "./RegisterUseCase";
 

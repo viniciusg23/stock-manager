@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { createProductController } from "../useCases/manageProducts/createProduct";
-import { viewProductController } from "../useCases/manageProducts/viewProduct";
+import { createProductController } from "../useCases/product/createProduct";
+import { viewProductController } from "../useCases/product/viewProduct";
 
 
 const router = Router();

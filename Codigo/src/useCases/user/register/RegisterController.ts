@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Controller } from "../IController";
+import { Controller } from "../../IController";
 import { RegisterUseCase } from "./RegisterUseCase";
 
 export class RegisterController implements Controller {

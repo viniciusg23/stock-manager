@@ -6,7 +6,7 @@
   "scripts": {
     "test": "set ENV=test && vitest",
     "setup": "npm i && npm i --prefix client",
-    "dev": "set ENV=development && concurrently \"npx ts-node ./src/App.ts\" \"npm run start --prefix client\"",
+    "dev": "set ENV=development && concurrently \"npm run dev-server\" \"npm run dev-client\"",
     "dev-server": "set ENV=development && ts-node-dev --respawn --transpile-only ./src/App.ts",
     "dev-client": "npm run start --prefix client",
     "build-server": "tsc",

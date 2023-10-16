@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { generateCustomCodeController } from "../useCases/generateCustomCode";
-import { loginController } from "../useCases/login";
-import { registerController } from "../useCases/register";
+import { loginController } from "../useCases/user/login";
+import { registerController } from "../useCases/user/register";
 
 
 const router = Router();

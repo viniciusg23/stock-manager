@@ -13,6 +13,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { drawerItens } from "./drawerItens";
 import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
+
 import FunctionalityRender from '../functionalityRender/FunctionalityRender';
 
 const drawerMaxWidth: number = 300
@@ -90,7 +91,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function DrawerNavegation() {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
-  const [functionality, setFunctionality] = useState<string>("");
+  const [functionality, setFunctionality] = useState<{path: string, name: string}>({path: "", name: ""});
 
 
   const handleDrawerOpen = () => {
@@ -176,7 +177,7 @@ export default function DrawerNavegation() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                onClick={() => setFunctionality(item.path)}
+                onClick={() => setFunctionality({path: item.path, name: item.name})}
               >
                 <ListItemIcon
                   sx={{
@@ -198,7 +199,7 @@ export default function DrawerNavegation() {
       <Box component="main" sx={{ flexGrow: 1}}>
         <DrawerHeader />
         
-        <FunctionalityRender functionality={functionality}/>
+        <FunctionalityRender functionality={functionality.path} functionalityName={functionality.name}/>
 
       </Box>
 

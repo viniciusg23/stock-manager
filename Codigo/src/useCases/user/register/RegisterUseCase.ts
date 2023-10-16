@@ -1,5 +1,5 @@
-import { User } from "../../entities/user/User";
-import { IUserRepository } from "../../repository/userRepository/IUserRepository";
+import { User } from "../../../entities/user/User";
+import { IUserRepository } from "../../../repository/userRepository/IUserRepository";
 import { IRegisterDTO } from "./RegisterDTO";
 import { hashSync } from "bcryptjs";
 

@@ -3,14 +3,10 @@ import ProductsTable from "./components/ProductsTable";
 
 function ManageProducts() {
     return (
-        <div>
-
-
+        <>
             <AddProduct />
-
-        
             <ProductsTable />
-        </div>
+        </>
     );
 }
 

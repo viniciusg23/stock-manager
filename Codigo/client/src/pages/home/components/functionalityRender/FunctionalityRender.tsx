@@ -1,15 +1,19 @@
 import { Box, Breadcrumbs, Link, Paper, Typography } from '@mui/material';
 import { drawerWidth } from '../drawerNavegation/DrawerNavegation';
 import ManageProducts from '../../subPages/manageProducts/ManageProducts';
+import ManageSuppliers from '../../subPages/manageSuppliers/ManageSuppliers';
 
 
-function FunctionalityRender(props: { functionality: string }) {
+function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
     const { functionality } = props;
 
     let componentToRender = <div></div>;
     switch (functionality) {
-        case 'products':
+        case "product":
             componentToRender = <ManageProducts />;
+            break;
+        case "supplier": 
+            componentToRender = <ManageSuppliers />
             break;
         default:
             componentToRender = <Typography>Funcionalidade não encontrada</Typography>;
@@ -38,7 +42,7 @@ function FunctionalityRender(props: { functionality: string }) {
                     <Link underline="hover" color="inherit" href="/home">
                         Sistema
                     </Link>
-                    <Typography color="text.primary">{functionality}</Typography>
+                    <Typography color="text.primary">{props.functionalityName}</Typography>
                 </Breadcrumbs>
             </Paper>
 
@@ -47,9 +51,7 @@ function FunctionalityRender(props: { functionality: string }) {
                 sx={{
                     padding: 2,
                     width: '100%',
-                    // minHeight: '100%',
                     backgroundColor: 'background.paper',
-                    // overflow: "auto"
                 }}
             >
                 {componentToRender}

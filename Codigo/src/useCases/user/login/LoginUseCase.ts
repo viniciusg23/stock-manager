@@ -1,5 +1,5 @@
 import { compareSync } from "bcryptjs";
-import { IUserRepository } from "../../repository/userRepository/IUserRepository";
+import { IUserRepository } from "../../../repository/userRepository/IUserRepository";
 import { ILoginDTO } from "./LoginDTO";
 import jwt from "jsonwebtoken";
 import config from "config";

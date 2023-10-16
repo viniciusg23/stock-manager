@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createSupplierController } from "../useCases/manageSuppliers/createSupplier/index";
-import { viewSupplierController } from "../useCases/manageSuppliers/viewSupplier/index";
+import { createSupplierController } from "../useCases/supplier/createSupplier/index";
+import { viewSupplierController } from "../useCases/supplier/viewSupplier/index";
 
 const router = Router();
 
