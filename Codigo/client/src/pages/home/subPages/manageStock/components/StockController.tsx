@@ -2,6 +2,9 @@ import { Edit, Delete, QrCode2 } from "@mui/icons-material";
 import { ButtonGroup, Tooltip, IconButton, Box, Button } from "@mui/material";
 import Form from "../../../components/Form";
 import { useState } from "react";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { useNavigate } from "react-router-dom";
 
 interface StockControllerProps {
     product: {
@@ -17,6 +20,7 @@ interface StockControllerProps {
 }
 
 function StockController(props: StockControllerProps) {
+    const navigate = useNavigate();
     const [isOepn, setIsOpen] = useState<boolean>(false);
     const [qrcode, setQrCode] = useState<string>("");
 
@@ -43,9 +47,12 @@ function StockController(props: StockControllerProps) {
     const generateQrCode = async () => {
         try {
             //TODO fazer request para remover prod
-            console.log(`${name} QR Code`);
+            const options = { 
+                method: 'GET',
+                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+            };
     
-            const response = await fetch(`/sell/create-qrcode/${id}`);
+            const response = await fetch(`/sell/create-qrcode/${id}`, options);
             const data = await response.json();
     
             console.log(data.qrCode);
@@ -53,8 +60,14 @@ function StockController(props: StockControllerProps) {
             setQrCode(data.qrCode);            
             handleOpen();
 
-        } catch (error) {
-            console.error('Erro ao gerar QR Code:', error);
+        }
+        catch (error: any | UnauthorizationError) {
+            if(error instanceof UnauthorizationError){
+                alert("Sessão finalizada");
+                return navigate("/");
+            }
+
+            alert(error.message)
         }
     }
 

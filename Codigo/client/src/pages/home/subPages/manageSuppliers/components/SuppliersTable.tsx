@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import SupplierController from "./SupplierController";
 import Table from "../../../components/Table";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { useNavigate } from "react-router-dom";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
 
 
 interface ISupplierColumn{
@@ -25,12 +28,16 @@ const columns: ISupplierColumn[] = [
 
 
 function SuppliersTable() {
+    const navigate = useNavigate();
     const [rows, setRows] = useState<ISupplierRow[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const options = { method: 'GET' };
+                const options = { 
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                };
     
                 const jsonData = await fetch('/supplier/view', options);
                 const data = await jsonData.json();
@@ -41,8 +48,14 @@ function SuppliersTable() {
 
                 setRows(data.suppliers);
 
-            } catch (error: any) {
-                alert(error.message);
+            } 
+            catch (error: any | UnauthorizationError) {
+                if(error instanceof UnauthorizationError){
+                    alert("Sessão finalizada");
+                    return navigate("/");
+                }
+    
+                alert(error.message)
             }
         }
 

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Box, Button } from '@mui/material';
+import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
+import { useNavigate } from 'react-router-dom';
+import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
 
 interface FormValues {
     name: string;
@@ -15,6 +18,7 @@ const initialFormValues: FormValues = {
 
 
 function AddSupplierForm(){
+    const navigate = useNavigate();
     const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
     const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -22,24 +26,34 @@ function AddSupplierForm(){
     };
 
     const handleSubmit = async () => {
-        console.log(formValues);
+        try {
+            console.log(formValues);
+    
+            const body: string = JSON.stringify({
+                name: formValues.name,
+                description: formValues.description
+            });
+    
+            const options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                body: body
+            };
+              
+            const jsonData = await fetch('/supplier/create', options);
+            const data = await jsonData.json();
+    
+            alert(data.message);
+            setFormValues(initialFormValues);
+        } 
+        catch (error: any | UnauthorizationError) {
+            if(error instanceof UnauthorizationError){
+                alert("Sessão finalizada");
+                return navigate("/");
+            }
 
-        const body: string = JSON.stringify({
-            name: formValues.name,
-            description: formValues.description
-        });
-
-        const options = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: body
-        };
-          
-        const jsonData = await fetch('/supplier/create', options);
-        const data = await jsonData.json();
-
-        alert(data.message);
-        setFormValues(initialFormValues);
+            alert(error.message)
+        }
     };
 
 

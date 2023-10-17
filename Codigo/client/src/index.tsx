@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import EntryPage from './pages/entry/EntryPage';
 import HomePage from './pages/home/HomePage';
+import AgilSell from './pages/agilSell/AgilSell';
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "/home",
         element: <HomePage />,
       },
+      {
+        path: "/agil-sell/:id",
+        element: <AgilSell />
+      }
 
     ]
   }

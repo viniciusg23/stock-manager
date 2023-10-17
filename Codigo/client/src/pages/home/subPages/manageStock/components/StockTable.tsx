@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Table from "../../../components/Table";
 import StockController from "./StockController";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { useNavigate } from "react-router-dom";
 
 
 interface IStockColumn{
@@ -33,12 +36,16 @@ const columns: IStockColumn[] = [
 
 
 function StockTable() {
+    const navigate = useNavigate();
     const [rows, setRows] = useState<IStockRow[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const options = { method: 'GET' };
+                const options = { 
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                };
     
                 const jsonData = await fetch('/product/view', options);
                 const data = await jsonData.json();
@@ -50,8 +57,14 @@ function StockTable() {
 
                 setRows(data.products);
 
-            } catch (error: any) {
-                alert(error.message);
+            }
+            catch (error: any | UnauthorizationError) {
+                if(error instanceof UnauthorizationError){
+                    alert("Sessão finalizada");
+                    return navigate("/");
+                }
+    
+                alert(error.message)
             }
         }
 

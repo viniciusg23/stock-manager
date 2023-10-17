@@ -1,6 +1,9 @@
 import { Box, Button, Divider, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, Typography, useTheme } from "@mui/material";
 import { Close, ShoppingCartCheckout } from "@mui/icons-material";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UnauthorizationError } from "../../../../errors/UnauthorizationError";
+import { getAuthorizationToken } from "../../utils/getAuthorizationToken";
 
 interface Product {
     id: string;
@@ -15,7 +18,8 @@ interface Employee {
 }
 
 function RegisterSells() {
-    // const theme = useTheme()
+    const navigate = useNavigate()
+
     const [products, setProducts] = useState<Product[]>([]);
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [availableQuantity, setAvailableQuantity] = useState<number>(0);
@@ -63,26 +67,36 @@ function RegisterSells() {
 
     const handleSell = async () => {
 
-        console.log("sell")
-
-        const body = JSON.stringify({
-            productId: selectedProductId,
-            quantity: selectedQuantity,
-            salePrice: selectedProductSalePrice,
-            employeeId: selectedEmployee
-        })
-
-        const options = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: body
-        };
-          
-        const response = await fetch("/sell", options);
-        const data = await response.json();
-
-        alert(data.message);
+        try {
+            console.log("sell")
+    
+            const body = JSON.stringify({
+                productId: selectedProductId,
+                quantity: selectedQuantity,
+                salePrice: selectedProductSalePrice,
+                employeeId: selectedEmployee
+            })
+    
+            const options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                body: body
+            };
+              
+            const response = await fetch("/sell", options);
+            const data = await response.json();
+    
+            alert(data.message);
             
+        }
+        catch (error: any | UnauthorizationError) {
+            if(error instanceof UnauthorizationError){
+                alert("Sessão finalizada");
+                return navigate("/");
+            }
+
+            alert(error.message)
+        } 
     }
 
     const handleCancel = () => {
