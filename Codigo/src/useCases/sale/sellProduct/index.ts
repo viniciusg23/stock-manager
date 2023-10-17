@@ -4,7 +4,7 @@ import { ISaleRepository } from "../../../repository/saleRepository/ISaleReposit
 import { MongoDBSaleRepository } from "../../../repository/saleRepository/implementation/MongoDBSaleRepository";
 import { EditProductUseCase } from "../../product/editProduct/EditProductUseCase";
 import { SellProductController } from "./SellProductController";
-import { SellProductUseCase } from "./sellProductUseCase";
+import { SellProductUseCase } from "./SellProductUseCase";
 
 const saleRepository: ISaleRepository = new MongoDBSaleRepository();
 const productRepository: IProductRepository = new MongoDBProductRepository();

@@ -23,7 +23,7 @@ describe("Manage Supplier in Database", () => {
         const supplier = new Supplier("sup1", "desc1");
         const mongoDBSupplierRepository = new MongoDBSupplierRepository();
 
-        await mongoDBSupplierRepository.save(supplier);
+        await mongoDBSupplierRepository.create(supplier);
 
         const verifySupplier = await SupplierModel.findOne({name: "sup1"});
 
@@ -47,7 +47,7 @@ describe("Manage Supplier in Database", () => {
         const supplier = new Supplier("sup3", "desc1");
         const mongoDBSupplierRepository = new MongoDBSupplierRepository();
 
-        await mongoDBSupplierRepository.save(supplier);
+        await mongoDBSupplierRepository.create(supplier);
 
         await mongoDBSupplierRepository.remove("sup3");
         const findedSupplier = await mongoDBSupplierRepository.findByName("sup3");

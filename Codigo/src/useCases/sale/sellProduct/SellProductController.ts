@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SellProductUseCase } from "./sellProductUseCase";
+import { SellProductUseCase } from "./SellProductUseCase";
 
 export class SellProductController {
     private sellProductUseCase: SellProductUseCase;

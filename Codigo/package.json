@@ -11,7 +11,7 @@
     "dev-client": "npm run start --prefix client",
     "build-server": "tsc",
     "build-client": "npm run build --prefix client",
-    "build": "npm run build_client && npm run build_server"
+    "build": "npm run build-server && npm run build-client "
   },
   "author": "",
   "license": "ISC",
