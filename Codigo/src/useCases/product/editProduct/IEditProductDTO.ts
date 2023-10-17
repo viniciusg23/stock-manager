@@ -1,4 +1,5 @@
 export interface IEditProductDTO {
+    isFiscal: boolean;
     id: string;
     category: string;
     name: string;
@@ -8,4 +9,5 @@ export interface IEditProductDTO {
     purchaseMonth: number;
     purchaseYear: number;
     supplier: string;
+    code: string
 }

@@ -3,10 +3,10 @@ import { IProductRepository } from "../../../repository/productRepository/IProdu
 import { ICreateProductRequestDTO } from "./CreateProductDTO";
 
 export class CreateProductUseCase {
-  private productRepositoty: IProductRepository;
+  private productRepository: IProductRepository;
 
-  public constructor(productRepositoty: IProductRepository) {
-    this.productRepositoty = productRepositoty;
+  public constructor(productRepository: IProductRepository) {
+    this.productRepository = productRepository;
   }
 
   public async execute(data: ICreateProductRequestDTO) {
@@ -27,6 +27,6 @@ export class CreateProductUseCase {
       code.toString()
     );
 
-    await this.productRepositoty.create(product);
+    await this.productRepository.create(product);
   }
 }

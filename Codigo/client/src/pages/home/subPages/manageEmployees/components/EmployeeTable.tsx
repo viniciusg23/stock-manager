@@ -18,7 +18,8 @@ interface EmployeeRow{
 const columns: EmployeeColumn[] = [
     { id: "id", label: "Código", minWidth: 100 },
     { id: "name", label: "Nome", minWidth: 170 },
-    { id: "job", label: "Cargo", minWidth: 150 }
+    { id: "job", label: "Cargo", minWidth: 150 },
+    { id: "action" , label: "Ações", minWidth: 70 }
 ];
 
 

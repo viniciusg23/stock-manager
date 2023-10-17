@@ -3,6 +3,8 @@ import { drawerWidth } from '../drawerNavegation/DrawerNavegation';
 import ManageProducts from '../../subPages/manageProducts/ManageProducts';
 import ManageSuppliers from '../../subPages/manageSuppliers/ManageSuppliers';
 import ManageEmployees from '../../subPages/manageEmployees/ManageEmployees';
+import ManageStock from '../../subPages/manageStock/ManageStock';
+import RegisterSells from '../../subPages/registerSell/RegisterSells';
 
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
@@ -18,6 +20,12 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
             break;
         case "employee": 
             componentToRender = <ManageEmployees />
+            break;
+        case "stock":
+            componentToRender = <ManageStock />
+            break;
+        case "sell":
+            componentToRender = <RegisterSells />
             break;
         default:
             componentToRender = <Typography>Funcionalidade não encontrada</Typography>;

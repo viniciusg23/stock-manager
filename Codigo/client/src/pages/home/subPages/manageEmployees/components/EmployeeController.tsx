@@ -28,12 +28,12 @@ function EmployeeController(props: EmployeeControllerProps) {
     return (
         <ButtonGroup variant="contained" disableElevation>
             <Tooltip title="Editar">
-                <IconButton color='info' onClick={removeEmployee}>
+                <IconButton color='info' onClick={updateEmployee}>
                     <Edit />
                 </IconButton>
             </Tooltip>
             <Tooltip title="Excluir">
-                <IconButton color='error' onClick={updateEmployee}>
+                <IconButton color='error' onClick={removeEmployee}>
                     <Delete />
                 </IconButton>
             </Tooltip>

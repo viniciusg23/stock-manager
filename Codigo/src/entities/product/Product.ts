@@ -176,4 +176,9 @@ export class Product {
   public setSupplier(supplier: string): void {
     this.supplier = supplier;
   }
+
+  public getId(): string | undefined{
+    return this.id;
+  }
+
 }
