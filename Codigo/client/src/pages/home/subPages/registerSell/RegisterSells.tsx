@@ -1,5 +1,5 @@
 import { Box, Button, Divider, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, Typography, useTheme } from "@mui/material";
-import { Send } from "@mui/icons-material";
+import { Close, ShoppingCartCheckout } from "@mui/icons-material";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 
 interface Product {
@@ -15,21 +15,23 @@ interface Employee {
 }
 
 function RegisterSells() {
-    const theme = useTheme()
+    // const theme = useTheme()
     const [products, setProducts] = useState<Product[]>([]);
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [availableQuantity, setAvailableQuantity] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
 
-    const [selectedProduct, setSelectedProduct] = useState("");
+    const [selectedProductId, setSelectedProduct] = useState("");
+    const [selectedProductSalePrice, setSelectedProductSalePrice] = useState<number>(0);
     const handleChangeProduct = (event: SelectChangeEvent) => {
         setSelectedProduct(event.target.value);
 
-        const selectedProduct = products.find(product => product.id === event.target.value);
+        const selectedProductId = products.find(product => product.id === event.target.value);
 
-        if (selectedProduct) {
-            setAvailableQuantity(Number(selectedProduct.quantity));
+        if (selectedProductId) {
+            setAvailableQuantity(Number(selectedProductId.quantity));
+            setSelectedProductSalePrice(Number(selectedProductId.salePrice));
         }
         else {
             setAvailableQuantity(0);
@@ -40,10 +42,10 @@ function RegisterSells() {
     const handleChangeQuantity = (event: SelectChangeEvent) => {
         setSelectedQuantity(event.target.value);
 
-        const product = products.find(product => product.id === selectedProduct);
+        const product = products.find(product => product.id === selectedProductId);
 
         if (product) {
-            setTotalPrice(Number(product.quantity) * Number(product.salePrice));
+            setTotalPrice(Number(event.target.value) * selectedProductSalePrice);
         }
         else {
             setTotalPrice(0);
@@ -59,12 +61,32 @@ function RegisterSells() {
         setTotalPrice(Number(event.target.value));
     }
 
-    const handleSell = () => {
-        
+    const handleSell = async () => {
+
+        console.log("sell")
+
+        const body = JSON.stringify({
+            productId: selectedProductId,
+            quantity: selectedQuantity,
+            salePrice: selectedProductSalePrice,
+            employeeId: selectedEmployee
+        })
+
+        const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: body
+        };
+          
+        const response = await fetch("/sell", options);
+        const data = await response.json();
+
+        alert(data.message);
+            
     }
 
     const handleCancel = () => {
-
+        console.log("cancel")
     }
 
 
@@ -116,7 +138,7 @@ function RegisterSells() {
                         <Select
                             color="secondary"
                             labelId="select-product-label"
-                            value={selectedProduct}
+                            value={selectedProductId}
                             label="Selecionar Produto"
                             onChange={handleChangeProduct}
                         >
@@ -184,27 +206,31 @@ function RegisterSells() {
                         mt: "1em",
                         display: "flex",
                         alignItems: "center",
-                        gap: "1.5em"
+                        gap: "1.5em",
+                        maxWidth: 600
                     }}
                 >
                     <Button 
-                        color="warning" 
-                        variant="outlined" 
-                        size="large" 
-                        endIcon={<Send />} 
-                        onClick={handleSell}
-                    >
-                        Cancelar
-                    </Button>
-                    <Button 
+                        fullWidth
                         color="success" 
                         variant="contained" 
                         size="large" 
-                        endIcon={<Send />} 
-                        onClick={handleCancel}
+                        endIcon={<ShoppingCartCheckout />} 
+                        onClick={handleSell}
                     >
                         Vender
                     </Button>
+                    <Button 
+                        fullWidth
+                        color="warning" 
+                        variant="outlined" 
+                        size="large" 
+                        endIcon={<Close />} 
+                        onClick={handleCancel}
+                    >
+                        Cancelar
+                    </Button>
+                    
                 </Box>
             </Box>
         </>
