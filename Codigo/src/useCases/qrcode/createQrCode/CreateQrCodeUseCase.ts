@@ -6,7 +6,7 @@ export class CreateQrCodeUseCase {
     public async execute(data: ICreateQrCodeDTO): Promise<string>{
         const {protocol, host, id} = data;
 
-        const url = `${protocol}://${host}/sell/${id}`;
+        const url = `${protocol}://${host}/agil-sell/${id}`;
 
         const createdQrCode = await qrCode.toDataURL(url);
 

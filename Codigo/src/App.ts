@@ -4,6 +4,7 @@ import express from "express";
 import config from "config";
 import Logger from "../config/logger";
 import cors from "cors";
+import path from "path";
 import {connect} from "../config/db";
 
 //routes imports
@@ -20,14 +21,15 @@ Logger.info("Server started on " + environment + " environment");
 const app = express();
 app.use(express.json());
 
+
+app.use(express.static(path.join(__dirname, 'client')));
+app.get("/", (req, res) =>{
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+});
+
 if(environment === "development"){
     app.use(cors());
 }
-
-
-app.get("/", (req, res) => {
-    res.send("Hello world");
-});
 
 app.use("/supplier", supplierRouter);
 

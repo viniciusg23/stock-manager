@@ -11,7 +11,8 @@
     "dev-client": "npm run start --prefix client",
     "build-server": "tsc",
     "build-client": "npm run build --prefix client",
-    "build": "npm run build-server && npm run build-client "
+    "win-build": "npm run setup && npm run build-server && npm run build-client && npm run win-move-build",
+    "win-move-build": "xcopy /s /y client\\build dist\\src\\client\\"
   },
   "author": "",
   "license": "ISC",
