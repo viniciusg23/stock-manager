@@ -63,12 +63,12 @@ function AddProductForm(){
             salePrice: 0,
             purchaseMonth: monthNameToNumber(formValues.purchaseMonth),
             purchaseYear: formValues.purchaseYear,
-            supplier: formValues.supplier,
+            supplier: formValues.supplier
         });
 
         const options = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/2023.5.8'},
+            headers: {'Content-Type': 'application/json'},
             body: body
         };
           

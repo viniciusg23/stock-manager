@@ -30,7 +30,6 @@ const productSchema = new Schema(
     },
     purchaseYear: { type: Number, required: true },
     supplier: { type: String, required: true },
-    qrCode: { type: String, require: true },
   },
   {
     timestamps: true,

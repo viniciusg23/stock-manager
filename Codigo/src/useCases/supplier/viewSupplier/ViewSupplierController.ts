@@ -15,7 +15,7 @@ export class ViewSupplierController implements Controller{
             const suppliers = await this.viewSupplierUseCase.execute();
             
             return res.status(200).json({
-                msg: "All suppliers founded",
+                message: "All suppliers founded",
                 suppliers: suppliers
             });
         } catch (error: any) {

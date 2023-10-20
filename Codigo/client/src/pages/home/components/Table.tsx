@@ -1,16 +1,6 @@
 import { Paper, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination, Table as MUITable } from "@mui/material";
-import ProductController from "../subPages/manageProducts/components/ProductController";
 import { useState } from "react";
 
-// export interface Column {
-//     label: string;
-//     minWidth: number
-//     align?: 'right';
-// }
-
-// export interface Row {
-
-// }
 
 interface TableProps {
     columns: any[];
@@ -21,7 +11,6 @@ interface TableProps {
 function Table(props: TableProps) {
     const {columns, rows} = props;
 
-    const [tableRows, setTableRows] = useState<any[]>(rows);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -63,7 +52,7 @@ function Table(props: TableProps) {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (

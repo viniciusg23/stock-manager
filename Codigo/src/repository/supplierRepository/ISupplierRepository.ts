@@ -5,7 +5,7 @@ import { Supplier } from "../../entities/supplier/Supplier";
  */
 export interface ISupplierRepository {
     findByName(name: string): Promise<Supplier | null>;
-    save(supplier: Supplier): Promise<void>;
-    remove(name: string): Promise<void>;
+    create(supplier: Supplier): Promise<void>;
+    remove(id: string): Promise<void>;
     findAll(): Promise<Supplier[]>;
 }

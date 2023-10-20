@@ -1,0 +1,68 @@
+import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import { Box, Button, useTheme } from '@mui/material';
+
+interface FormValues { 
+    name: string;
+    job: string;
+}
+
+const initialFormValues: FormValues = {
+    name: "",
+    job: ""
+};
+
+
+function AddEmployeeForm(){
+    const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+
+    const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setFormValues({ ...formValues, [prop]: event.target.value });
+    };
+
+    const handleSubmit = async () => {
+        console.log(formValues);
+
+        const body: string = JSON.stringify({
+            name: formValues.name,
+            job: formValues.job
+        });
+
+        const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: body
+        };
+          
+        const jsonData = await fetch('/employee/create', options)
+        const data = await jsonData.json();
+
+        alert(data.message);
+
+        setFormValues(initialFormValues);
+    };
+
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+                gap: 2,
+            }}
+        >
+            <TextField color='secondary' id="name" label="Nome do Funcionário" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
+            
+            <TextField color='secondary' id="category" label="Cargo do Funcionário" variant="outlined" fullWidth value={formValues.job} onChange={handleChange('job')} />
+            
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+                Registrar
+            </Button>
+        </Box>
+    );
+};
+
+export default AddEmployeeForm;
+
+

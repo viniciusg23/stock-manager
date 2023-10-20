@@ -5,10 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import EntryPage from './pages/entry/EntryPage';
 import HomePage from './pages/home/HomePage';
-import CreateProductPage from './pages/manageProducts/CreateProductPage';
-import CreateSupplierPage from './pages/manageSuppliers/CreateSupplierPage';
-import ViewSupplierPage from './pages/manageSuppliers/ViewSupplierPage';
-import ViewProductPage from './pages/manageProducts/ViewProductPage';
+import AgilSell from './pages/agilSell/AgilSell';
 
 
 const router = createBrowserRouter([
@@ -26,20 +23,8 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/create-product",
-        element: <CreateProductPage />
-      },
-      {
-        path: "/view-product",
-        element: <ViewProductPage />
-      },
-      {
-        path: "/create-supplier",
-        element: <CreateSupplierPage />
-      },
-      {
-        path: "/view-supplier",
-        element: <ViewSupplierPage />
+        path: "/agil-sell/:id",
+        element: <AgilSell />
       }
 
     ]

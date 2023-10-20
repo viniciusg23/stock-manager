@@ -31,6 +31,11 @@ export const drawerItens : Array<DrawerItem> = [
         icon: Icons.Explore
     },
     {
+        name: "Registrar Vendas",
+        path: "sell",
+        icon: Icons.Sell
+    },
+    {
         name: "Visualizar Vendas",
         path: "sales",
         icon: Icons.MonetizationOn
@@ -38,7 +43,7 @@ export const drawerItens : Array<DrawerItem> = [
     {
         //TODO
         name: "Gerenciar Funcionários",
-        path: "employees",
+        path: "employee",
         icon: Icons.Group
     },
 

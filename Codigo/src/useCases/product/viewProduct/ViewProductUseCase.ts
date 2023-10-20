@@ -10,23 +10,7 @@ export class ViewProductUseCase {
     }
 
     public async execute(): Promise<Product[]> {
-        const allProducts = [];
-        const productsDB = await this.productRepository.findAll();
-
-        for(const prod of productsDB){
-            allProducts.push(new Product(
-                prod.isIsFiscal(),
-                prod.getCategory(),
-                prod.getName(),
-                prod.getQuantity(),
-                prod.getCostPrice(),
-                prod.getSalePrice(),
-                getMonthValue(prod.getPurchaseMonth())!,
-                prod.getPurchaseYear(),
-                prod.getSupplier(),
-                prod.getCode(),
-            ));
-        }
+        const allProducts = await this.productRepository.findAll();
 
         return allProducts;
     }

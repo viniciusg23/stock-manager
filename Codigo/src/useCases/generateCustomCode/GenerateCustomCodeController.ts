@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { Controller } from "../IController";
 import { gerarPlanilha } from "./GenerateCustomCodeUseCase";
-import { ViewProductUseCase } from "../manageProducts/viewProduct/ViewProductUseCase";
+import { ViewProductUseCase } from "../product/viewProduct/ViewProductUseCase";
 
 export class GenerateCustomCodeController implements Controller {
 

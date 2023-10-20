@@ -23,7 +23,7 @@ export class Product {
     | "Dezembro";
   private purchaseYear: number;
   private supplier: string;
-  private qrCode: string;
+  private id?: string;
 
   constructor(
     isFiscal: boolean,
@@ -35,8 +35,8 @@ export class Product {
     purchaseMonth: number,
     purchaseYear: number,
     supplier: string,
-    qrCode: string,
-    code?: string
+    code?: string,
+    id?: string
   ) {
     this.code = code ? code : "";
 
@@ -70,14 +70,7 @@ export class Product {
 
     this.purchaseYear = purchaseYear;
     this.supplier = supplier;
-    this.qrCode = qrCode;
-  }
-
-  public getQrCode(): string {
-    return this.qrCode;
-  }
-  public setQrCode(qrCode: string): void {
-    this.qrCode = qrCode;
+    this.id = id;
   }
 
   public getCode(): string {
@@ -183,4 +176,9 @@ export class Product {
   public setSupplier(supplier: string): void {
     this.supplier = supplier;
   }
+
+  public getId(): string | undefined{
+    return this.id;
+  }
+
 }

@@ -1,11 +1,12 @@
 export class Supplier {
     private name: string;
     private description: string;
+    private id?: string;
 
-
-    public constructor(name: string, description: string){
+    public constructor(name: string, description: string, id?: string){
         this.name = name;
         this.description = description;
+        this.id = id;
     }
 
     public getName(): string {
@@ -24,4 +25,11 @@ export class Supplier {
         this.description = description;
     }
 
+    public getid(): string | undefined {
+        return this.id;
+    }
+
+    public setid(id: string): void {
+        this.id = id;
+    }
 }

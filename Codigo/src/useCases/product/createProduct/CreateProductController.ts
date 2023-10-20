@@ -1,6 +1,4 @@
-import { Request, Response, NextFunction } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+import { Request, Response } from "express";
 import { Controller } from "../../IController";
 import { CreateProductUseCase } from "./CreateProductUseCase";
 
