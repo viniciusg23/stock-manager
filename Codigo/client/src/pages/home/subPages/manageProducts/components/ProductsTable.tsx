@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import ProductController from './ProductController';
 import Table from '../../../components/Table';
+import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
+import { useNavigate } from 'react-router-dom';
+import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
 
 interface ProductColumn{
     id: 'code' | 'isFiscal' | 'category' | 'name' | 'costPrice' | 'purchaseDate' | 'supplier' | "action";
@@ -32,12 +35,18 @@ const columns: ProductColumn[] = [
 
 
 function ProductsTable() {
+    const navigate = useNavigate();
     const [rows, setRows] = useState<ProductRow[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const options = { method: 'GET' };
+                setLoading(true);
+                const options = { 
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`}, 
+                };
     
                 const jsonData = await fetch('/product/view', options);
                 const data = await jsonData.json();
@@ -49,9 +58,15 @@ function ProductsTable() {
                 }
 
                 setRows(data.products);
+            } catch (error: any | UnauthorizationError) {
+                if(error instanceof UnauthorizationError){
+                    alert("Sessão finalizada");
+                    return navigate("/");
+                }
 
-            } catch (error: any) {
-                alert(error.message);
+                alert(error);
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -61,7 +76,7 @@ function ProductsTable() {
 
     return (
         <>
-            <Table columns={columns} rows={rows} />
+            <Table isLoading={loading} columns={columns} rows={rows} />
         </>
     );
 }

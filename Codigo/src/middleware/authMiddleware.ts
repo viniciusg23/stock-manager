@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import config from "config";
 
 export interface IRequestWithUser extends Request {
-  user: string | jwt.JwtPayload;
+  authentication?: string | jwt.JwtPayload;
 }
 
 export const authMiddleware = (req: IRequestWithUser, res: Response, next: NextFunction) => {
@@ -16,9 +16,9 @@ export const authMiddleware = (req: IRequestWithUser, res: Response, next: NextF
     try {
         const jwtSecret = config.get<string>("jwt");
         const decoded = jwt.verify(token, jwtSecret);
-        req.user = decoded;
+        req.authentication = decoded;
         next();
     } catch (error) {
-        res.status(400).json({ message: "Invalid token." });
+        return res.status(400).json({ message: "Invalid token." });
     }
 };

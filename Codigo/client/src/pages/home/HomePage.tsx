@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuthorizationToken } from "./utils/getAuthorizationToken";
 import { UnauthorizationError } from "../../errors/UnauthorizationError";
+import FadeIn from "react-fade-in/lib/FadeIn";
 
 function HomePage() {
     const navigate = useNavigate();

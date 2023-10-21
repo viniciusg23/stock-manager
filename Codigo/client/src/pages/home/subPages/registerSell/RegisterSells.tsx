@@ -4,6 +4,7 @@ import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UnauthorizationError } from "../../../../errors/UnauthorizationError";
 import { getAuthorizationToken } from "../../utils/getAuthorizationToken";
+import FadeIn from "react-fade-in/lib/FadeIn";
 
 interface Product {
     id: string;
@@ -108,9 +109,14 @@ function RegisterSells() {
 
 
     useEffect(() => {
+        const options = { 
+            method: 'GET',
+            headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`}, 
+        };
+
         const fetchProductsData = async () => {
             try {
-                const jsonData = await fetch('/product/view');
+                const jsonData = await fetch('/product/view', options);
                 const data = await jsonData.json();
 
                 setProducts(data.products);
@@ -122,7 +128,7 @@ function RegisterSells() {
 
         const fetchEmployeesData = async () => {
             try {
-                const jsonData = await fetch('/employee/view');
+                const jsonData = await fetch('/employee/view', options);
                 const data = await jsonData.json();
 
                 setEmployees(data.employees);
@@ -138,7 +144,7 @@ function RegisterSells() {
 
 
     return (
-        <>
+        <FadeIn>
             <Typography align="left" variant="h5">Registrar Nova Venda</Typography>
             <Divider />
 
@@ -247,7 +253,7 @@ function RegisterSells() {
                     
                 </Box>
             </Box>
-        </>
+        </FadeIn>
     );
 }
 

@@ -32,6 +32,7 @@ function ProductController(props: ProductControllerProps) {
     const updateProduct = () => {
         //TODO fazer request para atualizar prod
         console.log(`${name} Atualizado`);
+        
 
     }
 

@@ -1,16 +1,20 @@
-import { Box, Breadcrumbs, Link, Paper, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Fade, Link, Paper, Typography } from '@mui/material';
 import { drawerWidth } from '../drawerNavegation/DrawerNavegation';
 import ManageProducts from '../../subPages/manageProducts/ManageProducts';
 import ManageSuppliers from '../../subPages/manageSuppliers/ManageSuppliers';
 import ManageEmployees from '../../subPages/manageEmployees/ManageEmployees';
 import ManageStock from '../../subPages/manageStock/ManageStock';
 import RegisterSells from '../../subPages/registerSell/RegisterSells';
+import FadeIn from 'react-fade-in/lib/FadeIn';
+import FunctionalityName from './FunctionalityName';
 
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
-    const { functionality } = props;
+    const { functionality, functionalityName } = props;
 
     let componentToRender = <div></div>;
+    let defaultName = "";
+
     switch (functionality) {
         case "product":
             componentToRender = <ManageProducts />;
@@ -28,7 +32,8 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
             componentToRender = <RegisterSells />
             break;
         default:
-            componentToRender = <Typography>Funcionalidade não encontrada</Typography>;
+            defaultName = "Gerenciar Estoque";
+            componentToRender = <ManageStock />
     }
 
     return (
@@ -54,7 +59,7 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
                     <Link underline="hover" color="inherit" href="/home">
                         Sistema
                     </Link>
-                    <Typography color="text.primary">{props.functionalityName}</Typography>
+                    <FunctionalityName functionality={functionalityName ? functionalityName : defaultName} />
                 </Breadcrumbs>
             </Paper>
 

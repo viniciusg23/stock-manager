@@ -13,6 +13,7 @@ import productRouter from "./routers/productRouter";
 import userRouter from "./routers/userRouter";
 import employeeRouter from "./routers/employeeRouter";
 import sellRouter from "./routers/sellRouter";
+import { authMiddleware } from "./middleware/authMiddleware";
 
 
 const environment = config.get<string>("env")
@@ -31,15 +32,15 @@ if(environment === "development"){
     app.use(cors());
 }
 
-app.use("/supplier", supplierRouter);
+app.use("/supplier", authMiddleware, supplierRouter);
 
-app.use("/product", productRouter);
+app.use("/product", authMiddleware,  productRouter);
 
 app.use("/user", userRouter);
 
-app.use("/employee", employeeRouter);
+app.use("/employee", authMiddleware, employeeRouter);
 
-app.use("/sell", sellRouter);
+app.use("/sell", authMiddleware, sellRouter);
 
 
 

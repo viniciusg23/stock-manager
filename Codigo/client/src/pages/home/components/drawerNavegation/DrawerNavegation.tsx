@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -11,10 +11,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { drawerItens } from "./drawerItens";
-import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
+import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Switch } from '@mui/material';
+import { AccountCircle, LightMode, DarkMode } from '@mui/icons-material';
 
 import FunctionalityRender from '../functionalityRender/FunctionalityRender';
+import { ColorModeContext } from '../../../../context/ColorModeContext';
 
 const drawerMaxWidth: number = 300
 export let drawerWidth: number = drawerMaxWidth;
@@ -89,6 +90,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 export default function DrawerNavegation() {
+  const {mode, toggleColorMode} = useContext(ColorModeContext);
+
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [functionality, setFunctionality] = useState<{path: string, name: string}>({path: "", name: ""});
@@ -130,21 +133,23 @@ export default function DrawerNavegation() {
             Nome do Sistema
           </Typography>
 
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+          <Box sx={{display: "flex", alignItems: "center", gap: "1em"}}>
+              <Stack direction="row" spacing={0} alignItems="center">
+                  <LightMode />
+                  <Switch color="default" checked={mode === "light" ? false : true} onChange={toggleColorMode} />
+                  <DarkMode />
+              </Stack>
 
-            {/* 
-              //TODO: botao de mudar tema
-            */}
-          </div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                  <AccountCircle />
+              </IconButton>
+          </Box>
           
 
         </Toolbar>

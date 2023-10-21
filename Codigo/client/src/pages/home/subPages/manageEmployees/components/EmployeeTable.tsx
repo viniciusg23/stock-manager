@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import Table from '../../../components/Table';
 import EmployeeController from './EmployeeController';
+import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
+import { useNavigate } from 'react-router-dom';
+import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
 
 interface EmployeeColumn{
     id: 'id' | 'name' | 'job' | "action";
@@ -24,12 +27,19 @@ const columns: EmployeeColumn[] = [
 
 
 function EmployeeTable() {
+    const navigate = useNavigate();
     const [rows, setRows] = useState<EmployeeRow[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const options = { method: 'GET' };
+                setLoading(true);
+                const options = { 
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                };
     
                 const jsonData = await fetch('/employee/view', options);
                 const data = await jsonData.json();
@@ -40,8 +50,15 @@ function EmployeeTable() {
 
                 setRows(data.employees);
 
-            } catch (error: any) {
-                alert(error.message);
+            } catch (error: any | UnauthorizationError) {
+                if(error instanceof UnauthorizationError){
+                    alert("Sessão finalizada");
+                    return navigate("/");
+                }
+
+                alert(error);
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -51,7 +68,7 @@ function EmployeeTable() {
 
     return (
         <>
-            <Table columns={columns} rows={rows} />
+            <Table isLoading={loading} columns={columns} rows={rows} />
         </>
     );
 }

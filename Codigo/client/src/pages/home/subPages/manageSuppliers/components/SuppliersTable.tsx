@@ -30,10 +30,12 @@ const columns: ISupplierColumn[] = [
 function SuppliersTable() {
     const navigate = useNavigate();
     const [rows, setRows] = useState<ISupplierRow[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const options = { 
                     method: 'GET',
                     headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
@@ -57,6 +59,9 @@ function SuppliersTable() {
     
                 alert(error.message)
             }
+            finally {
+                setLoading(false);
+            }
         }
 
         fetchData();
@@ -65,7 +70,7 @@ function SuppliersTable() {
 
     return (
         <>
-            <Table columns={columns} rows={rows} />
+            <Table isLoading={loading} columns={columns} rows={rows} />
         </>
     );
 }

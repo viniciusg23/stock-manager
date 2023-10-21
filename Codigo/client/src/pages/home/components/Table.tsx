@@ -1,15 +1,16 @@
-import { Paper, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination, Table as MUITable } from "@mui/material";
+import { Paper, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination, Table as MUITable, CircularProgress } from "@mui/material";
 import { useState } from "react";
 
 
 interface TableProps {
     columns: any[];
     rows: any[];
+    isLoading: boolean;
 }
 
 
 function Table(props: TableProps) {
-    const {columns, rows} = props;
+    const { columns, rows, isLoading } = props;
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -25,61 +26,62 @@ function Table(props: TableProps) {
     };
 
     return (
-        <Paper elevation={0} sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <MUITable size="small" stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align || 'left'}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                            {/* <TableCell
-                                key="action"
-                                align="left"
-                            >
-                                Ações
-                            </TableCell> */}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
+        <>
+            {
+                isLoading ? (
+                    <Paper elevation={0} sx={{ display: 'flex', justifyContent: "center" }}>
+                        <CircularProgress color="secondary" />
+                    </Paper>
+                ) : (
+                    <Paper elevation={0} sx={{ width: '100%', overflow: 'hidden' }}>
+                        <TableContainer sx={{ maxHeight: 440 }}>
+                            <MUITable size="small" stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                        {columns.map((column) => (
+                                            <TableCell
+                                                key={column.id}
+                                                align={column.align || 'left'}
+                                                style={{ minWidth: column.minWidth }}
+                                            >
+                                                {column.label}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {rows
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((row) => {
                                             return (
-                                                <TableCell key={column.id} align={column.align || 'left'}>
-                                                    {value}
-                                                </TableCell>
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                                    {columns.map((column) => {
+                                                        const value = row[column.id];
+                                                        return (
+                                                            <TableCell key={column.id} align={column.align || 'left'}>
+                                                                {value}
+                                                            </TableCell>
+                                                        );
+                                                    })}
+                                                </TableRow>
                                             );
                                         })}
-                                        {/* <TableCell>
-                                            {controller}
-                                        </TableCell> */}
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </MUITable>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+                                </TableBody>
+                            </MUITable>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[10, 25, 100]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                )
+            }
+        </>
     );
 }
 

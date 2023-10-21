@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createSupplierController } from "../useCases/supplier/createSupplier/index";
 import { viewSupplierController } from "../useCases/supplier/viewSupplier/index";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = Router();
 
