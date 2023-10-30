@@ -4,21 +4,26 @@ import EmployeeController from './EmployeeController';
 import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
 import { useNavigate } from 'react-router-dom';
 import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../../../../reduxReducers/store';
+import { useEmployees } from '../../../../../reduxReducers/slicers/sliceEmployees';
+import { fetchEmployees } from '../../../../../reduxActions/fetchEmployees';
 
-interface EmployeeColumn{
+interface IEmployeeColumn{
     id: 'id' | 'name' | 'job' | "action";
     label: string;
     minWidth: number
     align?: 'right';
 }
 
-interface EmployeeRow{
+interface IEmployeeRow{
     id: string,
     name: string;
     job: string;
+    action: JSX.Element;
 }
 
-const columns: EmployeeColumn[] = [
+const columns: IEmployeeColumn[] = [
     { id: "id", label: "Código", minWidth: 100 },
     { id: "name", label: "Nome", minWidth: 170 },
     { id: "job", label: "Cargo", minWidth: 150 },
@@ -27,43 +32,29 @@ const columns: EmployeeColumn[] = [
 
 
 function EmployeeTable() {
-    const navigate = useNavigate();
-    const [rows, setRows] = useState<EmployeeRow[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const dispatch = useDispatch<AppDispatch>();
+    const {loading, employees, error} = useSelector(useEmployees);
+    const [rows, setRows] = useState<IEmployeeRow[]>([]);
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const options = { 
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
-                };
-    
-                const jsonData = await fetch('/employee/view', options);
-                const data = await jsonData.json();
+        dispatch(fetchEmployees());
+    }, []);
 
-                for(const employee of data.employees){
-                    employee.action = <EmployeeController employee={employee} />
-                }
+    useEffect(() => {
+        const rows: IEmployeeRow[] = [];
 
-                setRows(data.employees);
-
-            } catch (error: any | UnauthorizationError) {
-                if(error instanceof UnauthorizationError){
-                    alert("Sessão finalizada");
-                    return navigate("/");
-                }
-
-                alert(error);
-            } finally {
-                setLoading(false);
-            }
+        for(const employee of employees){
+            rows.push({
+                id: employee.id!,
+                name: employee.name,
+                job: employee.job,
+                action: <EmployeeController employee={employee}/>
+            })
         }
 
-        fetchData();
-    }, []);
+        setRows(rows);
+    }, [employees])
 
 
     return (

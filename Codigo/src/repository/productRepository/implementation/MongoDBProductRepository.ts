@@ -79,10 +79,14 @@ export class MongoDBProductRepository implements IProductRepository {
     }
 
     async remove(id: string): Promise<void> {
-        const deletedProduct = await ProductModel.deleteOne({_id: id});
 
-        if(!deletedProduct){
-            throw new Error("Was not possible to delete this product");
+        console.log(id);
+        const product = await ProductModel.deleteOne({_id: id});
+
+        console.log(product);
+
+        if(!product){
+            throw new Error("Cannot remove this product");
         }
 
     }

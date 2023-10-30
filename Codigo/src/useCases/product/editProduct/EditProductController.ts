@@ -27,7 +27,7 @@ export class EditProductController {
 
             await this.editProductUseCase.execute(req.body);
 
-            return res.status(201).json({message: "Product Updated"});
+            return res.status(200).json({message: "Product Updated"});
             
         } catch (error: any) {
             return res.status(400).json({

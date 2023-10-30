@@ -105,9 +105,6 @@ function RegisterSells() {
     }
 
 
-
-
-
     useEffect(() => {
         const options = { 
             method: 'GET',

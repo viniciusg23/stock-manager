@@ -8,19 +8,16 @@ export interface DrawerItem {
 
 export const drawerItens : Array<DrawerItem> = [
     {
-        //TODO
         name: "Gerenciar Estoque",
         path: "stock",
         icon: Icons.Inventory
     },
     {
-        //TODO
         name: "Gerenciar Produtos",
         path: "product",
         icon: Icons.LocalMall
     },
     {
-        //TODO
         name: "Gerenciar Fornecedores",
         path: "supplier",
         icon: Icons.LocalShipping
@@ -41,10 +38,14 @@ export const drawerItens : Array<DrawerItem> = [
         icon: Icons.MonetizationOn
     },
     {
-        //TODO
         name: "Gerenciar Funcionários",
         path: "employee",
         icon: Icons.Group
     },
+    {
+        name: "Dashboard",
+        path: "dashboard",
+        icon: Icons.Dashboard
+    }
 
 ]

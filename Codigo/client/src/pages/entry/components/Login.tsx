@@ -21,6 +21,12 @@ function Login() {
 
     useEffect(() => {
         //TODO: verificar se ja existe token de login no localstorage
+        const token = window.localStorage.getItem("authorization");
+
+        if(token){
+            return navigate("/home");
+        }
+        
     }, []);
 
     const handleLogin = async () => {

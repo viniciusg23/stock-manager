@@ -1,3 +1,3 @@
 export interface IRemoveProductRequestDTO {
-  code: string;
+    id: string;
 }

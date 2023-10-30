@@ -3,14 +3,13 @@ import { ISupplierRepository } from "../../../repository/supplierRepository/ISup
 import { IRemoveSupplierRequestDTO } from "./RemoveSupplierDTO";
 
 export class RemoveSupplierUseCase {
-  // Note the capitalization of the class name
   private supplierRepository: ISupplierRepository;
 
   constructor(supplierRepository: ISupplierRepository) {
-    this.supplierRepository = supplierRepository;
+      this.supplierRepository = supplierRepository;
   }
 
   public async execute(data: IRemoveSupplierRequestDTO) {
-    await this.supplierRepository.remove(data.name);
+      await this.supplierRepository.remove(data);
   }
 }

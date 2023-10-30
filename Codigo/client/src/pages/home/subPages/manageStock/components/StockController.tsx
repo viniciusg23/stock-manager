@@ -5,48 +5,40 @@ import { useState } from "react";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
 import { useNavigate } from "react-router-dom";
+import { Product } from "../../../../../entities/product/Product";
+import StockForm from "./StockForm";
 
 interface StockControllerProps {
-    product: {
-        id: string
-        code: string;
-        isFiscal: string;
-        category: number;
-        name: string;
-        costPrice: number;
-        purchaseDate: string;
-        supplier: string;
-    }
+    product: Product
 }
 
 function StockController(props: StockControllerProps) {
+    const { product } = props;
     const navigate = useNavigate();
-    const [isOepn, setIsOpen] = useState<boolean>(false);
+    const [isQrCodeOpen, setIsQrCodeOpen] = useState<boolean>(false);
+    const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
     const [qrcode, setQrCode] = useState<string>("");
 
-    const handleClose = () => {
-        setIsOpen(false);
+    const handleQrCodeClose = () => {
+        setIsQrCodeOpen(false);
     }
 
-    const handleOpen = () => {
-        setIsOpen(true);
+    const handleQrCodeOpen = () => {
+        setIsQrCodeOpen(true);
     }
 
+    const handleEditClose = () => {
+        setIsEditOpen(false);
+    }
 
-    const {
-        id,
-        code,
-        isFiscal,
-        category,
-        name,
-        costPrice,
-        purchaseDate,
-        supplier
-    } = props.product;
+    const handleEditOpen = () => {
+        setIsEditOpen(true);
+    }
+
+    const { id } = props.product;
 
     const generateQrCode = async () => {
         try {
-            //TODO fazer request para remover prod
             const options = { 
                 method: 'GET',
                 headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
@@ -58,7 +50,7 @@ function StockController(props: StockControllerProps) {
             console.log(data.qrCode);
 
             setQrCode(data.qrCode);            
-            handleOpen();
+            handleQrCodeOpen();
 
         }
         catch (error: any | UnauthorizationError) {
@@ -71,27 +63,24 @@ function StockController(props: StockControllerProps) {
         }
     }
 
-    const updateProduct = () => {
-        //TODO fazer request para atualizar prod
-        console.log(`${name} Atualizado`);
-
-    }
-
 
     return (
         <>
-            <Form isOpen={isOepn} handleClose={handleClose}>
+            <Form isOpen={isQrCodeOpen} handleClose={handleQrCodeClose}>
                 <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "1em"}}>
                     <img src={qrcode} width={300} />
                     <Box width={300} sx={{display: "flex", gap: "1em"}}>
                         <Button variant="contained" color="info" fullWidth>Imprimir</Button>
-                        <Button variant="outlined" color="secondary" fullWidth onClick={handleClose}>Cancelar</Button>
+                        <Button variant="outlined" color="secondary" fullWidth onClick={handleQrCodeClose}>Cancelar</Button>
                     </Box>
                 </Box>
             </Form>
+            <Form isOpen={isEditOpen} handleClose={handleEditClose}>
+                <StockForm product={product}></StockForm>
+            </Form>
             <ButtonGroup variant="contained" disableElevation>
                 <Tooltip title="Editar">
-                    <IconButton color='info' sx={{backgroundColor: "info"}} onClick={updateProduct}>
+                    <IconButton color='info' sx={{backgroundColor: "info"}} onClick={handleEditOpen}>
                         <Edit />
                     </IconButton>
                 </Tooltip>

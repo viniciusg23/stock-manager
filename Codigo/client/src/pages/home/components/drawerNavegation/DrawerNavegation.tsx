@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -16,6 +16,9 @@ import { AccountCircle, LightMode, DarkMode } from '@mui/icons-material';
 
 import FunctionalityRender from '../functionalityRender/FunctionalityRender';
 import { ColorModeContext } from '../../../../context/ColorModeContext';
+
+import { setFunctionality as setFunctionalityLC } from '../../utils/setFunctionality';
+import { getFunctionality } from '../../utils/getFunctionality';
 
 const drawerMaxWidth: number = 300
 export let drawerWidth: number = drawerMaxWidth;
@@ -90,12 +93,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 export default function DrawerNavegation() {
-  const {mode, toggleColorMode} = useContext(ColorModeContext);
+  const { mode, toggleColorMode } = useContext(ColorModeContext);
 
   const theme = useTheme();
   const [open, setOpen] = useState(true);
-  const [functionality, setFunctionality] = useState<{path: string, name: string}>({path: "", name: ""});
+  const [functionality, setFunctionality] = useState<{ path: string, name: string }>({ path: "", name: "" });
 
+  useEffect(() => {
+    const lastFunctionality = getFunctionality();
+    if(lastFunctionality){
+      setFunctionality(JSON.parse(lastFunctionality))
+    }
+  }, []);
 
   const handleDrawerOpen = () => {
     drawerWidth = 300;
@@ -109,8 +118,8 @@ export default function DrawerNavegation() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" open={open} sx={{backgroundColor: "primary.main"}}>
-        <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: "primary.main" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
 
           <IconButton
             color="inherit"
@@ -126,31 +135,31 @@ export default function DrawerNavegation() {
           </IconButton>
 
           <Box sx={{
-            ...(!open && {display: "none"})
+            ...(!open && { display: "none" })
           }} />
 
           <Typography variant="h6" noWrap component="div">
             Nome do Sistema
           </Typography>
 
-          <Box sx={{display: "flex", alignItems: "center", gap: "1em"}}>
-              <Stack direction="row" spacing={0} alignItems="center">
-                  <LightMode />
-                  <Switch color="default" checked={mode === "light" ? false : true} onChange={toggleColorMode} />
-                  <DarkMode />
-              </Stack>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "1em" }}>
+            <Stack direction="row" spacing={0} alignItems="center">
+              <LightMode />
+              <Switch color="default" checked={mode === "light" ? false : true} onChange={toggleColorMode} />
+              <DarkMode />
+            </Stack>
 
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                  <AccountCircle />
-              </IconButton>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </Box>
-          
+
 
         </Toolbar>
       </AppBar>
@@ -170,7 +179,7 @@ export default function DrawerNavegation() {
           </IconButton>
 
         </DrawerHeader>
-        
+
         <Divider />
 
         <List>
@@ -182,7 +191,11 @@ export default function DrawerNavegation() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                onClick={() => setFunctionality({path: item.path, name: item.name})}
+                onClick={() => {
+                  const func = { path: item.path, name: item.name }
+                  setFunctionality(func);
+                  setFunctionalityLC(JSON.stringify(func))
+                }}
               >
                 <ListItemIcon
                   sx={{
@@ -191,7 +204,7 @@ export default function DrawerNavegation() {
                     justifyContent: 'center',
                   }}
                 >
-                  <item.icon color="secondary"/>
+                  <item.icon color="secondary" />
                 </ListItemIcon>
                 <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -201,10 +214,10 @@ export default function DrawerNavegation() {
 
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1}}>
+      <Box component="main" sx={{ flexGrow: 1 }}>
         <DrawerHeader />
-        
-        <FunctionalityRender functionality={functionality.path} functionalityName={functionality.name}/>
+
+        <FunctionalityRender functionality={functionality.path} functionalityName={functionality.name} />
 
       </Box>
 

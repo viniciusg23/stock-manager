@@ -1,3 +1,1 @@
-export interface IRemoveSupplierRequestDTO {
-  name: string;
-}
+export type IRemoveSupplierRequestDTO = string

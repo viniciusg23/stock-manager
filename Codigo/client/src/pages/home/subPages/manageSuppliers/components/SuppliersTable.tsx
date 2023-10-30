@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import SupplierController from "./SupplierController";
 import Table from "../../../components/Table";
-import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
-import { useNavigate } from "react-router-dom";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { AppDispatch } from "../../../../../reduxReducers/store";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSuppliers } from "../../../../../reduxActions/fetchSuppliers";
+import { useSuppliers } from "../../../../../reduxReducers/slicers/sliceSuppliers";
 
 
 interface ISupplierColumn{
@@ -17,6 +18,7 @@ interface ISupplierRow{
     id: string;
     name: string;
     description: string;
+    action: JSX.Element;
 }
 
 const columns: ISupplierColumn[] = [
@@ -28,44 +30,31 @@ const columns: ISupplierColumn[] = [
 
 
 function SuppliersTable() {
-    const navigate = useNavigate();
     const [rows, setRows] = useState<ISupplierRow[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const {loading, suppliers, error} = useSelector(useSuppliers);
+
+    console.log(suppliers);
+
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const options = { 
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
-                };
-    
-                const jsonData = await fetch('/supplier/view', options);
-                const data = await jsonData.json();
+        dispatch(fetchSuppliers())
+    }, []);
 
-                for(const supplier of data.suppliers){
-                    supplier.action = <SupplierController supplier={supplier} />
-                }
+    useEffect(() => {
+        const rows: ISupplierRow[] = [];
 
-                setRows(data.suppliers);
-
-            } 
-            catch (error: any | UnauthorizationError) {
-                if(error instanceof UnauthorizationError){
-                    alert("Sessão finalizada");
-                    return navigate("/");
-                }
-    
-                alert(error.message)
-            }
-            finally {
-                setLoading(false);
-            }
+        for(const supplier of suppliers){
+            rows.push({
+                id: supplier.id!,
+                name: supplier.name,
+                description: supplier.description,
+                action: <SupplierController supplier={supplier} />
+            })
         }
 
-        fetchData();
-    }, []);
+        setRows(rows);
+    }, [suppliers]);
 
 
     return (

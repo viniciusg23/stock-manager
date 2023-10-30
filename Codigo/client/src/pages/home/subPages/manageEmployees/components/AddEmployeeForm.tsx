@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Box, Button, useTheme } from '@mui/material';
+import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
+import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
+import { useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../../../../../reduxReducers/store';
+import { useDispatch } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
+import { fetchEmployees } from '../../../../../reduxActions/fetchEmployees';
 
 interface FormValues { 
     name: string;
@@ -14,32 +21,44 @@ const initialFormValues: FormValues = {
 
 
 function AddEmployeeForm(){
+    const navigate = useNavigate();
     const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+    const dispatch = useDispatch<AppDispatch>();
+
 
     const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormValues({ ...formValues, [prop]: event.target.value });
     };
 
     const handleSubmit = async () => {
-        console.log(formValues);
+        try {
+            const body: string = JSON.stringify({
+                name: formValues.name,
+                job: formValues.job
+            });
+    
+            const options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                body: body
+            };
+              
+            const jsonData = await fetch('/employee/create', options)
+            const data = await jsonData.json();
+    
+            enqueueSnackbar(data.message, {variant: "success"});
+    
+            setFormValues(initialFormValues);
+        } catch (error: any | UnauthorizationError) {
+            if(error instanceof UnauthorizationError){
+                alert("Sessão finalizada");
+                return navigate("/");
+            }
 
-        const body: string = JSON.stringify({
-            name: formValues.name,
-            job: formValues.job
-        });
-
-        const options = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: body
-        };
-          
-        const jsonData = await fetch('/employee/create', options)
-        const data = await jsonData.json();
-
-        alert(data.message);
-
-        setFormValues(initialFormValues);
+            enqueueSnackbar(error.message, {variant: "error"});
+        } finally {
+            dispatch(fetchEmployees());
+        }
     };
 
 

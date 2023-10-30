@@ -5,14 +5,15 @@
   "main": "App.js",
   "scripts": {
     "test": "set ENV=test && vitest",
-    "setup": "npm i && npm i --prefix client",
+    "setup": "npm i --force && npm i --prefix client --force",
     "dev": "set ENV=development && concurrently \"npm run dev-server\" \"npm run dev-client\"",
     "dev-server": "set ENV=development && ts-node-dev --respawn --transpile-only ./src/App.ts",
     "dev-client": "npm run start --prefix client",
     "build-server": "tsc",
     "build-client": "npm run build --prefix client",
     "win-build": "npm run setup && npm run build-server && npm run build-client && npm run win-move-build",
-    "win-move-build": "xcopy /s /y client\\build dist\\src\\client\\"
+    "win-move-build": "xcopy /s /y client\\build dist\\src\\client\\",
+    "win-prod": "npm run win-build && node ./dist/src/App.js"
   },
   "author": "",
   "license": "ISC",

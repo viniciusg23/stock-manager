@@ -24,25 +24,27 @@ app.use(express.json());
 
 
 app.use(express.static(path.join(__dirname, 'client')));
-app.get("/", (req, res) =>{
-    res.sendFile(path.join(__dirname, 'client', 'index.html'));
-});
 
 if(environment === "development"){
     app.use(cors());
 }
 
-app.use("/supplier", authMiddleware, supplierRouter);
+app.use("/supplier", supplierRouter);
 
-app.use("/product", authMiddleware,  productRouter);
+app.use("/product",  productRouter);
 
 app.use("/user", userRouter);
 
-app.use("/employee", authMiddleware, employeeRouter);
+app.use("/employee", employeeRouter);
 
-app.use("/sell", authMiddleware, sellRouter);
+app.use("/sell", sellRouter);
 
 
+
+
+app.get("*", (req, res) =>{
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+});
 
 const PORT = config.get<string>("port");
 app.listen(PORT, async () => {

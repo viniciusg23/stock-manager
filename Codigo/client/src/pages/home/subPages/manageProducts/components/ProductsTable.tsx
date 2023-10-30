@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import ProductController from './ProductController';
 import Table from '../../../components/Table';
-import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
-import { useNavigate } from 'react-router-dom';
-import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
+import { useDispatch, useSelector } from 'react-redux';
+import { useProducts } from '../../../../../reduxReducers/slicers/sliceProducts';
+import { fetchProducts } from '../../../../../reduxActions/fetchProducts';
+import { AppDispatch } from '../../../../../reduxReducers/store';
 
 interface ProductColumn{
     id: 'code' | 'isFiscal' | 'category' | 'name' | 'costPrice' | 'purchaseDate' | 'supplier' | "action";
@@ -15,11 +16,12 @@ interface ProductColumn{
 interface ProductRow{
     code: string;
     isFiscal: string;
-    category: number;
+    category: string;
     name: string;
     costPrice: number;
     purchaseDate: string;
     supplier: string;
+    action: JSX.Element;
 }
 
 const columns: ProductColumn[] = [
@@ -35,43 +37,37 @@ const columns: ProductColumn[] = [
 
 
 function ProductsTable() {
-    const navigate = useNavigate();
+    const {products, loading, error} = useSelector(useProducts);
+    const dispatch = useDispatch<AppDispatch>();
+
+
     const [rows, setRows] = useState<ProductRow[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const options = { 
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`}, 
-                };
-    
-                const jsonData = await fetch('/product/view', options);
-                const data = await jsonData.json();
+        dispatch(fetchProducts())
+    }, [])
 
-                for(const product of data.products){
-                    product.isFiscal = product.isFiscal ? "Sim" : "Não"; 
-                    product.purchaseDate = formatDate(product.purchaseMonth, product.purchaseYear);
-                    product.action = <ProductController product={product} />;
-                }
 
-                setRows(data.products);
-            } catch (error: any | UnauthorizationError) {
-                if(error instanceof UnauthorizationError){
-                    alert("Sessão finalizada");
-                    return navigate("/");
-                }
+    useEffect(() => {
+        const rows: ProductRow[] = [];
 
-                alert(error);
-            } finally {
-                setLoading(false);
+        for(const product of products){
+            const row: ProductRow = {
+                code: product.code,
+                isFiscal: product.isFiscal ? "Sim" : "Não",
+                category: product.category,
+                name: product.name,
+                costPrice: product.costPrice,
+                purchaseDate: formatDate(product.purchaseMonth, product.purchaseYear),
+                supplier: product.supplier,
+                action: <ProductController product={product} />
             }
+
+            rows.push(row);
         }
 
-        fetchData();
-    }, []);
+        setRows(rows);
+    }, [products]);
 
 
     return (
@@ -83,6 +79,6 @@ function ProductsTable() {
 
 export default ProductsTable;
 
-function formatDate(month: string, year: string){
+function formatDate(month: string, year: number){
     return month + "/" + year;
 }

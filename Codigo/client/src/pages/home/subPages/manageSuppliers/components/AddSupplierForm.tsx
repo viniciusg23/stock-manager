@@ -4,21 +4,25 @@ import { Box, Button } from '@mui/material';
 import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
 import { useNavigate } from 'react-router-dom';
 import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
+import { useDispatch } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
+import { fetchSuppliers } from '../../../../../reduxActions/fetchSuppliers';
+import { AppDispatch } from '../../../../../reduxReducers/store';
 
 interface FormValues {
     name: string;
     description: string;
 }
 
-
 const initialFormValues: FormValues = {
     name: "",
     description: ""
 };
 
-
 function AddSupplierForm(){
     const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
+
     const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
     const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -26,9 +30,7 @@ function AddSupplierForm(){
     };
 
     const handleSubmit = async () => {
-        try {
-            console.log(formValues);
-    
+        try {    
             const body: string = JSON.stringify({
                 name: formValues.name,
                 description: formValues.description
@@ -43,7 +45,7 @@ function AddSupplierForm(){
             const jsonData = await fetch('/supplier/create', options);
             const data = await jsonData.json();
     
-            alert(data.message);
+            enqueueSnackbar(data.message, {variant: "success"});
             setFormValues(initialFormValues);
         } 
         catch (error: any | UnauthorizationError) {
@@ -52,7 +54,9 @@ function AddSupplierForm(){
                 return navigate("/");
             }
 
-            alert(error.message)
+            enqueueSnackbar(error.message, {variant: "error"});
+        } finally {
+            dispatch(fetchSuppliers());
         }
     };
 
@@ -69,7 +73,6 @@ function AddSupplierForm(){
             <TextField color='secondary' id="name" label="Nome do Fornecedor" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
             
             <TextField color='secondary' id="description" label="Descrição do Fornecedor" variant="outlined" fullWidth value={formValues.description} onChange={handleChange('description')} />
-            
             
             <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Registrar

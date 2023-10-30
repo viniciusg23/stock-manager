@@ -4,6 +4,10 @@ import StockController from "./StockController";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useProducts } from "../../../../../reduxReducers/slicers/sliceProducts";
+import { AppDispatch } from "../../../../../reduxReducers/store";
+import { fetchProducts } from "../../../../../reduxActions/fetchProducts";
 
 
 interface IStockColumn{
@@ -15,13 +19,12 @@ interface IStockColumn{
 
 interface IStockRow{
     code: string
-    category: string;
     name: string;
     costPrice: number;
     salePrice: number;
     quantity: number;
-    supplier: string;
     profit: number;
+    action: JSX.Element;
 }
 
 const columns: IStockColumn[] = [
@@ -36,46 +39,37 @@ const columns: IStockColumn[] = [
 
 
 function StockTable() {
-    const navigate = useNavigate();
+    
+    // const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
+
+    const {products, loading, error} = useSelector(useProducts);
     const [rows, setRows] = useState<IStockRow[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const options = { 
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
-                };
-    
-                const jsonData = await fetch('/product/view', options);
-                const data = await jsonData.json();
+        dispatch(fetchProducts())
+    }, []);
 
-                for(const product of data.products){
-                    product.action = <StockController product={product} />;
-                    product.profit = (product.salePrice - product.costPrice).toFixed(2);
-                }
+    useEffect(() => {
+        const rows: IStockRow[] = [];
 
-                setRows(data.products);
-
+        for(const product of products){
+            const row: IStockRow = {
+                code: product.code,
+                quantity: product.quantity,
+                name: product.name,
+                costPrice: product.costPrice,
+                salePrice: product.salePrice,
+                action: <StockController product={product} />,
+                profit: product.salePrice - product.costPrice
             }
-            catch (error: any | UnauthorizationError) {
-                if(error instanceof UnauthorizationError){
-                    alert("Sessão finalizada");
-                    return navigate("/");
-                }
-    
-                alert(error.message)
-            } 
-            finally {
-                setLoading(false);
-            }
+
+            rows.push(row);
         }
 
-        fetchData();
-    }, []);
+        setRows(rows);
+    }, [products]);
 
 
     return (

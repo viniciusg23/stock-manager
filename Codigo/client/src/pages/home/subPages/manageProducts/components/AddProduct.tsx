@@ -1,6 +1,6 @@
 import { Fab, Tooltip } from "@mui/material";
 import {Add} from "@mui/icons-material"
-import AddProductForm from "./AddProductForm";
+import ProductForm from "./ProductForm";
 import { useState } from "react";
 import Form from "../../../components/Form";
 
@@ -18,7 +18,7 @@ function AddProduct() {
     return (
         <>
             <Form isOpen={openForm} handleClose={handleClose}>
-                <AddProductForm />
+                <ProductForm control="create"/>
             </Form>
 
 

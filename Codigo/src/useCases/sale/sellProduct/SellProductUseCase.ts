@@ -1,4 +1,4 @@
-import { Sale } from "../../../entities/Sale/Sale";
+import { Sale } from "../../../entities/sale/Sale";
 import { EnumMonth } from "../../../entities/product/EnumMonth";
 import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
 import { ISaleRepository } from "../../../repository/saleRepository/ISaleRepository";

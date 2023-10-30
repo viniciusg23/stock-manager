@@ -1,56 +1,90 @@
 import { Edit, Delete } from "@mui/icons-material";
 import { ButtonGroup, Tooltip, IconButton } from "@mui/material";
+import Form from "../../../components/Form";
+import { useState } from "react";
+import ProductForm from "./ProductForm";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
+import { Product } from "../../../../../entities/product/Product";
+import { AppDispatch } from "../../../../../reduxReducers/store";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../../../../../reduxActions/fetchProducts";
 
 interface ProductControllerProps {
-    product: {
-        code: string;
-        isFiscal: string;
-        category: number;
-        name: string;
-        costPrice: number;
-        purchaseDate: string;
-        supplier: string;
-    }
+    product: Product
 }
 
 function ProductController(props: ProductControllerProps) {
-    const {
-        code,
-        isFiscal,
-        category,
-        name,
-        costPrice,
-        purchaseDate,
-        supplier
-    } = props.product;
+    const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
 
-    const removeProduct = () => {
-        //TODO fazer request para remover prod
-        console.log(`${name} Removido`)
+    const { product } = props;
+    const [openForm, setOpenForm] = useState<boolean>(false);
+
+    const handleClose = () => {
+        setOpenForm(false);
     }
 
-    const updateProduct = () => {
-        //TODO fazer request para atualizar prod
-        console.log(`${name} Atualizado`);
-        
-
+    const handleOpen = () => {
+        setOpenForm(true);
     }
 
+
+    const removeProduct = async () => {    
+        try {
+            const body: string = JSON.stringify({
+                id: product.id,
+            });
+    
+            const options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                body: body
+            };
+              
+            const response = await fetch("/product/remove", options)
+            const data = await response.json();
+
+            if(!response.ok){
+                throw new Error(data.message);
+            }
+    
+            enqueueSnackbar(data.message, {variant: "success"});
+            
+        } catch (error: any | UnauthorizationError) {
+            if(error instanceof UnauthorizationError){
+                alert("Sessão finalizada");
+                return navigate("/");
+            }
+
+            enqueueSnackbar(error.message, {variant: "error"})
+        } finally {
+            dispatch(fetchProducts());
+        }
+    }
 
 
     return (
-        <ButtonGroup variant="contained" disableElevation>
-            <Tooltip title="Editar">
-                <IconButton color='info' sx={{backgroundColor: "info"}} onClick={updateProduct}>
-                    <Edit />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Excluir">
-                <IconButton color='error' onClick={removeProduct}>
-                    <Delete />
-                </IconButton>
-            </Tooltip>
-        </ButtonGroup>
+        <>
+            <Form isOpen={openForm} handleClose={handleClose}>
+                <ProductForm control="edit" product={product}/>
+            </Form>
+
+            <ButtonGroup variant="contained" disableElevation>
+                <Tooltip title="Editar">
+                    <IconButton color='info' sx={{backgroundColor: "info"}} onClick={handleOpen}>
+                        <Edit />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Excluir">
+                    <IconButton color='error' onClick={removeProduct}>
+                        <Delete />
+                    </IconButton>
+                </Tooltip>
+            </ButtonGroup>
+        </>
     );
 }
 

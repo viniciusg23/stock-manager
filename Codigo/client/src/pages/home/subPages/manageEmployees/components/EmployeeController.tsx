@@ -1,39 +1,63 @@
 import { Edit, Delete } from "@mui/icons-material";
 import { ButtonGroup, Tooltip, IconButton } from "@mui/material";
+import { Employee } from "../../../../../entities/employee/Employee";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { enqueueSnackbar } from "notistack";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { fetchEmployees } from "../../../../../reduxActions/fetchEmployees";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../../reduxReducers/store";
 
 interface EmployeeControllerProps {
-    employee: {
-        id: string;
-        name: string;
-        job: string
-    }
+    employee: Employee;
 }
 
 function EmployeeController(props: EmployeeControllerProps) {
-    const {name, job, id} = props.employee;
+    const {id} = props.employee;
 
-    const removeEmployee = () => {
-        //TODO fazer request para remover empl
-        console.log(`${name} Removido`)
-    }
+    const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>();
 
-    const updateEmployee = () => {
-        //TODO fazer request para atualizar empl
-        console.log(`${name} Atualizado`);
+    const removeEmployee = async () => {
+        try {
+            const body: string = JSON.stringify({
+                id: id,
+            });
+    
+            const options = {
+                method: "POST",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}`},
+                body: body
+            };
+              
+            const response = await fetch("/employee/remove", options)
+            const data = await response.json();
 
+            if(!response.ok){
+                throw new Error(data.message);
+            }
+    
+            enqueueSnackbar(data.message, {variant: "success"});
+            
+        } catch (error: any | UnauthorizationError) {
+            if(error instanceof UnauthorizationError){
+                alert("Sessão finalizada");
+                return navigate("/");
+            }
+
+            enqueueSnackbar(error.message, {variant: "error"})
+        } finally {
+            dispatch(fetchEmployees());
+        }
     }
 
 
 
     return (
         <ButtonGroup variant="contained" disableElevation>
-            <Tooltip title="Editar">
-                <IconButton color='info' onClick={updateEmployee}>
-                    <Edit />
-                </IconButton>
-            </Tooltip>
             <Tooltip title="Excluir">
-                <IconButton color='error' onClick={removeEmployee}>
+                <IconButton color="error" onClick={removeEmployee}>
                     <Delete />
                 </IconButton>
             </Tooltip>

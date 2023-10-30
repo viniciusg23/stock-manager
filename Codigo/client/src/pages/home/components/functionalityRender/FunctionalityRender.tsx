@@ -5,7 +5,6 @@ import ManageSuppliers from '../../subPages/manageSuppliers/ManageSuppliers';
 import ManageEmployees from '../../subPages/manageEmployees/ManageEmployees';
 import ManageStock from '../../subPages/manageStock/ManageStock';
 import RegisterSells from '../../subPages/registerSell/RegisterSells';
-import FadeIn from 'react-fade-in/lib/FadeIn';
 import FunctionalityName from './FunctionalityName';
 
 

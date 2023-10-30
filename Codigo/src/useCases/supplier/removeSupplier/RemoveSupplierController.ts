@@ -11,12 +11,12 @@ export class RemoveSupplierController implements Controller {
 
   public async handle(req: Request, res: Response): Promise<Response> {
     try {
-      const { name } = req.body;
-      if (name === null) {
-        throw new Error("Supplier must have a name.");
+      const { id } = req.body;
+      if (id === null) {
+        throw new Error("Supplier must have a id.");
       }
 
-      await this.removeSupplierUseCase.execute(name);
+      await this.removeSupplierUseCase.execute(id);
 
       return res.status(201).json({ message: "Supplier excluded" });
     } catch (error: any) {
