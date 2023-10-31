@@ -30,38 +30,38 @@ const mesesDoAno: MesesDoAno = {
   Dezembro: 12,
 };
 
-interface ItemDeCompra {
-  isFiscal: boolean;
-  category: string;
-  name: string;
-  costPrice: number;
-  salePrice: number;
-  purchaseMonth: keyof typeof mesesDoAno;
-  purchaseYear: number;
-}
+// interface ItemDeCompra {
+//   isFiscal: boolean;
+//   category: string;
+//   name: string;
+//   costPrice: number;
+//   salePrice: number;
+//   purchaseMonth: keyof typeof mesesDoAno;
+//   purchaseYear: number;
+// }
 
 const categorias: { [codigo: string]: string } = {
-  "33,042,010": "Maquiagem",
-  "39,269,090": "Chaveiro/lenço crochê",
-  "42,021,210": "Bolsa necessaire",
-  "42,022,100": "Bolsa etnica",
-  "42,022,210": "Bolsa",
-  "42,022,220": "Carteira",
-  "42,022,900": "Bolsa chutch",
-  "42,023,200": "Bolsa necessaire/porta moedas",
-  "42,029,200": "Bolsa",
-  "42,033,000": "Cinto",
-  "42,034,000": "Pulseira/bracelete",
-  "61,178,090": "Lenço",
-  "62,143,000": "Lenço triangulo",
-  "62,144,000": "Lenço franja",
-  "66,019,110": "Sombrinha",
-  "71,171,900": "Pulseira/brinco/colar",
-  "71,179,000": "Anel",
-  "76,169,900": "Cinzeiro/porta remédio metal",
-  "96,151,100": "Grampo cabelo pequeno",
-  "96,151,900": "Grampo cabelo estampado",
-  "96,159,000": "Presília",
+    "33,042,010": "Maquiagem",
+    "39,269,090": "Chaveiro/lenço crochê",
+    "42,021,210": "Bolsa necessaire",
+    "42,022,100": "Bolsa etnica",
+    "42,022,210": "Bolsa",
+    "42,022,220": "Carteira",
+    "42,022,900": "Bolsa chutch",
+    "42,023,200": "Bolsa necessaire/porta moedas",
+    "42,029,200": "Bolsa",
+    "42,033,000": "Cinto",
+    "42,034,000": "Pulseira/bracelete",
+    "61,178,090": "Lenço",
+    "62,143,000": "Lenço triangulo",
+    "62,144,000": "Lenço franja",
+    "66,019,110": "Sombrinha",
+    "71,171,900": "Pulseira/brinco/colar",
+    "71,179,000": "Anel",
+    "76,169,900": "Cinzeiro/porta remédio metal",
+    "96,151,100": "Grampo cabelo pequeno",
+    "96,151,900": "Grampo cabelo estampado",
+    "96,159,000": "Presília",
 };
 
 function obterNumeroParaCategoria(categoria: string): string {

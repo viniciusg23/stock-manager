@@ -47,8 +47,6 @@ function StockController(props: StockControllerProps) {
             const response = await fetch(`/sell/create-qrcode/${id}`, options);
             const data = await response.json();
     
-            console.log(data.qrCode);
-
             setQrCode(data.qrCode);            
             handleQrCodeOpen();
 
@@ -68,7 +66,10 @@ function StockController(props: StockControllerProps) {
         <>
             <Form isOpen={isQrCodeOpen} handleClose={handleQrCodeClose}>
                 <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "1em"}}>
-                    <img src={qrcode} width={300} />
+                    <div id="ticket">
+                        <img src={qrcode} width={300} />
+                        
+                    </div>
                     <Box width={300} sx={{display: "flex", gap: "1em"}}>
                         <Button variant="contained" color="info" fullWidth>Imprimir</Button>
                         <Button variant="outlined" color="secondary" fullWidth onClick={handleQrCodeClose}>Cancelar</Button>

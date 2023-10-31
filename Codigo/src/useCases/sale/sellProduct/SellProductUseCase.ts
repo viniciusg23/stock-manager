@@ -18,7 +18,17 @@ export class SellProductUseCase {
 
     public async execute(data: ISellProductDTO){
         const totalPrice = data.quantity * data.salePrice;
-        const sale = new Sale(data.productId, data.quantity, data.salePrice, data.employeeId, totalPrice);
+        const sale = new Sale(
+            data.productId, 
+            data.quantity, 
+            data.salePrice, 
+            data.employeeId, 
+            totalPrice, 
+            data.buyerName, 
+            data.buyerEmail, 
+            data.buyerNumber
+        );
+
         await this.saleRepository.create(sale);
         
         const product = await this.productRepository.findById(data.productId);

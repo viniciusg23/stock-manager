@@ -14,9 +14,6 @@ router.post("/", (req, res) => {
     return sellProductController.handle(req, res);
 })
 
-// router.post("/", (req, res) => {
-//     return sellProductController.handle(req, res);
-// })
 
 
 export default router;

@@ -6,6 +6,7 @@ import ManageEmployees from '../../subPages/manageEmployees/ManageEmployees';
 import ManageStock from '../../subPages/manageStock/ManageStock';
 import RegisterSells from '../../subPages/registerSell/RegisterSells';
 import FunctionalityName from './FunctionalityName';
+import Dashboard from '../../subPages/dashboard/Dashboard';
 
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
@@ -29,6 +30,9 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
             break;
         case "sell":
             componentToRender = <RegisterSells />
+            break;
+        case "dashboard":
+            componentToRender = <Dashboard />
             break;
         default:
             defaultName = "Gerenciar Estoque";

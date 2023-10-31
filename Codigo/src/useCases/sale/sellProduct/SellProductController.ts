@@ -10,13 +10,13 @@ export class SellProductController {
 
     public async handle(req: Request, res: Response){
         try {
-            const {productId, quantity, salePrice, employeeId} = req.body;
+            const {productId, quantity, salePrice, employeeId, buyerName, buyerEmail, buyerNumber} = req.body;
 
             if(!productId || !quantity || !salePrice || !employeeId){
                 throw new Error("Invalid fields.");
             }
 
-            await this.sellProductUseCase.execute({productId, quantity, salePrice, employeeId});
+            await this.sellProductUseCase.execute({productId, quantity, salePrice, employeeId, buyerName, buyerEmail, buyerNumber});
 
             return res.json({
                 message: "Sale was succefuly registered."

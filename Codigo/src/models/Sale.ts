@@ -6,7 +6,10 @@ const SaleSchema = new Schema(
         quantity: { type: String, required: true },
         salePrice: { type: Number, required: true },
         totalPrice: { type: Number, required: true },
-        employeeId: { type: String, required: true }
+        employeeId: { type: String, required: true },
+        buyerName: { type: String, required: true },
+        buyerEmail: { type: String },
+        buyerNumber: { type: String }
     },
     {
         timestamps: true
