@@ -49,7 +49,7 @@ function RegisterSells(props: IRegisterSellsProps) {
     }, [selectedProductId])
 
 
-    const [selectedQuantity, setSelectedQuantity] = useState<string>("");
+    const [selectedQuantity, setSelectedQuantity] = useState<number>(0);
     useEffect(() => {
         const product = products.find(product => product.id === selectedProductId);
         if (product) {
@@ -62,6 +62,17 @@ function RegisterSells(props: IRegisterSellsProps) {
 
     const handleSell = async () => {
         try {
+
+            if(
+                selectedProductId === "" ||
+                selectedQuantity < 1 ||
+                selectedProductSalePrice < 1 ||
+                selectedEmployee === "" ||
+                buyerName === ""
+            ){
+                throw new Error("Invalid fields");
+            }
+
             const body = JSON.stringify({
                 productId: selectedProductId,
                 quantity: selectedQuantity,
@@ -139,7 +150,7 @@ function RegisterSells(props: IRegisterSellsProps) {
                             labelId="select-quantity-label"
                             value={selectedQuantity}
                             label="Selecionar Quantidade"
-                            onChange={(event) => setSelectedQuantity(event.target.value)}
+                            onChange={(event) => setSelectedQuantity(Number(event.target.value))}
                         >
                             {Array.from({ length: availableQuantity }, (_, index) => (
                                 <MenuItem key={index + 1} value={index + 1}>{index + 1}</MenuItem>

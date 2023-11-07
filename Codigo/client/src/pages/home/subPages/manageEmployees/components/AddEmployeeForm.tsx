@@ -8,13 +8,10 @@ import { AppDispatch } from '../../../../../reduxReducers/store';
 import { useDispatch } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
 import { fetchEmployees } from '../../../../../reduxActions/fetchEmployees';
+import { Employee } from '../../../../../entities/Employee';
 
-interface FormValues { 
-    name: string;
-    job: string;
-}
 
-const initialFormValues: FormValues = {
+const initialEmployee: Employee = {
     name: "",
     job: ""
 };
@@ -22,16 +19,23 @@ const initialFormValues: FormValues = {
 
 function AddEmployeeForm(){
     const navigate = useNavigate();
-    const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+    const [formValues, setEmployee] = useState<Employee>(initialEmployee);
     const dispatch = useDispatch<AppDispatch>();
 
 
-    const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        setFormValues({ ...formValues, [prop]: event.target.value });
+    const handleChange = (prop: keyof Employee) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setEmployee({ ...formValues, [prop]: event.target.value });
     };
 
     const handleSubmit = async () => {
         try {
+
+            for(const key in formValues){
+                if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
+                    throw new Error("Invalid fields");
+                }
+            }
+
             const body: string = JSON.stringify({
                 name: formValues.name,
                 job: formValues.job
@@ -48,7 +52,7 @@ function AddEmployeeForm(){
     
             enqueueSnackbar(data.message, {variant: "success"});
     
-            setFormValues(initialFormValues);
+            setEmployee(initialEmployee);
         } catch (error: any | UnauthorizationError) {
             if(error instanceof UnauthorizationError){
                 alert("Sessão finalizada");

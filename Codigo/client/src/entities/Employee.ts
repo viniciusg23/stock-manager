@@ -1,5 +1,5 @@
 export class Employee {
-    
+    [key: string]: any;
     public name: string;
     public job: string;
     public id?: string;

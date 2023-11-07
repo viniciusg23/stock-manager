@@ -74,6 +74,13 @@ function ProductForm(props: IProductFormProps){
 
     const handleSubmit = async () => {
         try {
+
+            for(const key in formValues){
+                if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
+                    throw new Error("Invalid fields");
+                }
+            }
+
             const body: string = JSON.stringify({
                 id: formValues.id,
                 code: formValues.code,
@@ -153,7 +160,6 @@ function ProductForm(props: IProductFormProps){
             
             <TextField color='secondary' id="costPrice" label="Preço de Custo do Produto" variant="outlined" fullWidth type="number" value={formValues.costPrice} onChange={handleChange('costPrice')} />
             
-            {/* <TextField color='secondary' id="supplier" label="Fornecedor do Produto" variant="outlined" fullWidth value={formValues.supplier} onChange={handleChange('supplier')} /> */}
 
             <FormControl sx={{ my: 1 }} fullWidth>
                 <InputLabel color="secondary" id="select-supplier-label">Selecionar Fornecedor</InputLabel>

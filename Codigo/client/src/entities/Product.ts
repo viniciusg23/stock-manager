@@ -1,4 +1,5 @@
 export class Product {
+    [key: string]: any;
     code: string;
     isFiscal: boolean;
     category: string;

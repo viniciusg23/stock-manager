@@ -8,13 +8,10 @@ import { AppDispatch } from '../../../../../reduxReducers/store';
 import { useDispatch } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
 import { fetchCategories } from '../../../../../reduxActions/fetchCategories';
+import { Category } from '../../../../../entities/Category';
 
-interface FormValues { 
-    name: string;
-    fiscalCode: string;
-}
 
-const initialFormValues: FormValues = {
+const initialCategory: Category = {
     name: "",
     fiscalCode: ""
 };
@@ -22,16 +19,23 @@ const initialFormValues: FormValues = {
 
 function AddCategoryForm(){
     const navigate = useNavigate();
-    const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+    const [formValues, setCategory] = useState<Category>(initialCategory);
     const dispatch = useDispatch<AppDispatch>();
 
 
-    const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        setFormValues({ ...formValues, [prop]: event.target.value });
+    const handleChange = (prop: keyof Category) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setCategory({ ...formValues, [prop]: event.target.value });
     };
 
     const handleSubmit = async () => {
         try {
+
+            for(const key in formValues){
+                if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
+                    throw new Error("Invalid fields");
+                }
+            }
+
             const body: string = JSON.stringify({
                 name: formValues.name,
                 fiscalCode: formValues.fiscalCode
@@ -47,7 +51,7 @@ function AddCategoryForm(){
             const data = await jsonData.json();
     
             enqueueSnackbar(data.message, {variant: "success"});
-            setFormValues(initialFormValues);
+            setCategory(initialCategory);
 
         } catch (error: any | UnauthorizationError) {
             if(error instanceof UnauthorizationError){

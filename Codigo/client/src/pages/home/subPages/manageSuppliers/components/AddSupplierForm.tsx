@@ -8,13 +8,10 @@ import { useDispatch } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
 import { fetchSuppliers } from '../../../../../reduxActions/fetchSuppliers';
 import { AppDispatch } from '../../../../../reduxReducers/store';
+import { Supplier } from '../../../../../entities/Supplier';
 
-interface FormValues {
-    name: string;
-    description: string;
-}
 
-const initialFormValues: FormValues = {
+const initialSupplier: Supplier = {
     name: "",
     description: ""
 };
@@ -23,14 +20,21 @@ function AddSupplierForm(){
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
 
-    const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+    const [formValues, setSupplier] = useState<Supplier>(initialSupplier);
 
-    const handleChange = (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        setFormValues({ ...formValues, [prop]: event.target.value });
+    const handleChange = (prop: keyof Supplier) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setSupplier({ ...formValues, [prop]: event.target.value });
     };
 
     const handleSubmit = async () => {
         try {    
+
+            for(const key in formValues){
+                if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
+                    throw new Error("Invalid fields");
+                }
+            }
+
             const body: string = JSON.stringify({
                 name: formValues.name,
                 description: formValues.description
@@ -46,7 +50,7 @@ function AddSupplierForm(){
             const data = await jsonData.json();
     
             enqueueSnackbar(data.message, {variant: "success"});
-            setFormValues(initialFormValues);
+            setSupplier(initialSupplier);
         } 
         catch (error: any | UnauthorizationError) {
             if(error instanceof UnauthorizationError){

@@ -1,5 +1,5 @@
 export class Category {
- 
+    [key: string]: any;
     public name: string;
     public fiscalCode: string;
     public id?: string;

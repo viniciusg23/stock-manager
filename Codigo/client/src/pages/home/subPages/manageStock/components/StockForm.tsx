@@ -53,6 +53,13 @@ function StockForm(props: IStockFormProps){
 
     const handleSubmit = async () => {
         try {
+
+            for(const key in formValues){
+                if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
+                    throw new Error("Invalid fields");
+                }
+            }
+
             const body: string = JSON.stringify({
                 id: formValues.id,
                 code: formValues.code,

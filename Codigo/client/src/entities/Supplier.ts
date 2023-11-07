@@ -1,4 +1,5 @@
 export class Supplier {
+    [key: string]: any;
     public name: string;
     public description: string;
     public id?: string;
