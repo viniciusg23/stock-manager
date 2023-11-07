@@ -1,4 +1,4 @@
-import { Supplier } from "../../../entities/supplier/Supplier";
+import { Supplier } from "../../../entities/Supplier";
 import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
 
 export class ViewSupplierUseCase {

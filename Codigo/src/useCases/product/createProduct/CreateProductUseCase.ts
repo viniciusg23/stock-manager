@@ -1,4 +1,4 @@
-import { Product } from "../../../entities/product/Product";
+import { Product } from "../../../entities/Product";
 import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
 import { ICreateProductRequestDTO } from "./CreateProductDTO";
 

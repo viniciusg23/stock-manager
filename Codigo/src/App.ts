@@ -13,7 +13,7 @@ import productRouter from "./routers/productRouter";
 import userRouter from "./routers/userRouter";
 import employeeRouter from "./routers/employeeRouter";
 import sellRouter from "./routers/sellRouter";
-import { authMiddleware } from "./middleware/authMiddleware";
+import categoryRouter from "./routers/categoryRouter";
 
 
 const environment = config.get<string>("env")
@@ -38,6 +38,8 @@ app.use("/user", userRouter);
 app.use("/employee", employeeRouter);
 
 app.use("/sell", sellRouter);
+
+app.use("/category", categoryRouter);
 
 
 

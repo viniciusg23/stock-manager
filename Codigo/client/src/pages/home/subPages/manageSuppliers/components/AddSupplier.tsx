@@ -17,7 +17,7 @@ function AddSupplier() {
 
     return (
         <>
-            <Form isOpen={openForm} handleClose={handleClose}>
+            <Form isOpen={openForm} handleClose={handleClose} title="Adicionar Novo Fornecedor">
                 <AddSupplierForm />
             </Form>
 

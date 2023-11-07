@@ -23,6 +23,11 @@ export const drawerItens : Array<DrawerItem> = [
         icon: Icons.LocalShipping
     },
     {
+        name: "Gerenciar Categorias",
+        path: "categories",
+        icon: Icons.Category
+    },
+    {
         name: "Registrar Nova Viagem",
         path: "travel",
         icon: Icons.Explore

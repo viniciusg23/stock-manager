@@ -1,5 +1,5 @@
 import { getMonthValue } from "../../../entities/product/EnumMonth";
-import { Product } from "../../../entities/product/Product";
+import { Product } from "../../../entities/Product";
 import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
 
 export class ViewProductUseCase {

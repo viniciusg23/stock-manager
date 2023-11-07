@@ -1,5 +1,5 @@
 import * as ExcelJS from "exceljs";
-import { Product } from "../../entities/product/Product";
+import { Product } from "../../entities/Product";
 type MesesDoAno = {
   Janeiro: 1;
   Fevereiro: 2;

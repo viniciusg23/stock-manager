@@ -1,4 +1,4 @@
-import { User } from "../../../entities/user/User";
+import { User } from "../../../entities/User";
 import { UserModel } from "../../../models/User";
 import { IUserRepository } from "../IUserRepository";
 

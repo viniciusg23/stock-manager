@@ -17,7 +17,7 @@ function AddProduct() {
 
     return (
         <>
-            <Form isOpen={openForm} handleClose={handleClose}>
+            <Form isOpen={openForm} handleClose={handleClose} title="Adicionar Novo Produto">
                 <ProductForm control="create"/>
             </Form>
 

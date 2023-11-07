@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { beforeAll, afterAll, describe, expect, test } from "vitest";
 import { connect, disconnect } from "../../../../config/db";
 import { MongoDBProductRepository } from "./MongoDBProductRepository";
-import { Product } from "../../../entities/product/Product";
+import { Product } from "../../../entities/Product";
 
 
 beforeAll(async () => {

@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import FadeIn from "react-fade-in/lib/FadeIn";
 
 interface IFunctionalityNameProps {
     functionality: string;
@@ -14,9 +13,7 @@ function FunctionalityName({ functionality }: IFunctionalityNameProps) {
     }, [functionality]);
 
     return (
-        <FadeIn key={key}>
-            <Typography>{functionality}</Typography>
-        </FadeIn>
+        <Typography>{functionality}</Typography>
     );
 }
 

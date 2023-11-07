@@ -4,7 +4,6 @@ import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { enqueueSnackbar } from "notistack";
-import FadeIn from "react-fade-in";
 import { UnauthorizationError } from "../../errors/UnauthorizationError";
 import { fetchEmployees } from "../../reduxActions/fetchEmployees";
 import { fetchProducts } from "../../reduxActions/fetchProducts";
@@ -105,7 +104,7 @@ function RegisterSells(props: IRegisterSellsProps) {
 
 
     return (
-        <FadeIn>
+        <>
             <Typography 
                 align={format === "system" ? "left" : "center"}  
                 variant="h5"
@@ -246,7 +245,7 @@ function RegisterSells(props: IRegisterSellsProps) {
                     
                 </Box>
             </Box>
-        </FadeIn>
+        </>
     );
 }
 

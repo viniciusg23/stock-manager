@@ -1,4 +1,3 @@
-import FadeIn from "react-fade-in/lib/FadeIn";
 import AddProduct from "./components/AddProduct";
 import ProductsTable from "./components/ProductsTable";
 
@@ -7,9 +6,7 @@ function ManageProducts() {
         <>
             <AddProduct />
 
-            <FadeIn>
-                <ProductsTable />
-            </FadeIn>
+            <ProductsTable />
             
         </>
     );

@@ -1,5 +1,5 @@
-import { Sale } from "../../../entities/sale/Sale";
-import { EnumMonth } from "../../../entities/product/EnumMonth";
+import { Sale } from "../../../entities/Sale";
+import { EnumMonth } from "../../../entities/Product";
 import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
 import { ISaleRepository } from "../../../repository/saleRepository/ISaleRepository";
 import { EditProductUseCase } from "../../product/editProduct/EditProductUseCase";

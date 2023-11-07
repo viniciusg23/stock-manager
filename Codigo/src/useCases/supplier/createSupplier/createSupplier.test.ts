@@ -1,5 +1,5 @@
 import {describe, expect, test} from "vitest";
-import { Supplier } from "../../../entities/supplier/Supplier";
+import { Supplier } from "../../../entities/Supplier";
 
 describe("creating supplier", () => {
     test("new supplier object", () => {

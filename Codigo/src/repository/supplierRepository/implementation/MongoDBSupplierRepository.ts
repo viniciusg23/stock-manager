@@ -1,4 +1,4 @@
-import { Supplier } from "../../../entities/supplier/Supplier";
+import { Supplier } from "../../../entities/Supplier";
 import { ISupplierRepository } from "../ISupplierRepository";
 import { SupplierModel } from "../../../models/Supplier";
 

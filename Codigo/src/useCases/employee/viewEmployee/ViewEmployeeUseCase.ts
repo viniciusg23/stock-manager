@@ -1,4 +1,4 @@
-import { Employee } from "../../../entities/employee/Employee";
+import { Employee } from "../../../entities/Employee";
 import { IEmployeeRepository } from "../../../repository/employeeRepository/IEmployeeRepository";
 
 export class ViewEmployeeUseCase {

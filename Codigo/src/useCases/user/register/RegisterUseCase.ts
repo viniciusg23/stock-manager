@@ -1,4 +1,4 @@
-import { User } from "../../../entities/user/User";
+import { User } from "../../../entities/User";
 import { IUserRepository } from "../../../repository/userRepository/IUserRepository";
 import { IRegisterDTO } from "./RegisterDTO";
 import { hashSync } from "bcryptjs";

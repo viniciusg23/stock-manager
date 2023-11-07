@@ -68,7 +68,7 @@ function ProductController(props: ProductControllerProps) {
 
     return (
         <>
-            <Form isOpen={openForm} handleClose={handleClose}>
+            <Form isOpen={openForm} handleClose={handleClose} title="Editar Produto">
                 <ProductForm control="edit" product={product}/>
             </Form>
 

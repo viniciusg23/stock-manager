@@ -19,6 +19,7 @@ import { ColorModeContext } from '../../../../context/ColorModeContext';
 
 import { setFunctionality as setFunctionalityLC } from '../../utils/setFunctionality';
 import { getFunctionality } from '../../utils/getFunctionality';
+import Profile from './Profile';
 
 const drawerMaxWidth: number = 300
 export let drawerWidth: number = drawerMaxWidth;
@@ -149,15 +150,7 @@ export default function DrawerNavegation() {
               <DarkMode />
             </Stack>
 
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <Profile />
           </Box>
 
 

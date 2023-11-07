@@ -2,7 +2,7 @@ import {afterAll, beforeAll, beforeEach, describe, expect, test} from "vitest";
 import { SupplierModel } from "../../../models/Supplier";
 import { MongoDBSupplierRepository } from "./MongoDBSupplierRepository";
 import { connect, disconnect } from "../../../../config/db";
-import { Supplier } from "../../../entities/supplier/Supplier";
+import { Supplier } from "../../../entities/Supplier";
 import mongoose from "mongoose";
 
 const testName: string = "supplier1";

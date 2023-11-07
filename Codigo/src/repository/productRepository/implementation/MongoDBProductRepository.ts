@@ -1,5 +1,4 @@
-import { EnumMonth, getMonthValue } from "../../../entities/product/EnumMonth";
-import { Product } from "../../../entities/product/Product";
+import { Product, getMonthValue } from "../../../entities/Product";
 import { ProductModel } from "../../../models/Product";
 import { IProductRepository } from "../IProductRepository";
 

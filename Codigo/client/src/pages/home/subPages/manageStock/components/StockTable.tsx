@@ -40,7 +40,6 @@ const columns: IStockColumn[] = [
 
 function StockTable() {
     
-    // const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
 
     const {products, loading, error} = useSelector(useProducts);

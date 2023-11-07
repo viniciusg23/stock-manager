@@ -54,11 +54,14 @@ function Table(props: TableProps) {
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row) => {
                                             return (
-                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                                <TableRow key={row.id} hover role="checkbox" tabIndex={-1} >
                                                     {columns.map((column) => {
                                                         const value = row[column.id];
                                                         return (
-                                                            <TableCell key={column.id} align={column.align || 'left'}>
+                                                            <TableCell 
+                                                                key={column.id} 
+                                                                align={column.align || 'left'}
+                                                            >
                                                                 {value}
                                                             </TableCell>
                                                         );

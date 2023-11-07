@@ -17,7 +17,7 @@ function AddEmployee() {
 
     return (
         <>
-            <Form isOpen={openForm} handleClose={handleClose}>
+            <Form isOpen={openForm} handleClose={handleClose} title="Registrar Novo Funcionário">
                 <AddEmployeeForm />
             </Form>
 

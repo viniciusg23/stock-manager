@@ -1,5 +1,7 @@
-import { Box, Breadcrumbs, Fade, Link, Paper, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Box, Breadcrumbs, Fade, Grow, Link, Paper, Typography } from '@mui/material';
 import { drawerWidth } from '../drawerNavegation/DrawerNavegation';
+import { CSSTransition } from 'react-transition-group';
 import ManageProducts from '../../subPages/manageProducts/ManageProducts';
 import ManageSuppliers from '../../subPages/manageSuppliers/ManageSuppliers';
 import ManageEmployees from '../../subPages/manageEmployees/ManageEmployees';
@@ -7,10 +9,12 @@ import ManageStock from '../../subPages/manageStock/ManageStock';
 import RegisterSells from '../../subPages/registerSell/RegisterSells';
 import FunctionalityName from './FunctionalityName';
 import Dashboard from '../../subPages/dashboard/Dashboard';
+import ManageCategories from '../../subPages/manageCategories/ManageCategories';
 
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
     const { functionality, functionalityName } = props;
+    const [showComponent, setShowComponent] = useState(true);
 
     let componentToRender = <div></div>;
     let defaultName = "";
@@ -33,6 +37,9 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
             break;
         case "dashboard":
             componentToRender = <Dashboard />
+            break;
+        case "categories":
+            componentToRender = <ManageCategories />
             break;
         default:
             defaultName = "Gerenciar Estoque";
@@ -72,9 +79,18 @@ function FunctionalityRender(props: { functionality: string, functionalityName: 
                     padding: 2,
                     width: '100%',
                     backgroundColor: 'background.paper',
+                    // display: "flex"
                 }}
             >
-                {componentToRender}
+                <CSSTransition 
+                    in={showComponent}
+                    timeout={300}
+                    classNames="fade"
+                    unmountOnExit    
+                >
+                    {componentToRender}
+                </CSSTransition>
+                
             </Paper>
         </Box>
     );

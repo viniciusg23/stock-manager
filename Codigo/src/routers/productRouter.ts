@@ -5,6 +5,7 @@ import { viewProductController } from "../useCases/product/viewProduct";
 import { editProductController } from "../useCases/product/editProduct";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { removeProductController } from "../useCases/product/removeProduct";
+import { createQrCodeController } from "../useCases/qrcode/createQrCode";
 
 
 const router = Router();
@@ -25,7 +26,9 @@ router.post("/remove", authMiddleware, (req, res) => {
     return removeProductController.handle(req, res);
 })
 
-
+router.get("/create-qrcode/:id", authMiddleware, (req, res) => {
+    return createQrCodeController.handle(req, res);
+});
 
 
 export default router;
