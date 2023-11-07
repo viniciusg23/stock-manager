@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Supplier } from "../../entities/supplier/Supplier";
+import { Supplier } from "../../entities/Supplier";
 import { fetchSuppliers } from "../../reduxActions/fetchSuppliers";
 
 interface ISliceSuppliersState {

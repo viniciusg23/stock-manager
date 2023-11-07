@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchEmployees } from "../../reduxActions/fetchEmployees";
-import { Employee } from "../../entities/employee/Employee";
+import { Employee } from "../../entities/Employee";
 
 interface ISliceEmployeesState {
     employees: Employee[];

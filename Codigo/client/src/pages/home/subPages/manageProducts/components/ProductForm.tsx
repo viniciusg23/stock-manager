@@ -1,13 +1,17 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { TextField, Typography, Box, Button, useTheme, MenuItem, Switch, Stack } from '@mui/material';
+import { TextField, Typography, Box, Button, useTheme, MenuItem, Switch, Stack, Select, FormControl, InputLabel } from '@mui/material';
 import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
 import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
 import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
-import { Product } from '../../../../../entities/product/Product';
-import { useDispatch } from 'react-redux';
+import { Product } from '../../../../../entities/Product';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../../../../reduxActions/fetchProducts';
 import { AppDispatch } from '../../../../../reduxReducers/store';
+import { fetchCategories } from '../../../../../reduxActions/fetchCategories';
+import { useCategories } from '../../../../../reduxReducers/slicers/sliceCategories';
+import { useSuppliers } from '../../../../../reduxReducers/slicers/sliceSuppliers';
+import { fetchSuppliers } from '../../../../../reduxActions/fetchSuppliers';
 
 
 const months: Array<"Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro"> = [
@@ -36,6 +40,8 @@ interface IProductFormProps {
 function ProductForm(props: IProductFormProps){
     const {control, product} = props;
     const dispatch = useDispatch<AppDispatch>();
+    const {categories} = useSelector(useCategories);
+    const {suppliers} = useSelector(useSuppliers);
 
     if(control === "edit" && product){
         initialFormValues.id = product.id;
@@ -53,7 +59,10 @@ function ProductForm(props: IProductFormProps){
     
     const navigate = useNavigate();
     const theme = useTheme()
+
     const [formValues, setFormValues] = useState<Product>(initialFormValues);
+    const [category, setCategory] = useState<string>("");
+    const [supplier, setSupplier] = useState<string>("");
 
     const handleChange = (prop: keyof Product) => (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormValues({ ...formValues, [prop]: event.target.value });
@@ -69,14 +78,14 @@ function ProductForm(props: IProductFormProps){
                 id: formValues.id,
                 code: formValues.code,
                 isFiscal: formValues.isFiscal,
-                category: formValues.category,
+                category: category,
                 name: formValues.name,
                 quantity: 0,
                 costPrice: formValues.costPrice,
                 salePrice: 0,
                 purchaseMonth: monthNameToNumber(formValues.purchaseMonth),
                 purchaseYear: formValues.purchaseYear,
-                supplier: formValues.supplier
+                supplier: supplier
             });
     
             const options = {
@@ -107,6 +116,12 @@ function ProductForm(props: IProductFormProps){
         }
     };
 
+    useEffect(() => {
+        dispatch(fetchSuppliers());
+        dispatch(fetchCategories());
+    }, []);
+
+
 
     return (
         <Box
@@ -119,11 +134,41 @@ function ProductForm(props: IProductFormProps){
         >
             <TextField color='secondary' id="name" label="Nome do Produto" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
             
-            <TextField color='secondary' id="category" label="Categoria do Produto" variant="outlined" fullWidth value={formValues.category} onChange={handleChange('category')} />
+            {/* <TextField color='secondary' id="category" label="Categoria do Produto" variant="outlined" fullWidth value={formValues.category} onChange={handleChange('category')} /> */}
+
+            <FormControl sx={{ my: 1 }} fullWidth>
+                <InputLabel color="secondary" id="select-category-label">Selecionar Categoria</InputLabel>
+                <Select
+                    color="secondary"
+                    labelId="select-category-label"
+                    value={category}
+                    label="Selecionar Categoria"
+                    onChange={(event) => setCategory(event.target.value)}
+                >
+                    {categories.map((category) => (
+                        <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
             
             <TextField color='secondary' id="costPrice" label="Preço de Custo do Produto" variant="outlined" fullWidth type="number" value={formValues.costPrice} onChange={handleChange('costPrice')} />
             
-            <TextField color='secondary' id="supplier" label="Fornecedor do Produto" variant="outlined" fullWidth value={formValues.supplier} onChange={handleChange('supplier')} />
+            {/* <TextField color='secondary' id="supplier" label="Fornecedor do Produto" variant="outlined" fullWidth value={formValues.supplier} onChange={handleChange('supplier')} /> */}
+
+            <FormControl sx={{ my: 1 }} fullWidth>
+                <InputLabel color="secondary" id="select-supplier-label">Selecionar Fornecedor</InputLabel>
+                <Select
+                    color="secondary"
+                    labelId="select-supplier-label"
+                    value={supplier}
+                    label="Selecionar Fornecedor"
+                    onChange={(event) => setSupplier(event.target.value)}
+                >
+                    {suppliers.map((supplier) => (
+                        <MenuItem key={supplier.id} value={supplier.id}>{supplier.name}</MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
             
             <Stack direction="row" spacing={1} alignItems="center">
                 <Typography color={theme.palette.getContrastText("")}>Produto não é fiscal</Typography>

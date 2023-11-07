@@ -5,7 +5,7 @@ import { LegacyRef, RefObject, useRef, useState } from "react";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
 import { useNavigate } from "react-router-dom";
-import { Product } from "../../../../../entities/product/Product";
+import { Product } from "../../../../../entities/Product";
 import StockForm from "./StockForm";
 import { useReactToPrint } from "react-to-print";
 import ProductTicket from "./ProductTicket";

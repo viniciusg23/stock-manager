@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Product } from "../../entities/product/Product";
+import { Product } from "../../entities/Product";
 import { fetchProducts } from "../../reduxActions/fetchProducts";
 
 interface ISliceProductsState {

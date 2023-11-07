@@ -1,4 +1,4 @@
-import { Product } from "../entities/product/Product";
+import { Product } from "../entities/Product";
 
 export async function viewProducts(): Promise<Product[]> {
     const options = {

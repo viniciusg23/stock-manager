@@ -4,7 +4,7 @@ import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
 import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
 import { useNavigate } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
-import { Product } from '../../../../../entities/product/Product';
+import { Product } from '../../../../../entities/Product';
 import { useDispatch } from 'react-redux';
 import { fetchProducts } from '../../../../../reduxActions/fetchProducts';
 import { AppDispatch } from '../../../../../reduxReducers/store';

@@ -2,9 +2,9 @@ import { Fab, Tooltip } from "@mui/material";
 import {Add} from "@mui/icons-material"
 import { useState } from "react";
 import Form from "../../../components/Form";
-import AddEmployeeForm from "./AddEmployeeForm";
+import AddCategoryForm from "./AddCategoryForm";
 
-function AddEmployee() {
+function AddCategory() {
     const [openForm, setOpenForm] = useState<boolean>(false);
 
     const handleClose = () => {
@@ -17,12 +17,12 @@ function AddEmployee() {
 
     return (
         <>
-            <Form isOpen={openForm} handleClose={handleClose} title="Registrar Novo Funcionário">
-                <AddEmployeeForm />
+            <Form isOpen={openForm} handleClose={handleClose} title="Registrar Nova Categoria">
+                <AddCategoryForm />
             </Form>
 
 
-            <Tooltip title="Adicionar Funcionário" placement="left">
+            <Tooltip title="Adicionar Categoria" placement="left">
                 <Fab 
                     sx={{
                         position: "absolute",
@@ -41,4 +41,4 @@ function AddEmployee() {
     );
 }
 
-export default AddEmployee;
+export default AddCategory;

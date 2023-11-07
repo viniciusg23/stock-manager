@@ -1,4 +1,4 @@
-import { Employee } from "../entities/employee/Employee";
+import { Employee } from "../entities/Employee";
 
 export async function viewEmployees(): Promise<Employee[]> {
     const options = {
