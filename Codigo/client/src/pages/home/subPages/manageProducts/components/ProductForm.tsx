@@ -19,8 +19,8 @@ const months: Array<"Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junh
 ];
 
 const initialFormValues: Product = {
-    id: "",
-    code: "",
+    id: "null",
+    code: "null",
     isFiscal: false,
     category: "",
     name: "",
@@ -75,11 +75,21 @@ function ProductForm(props: IProductFormProps){
     const handleSubmit = async () => {
         try {
 
-            for(const key in formValues){
-                if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
-                    throw new Error("Invalid fields");
+            if(control === "create"){
+                for(const key in formValues){
+                    if ((formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) &&  (key !== "id" && key !== "code" && key !== "category" && key !== "supplier")) {
+                        throw new Error("Invalid fields");
+                    }
                 }
             }
+            else {
+                for(const key in formValues){
+                    if ((formValues[key] === "" || formValues[key] === null || formValues[key] === undefined)) {
+                        throw new Error("Invalid fields");
+                    }
+                }
+            }
+            
 
             const body: string = JSON.stringify({
                 id: formValues.id,
@@ -111,6 +121,8 @@ function ProductForm(props: IProductFormProps){
             enqueueSnackbar(data.message, {variant: "success"});
     
             setFormValues(initialFormValues);
+            setCategory("");
+            setSupplier("");
         } catch (error: any | UnauthorizationError) {
             if(error instanceof UnauthorizationError){
                 alert("Sessão finalizada");

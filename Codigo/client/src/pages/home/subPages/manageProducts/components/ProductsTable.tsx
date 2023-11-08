@@ -72,6 +72,9 @@ function ProductsTable() {
 
     return (
         <>
+
+            
+
             <Table isLoading={loading} columns={columns} rows={rows} />
         </>
     );

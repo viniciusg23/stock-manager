@@ -3,6 +3,7 @@ import { Product } from "../../entities/Product";
 import { fetchProducts } from "../../reduxActions/fetchProducts";
 
 interface ISliceProductsState {
+    [key: string]: any;
     products: Product[];
     loading: boolean
     error: string | undefined;

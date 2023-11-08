@@ -1,10 +1,21 @@
-import AddCategory from "./components/AddCategory";
+import { useCategories } from "../../../../reduxReducers/slicers/sliceCategories";
+import TableController from "../../components/TableController";
+import CategoryForm from "./components/CategoryForm";
 import CategoryTable from "./components/CategoryTable";
 
 function ManageCategories() {
     return (
         <>
-            <AddCategory />
+
+            <TableController 
+                tableTitle="Suas Categorias de Produtos"
+                thereIsAddButton
+                // selector="categories"
+                // slice={useCategories}
+                formTitle="Adicionar Nova Categoria"
+                form={<CategoryForm />}
+            />
+
             <CategoryTable />
         </>
     );

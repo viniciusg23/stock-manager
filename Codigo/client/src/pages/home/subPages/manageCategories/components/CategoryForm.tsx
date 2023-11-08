@@ -1,33 +1,34 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import { Box, Button } from '@mui/material';
+import { Box, Button, useTheme } from '@mui/material';
+import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
 import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
 import { useNavigate } from 'react-router-dom';
-import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
+import { AppDispatch } from '../../../../../reduxReducers/store';
 import { useDispatch } from 'react-redux';
 import { enqueueSnackbar } from 'notistack';
-import { fetchSuppliers } from '../../../../../reduxActions/fetchSuppliers';
-import { AppDispatch } from '../../../../../reduxReducers/store';
-import { Supplier } from '../../../../../entities/Supplier';
+import { fetchCategories } from '../../../../../reduxActions/fetchCategories';
+import { Category } from '../../../../../entities/Category';
 
 
-const initialSupplier: Supplier = {
+const initialCategory: Category = {
     name: "",
-    description: ""
+    fiscalCode: ""
 };
 
-function AddSupplierForm(){
+
+function CategoryForm(){
     const navigate = useNavigate();
+    const [formValues, setCategory] = useState<Category>(initialCategory);
     const dispatch = useDispatch<AppDispatch>();
 
-    const [formValues, setSupplier] = useState<Supplier>(initialSupplier);
 
-    const handleChange = (prop: keyof Supplier) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        setSupplier({ ...formValues, [prop]: event.target.value });
+    const handleChange = (prop: keyof Category) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        setCategory({ ...formValues, [prop]: event.target.value });
     };
 
     const handleSubmit = async () => {
-        try {    
+        try {
 
             for(const key in formValues){
                 if (formValues[key] === "" || formValues[key] === null || formValues[key] === undefined) {
@@ -37,7 +38,7 @@ function AddSupplierForm(){
 
             const body: string = JSON.stringify({
                 name: formValues.name,
-                description: formValues.description
+                fiscalCode: formValues.fiscalCode
             });
     
             const options = {
@@ -46,13 +47,13 @@ function AddSupplierForm(){
                 body: body
             };
               
-            const jsonData = await fetch('/supplier/create', options);
+            const jsonData = await fetch('/category/create', options)
             const data = await jsonData.json();
     
             enqueueSnackbar(data.message, {variant: "success"});
-            setSupplier(initialSupplier);
-        } 
-        catch (error: any | UnauthorizationError) {
+            setCategory(initialCategory);
+
+        } catch (error: any | UnauthorizationError) {
             if(error instanceof UnauthorizationError){
                 alert("Sessão finalizada");
                 return navigate("/");
@@ -60,7 +61,7 @@ function AddSupplierForm(){
 
             enqueueSnackbar(error.message, {variant: "error"});
         } finally {
-            dispatch(fetchSuppliers());
+            dispatch(fetchCategories());
         }
     };
 
@@ -74,9 +75,9 @@ function AddSupplierForm(){
                 gap: 2,
             }}
         >
-            <TextField color='secondary' id="name" label="Nome do Fornecedor" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
+            <TextField color='secondary' id="name" label="Nome da Categoria" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
             
-            <TextField color='secondary' id="description" label="Descrição do Fornecedor" variant="outlined" fullWidth value={formValues.description} onChange={handleChange('description')} />
+            <TextField color='secondary' id="category" label="Código Fiscal da Categoria" variant="outlined" fullWidth value={formValues.fiscalCode} onChange={handleChange('fiscalCode')} />
             
             <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Registrar
@@ -85,4 +86,6 @@ function AddSupplierForm(){
     );
 };
 
-export default AddSupplierForm;
+export default CategoryForm;
+
+
