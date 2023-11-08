@@ -1,4 +1,4 @@
-import { Paper, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination, Table as MUITable, CircularProgress } from "@mui/material";
+import { Paper, TableContainer, TableHead, TableRow, TableCell, TableBody, TablePagination, Table as MUITable, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 
 
@@ -72,6 +72,19 @@ function Table(props: TableProps) {
                                 </TableBody>
                             </MUITable>
                         </TableContainer>
+
+                        {rows.length <= 0 && (
+                            <Typography 
+                                my="3em" 
+                                sx={{
+                                    opacity: 0.5,
+                                    fontSize: "2em"
+                                }}
+                            >
+                                Nenhum item cadastrado
+                            </Typography>
+                        )}
+
                         <TablePagination
                             rowsPerPageOptions={[10, 25, 100]}
                             component="div"

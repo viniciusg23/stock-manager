@@ -1,7 +1,7 @@
-import { Box, Button, Divider, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography, useTheme } from "@mui/material";
-import { Close, ShoppingCartCheckout } from "@mui/icons-material";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Box, Button, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { ShoppingCartCheckout } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { enqueueSnackbar } from "notistack";
 import { UnauthorizationError } from "../../errors/UnauthorizationError";
@@ -10,7 +10,6 @@ import { fetchProducts } from "../../reduxActions/fetchProducts";
 import { useEmployees } from "../../reduxReducers/slicers/sliceEmployees";
 import { useProducts } from "../../reduxReducers/slicers/sliceProducts";
 import { AppDispatch } from "../../reduxReducers/store";
-import { getAuthorizationToken } from "../home/utils/getAuthorizationToken";
 
 
 interface IRegisterSellsProps {
@@ -89,7 +88,7 @@ function RegisterSells(props: IRegisterSellsProps) {
                 body: body
             };
                           
-            const response = await fetch("/sell", options);
+            const response = await fetch("/sale/sell", options);
             const data = await response.json();
     
             enqueueSnackbar(data.message, {variant: "success"});

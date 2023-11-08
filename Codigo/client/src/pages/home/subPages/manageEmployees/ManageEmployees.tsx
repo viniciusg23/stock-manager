@@ -1,24 +1,23 @@
-import { useEmployees } from "../../../../reduxReducers/slicers/sliceEmployees";
 import TableController from "../../components/TableController";
 import AddEmployeeForm from "./components/AddEmployeeForm";
 import EmployeeTable from "./components/EmployeeTable";
+import FadeTransition from "../../components/FadeTransition";
 
 function ManageEmployees() {
+
     return (
-        <>
-            {/* <AddEmployee /> */}
+        <FadeTransition>
+            <>            
+                <TableController 
+                    tableTitle="Seus Funcionários" 
+                    thereIsAddButton
+                    formTitle="Adicionar Novo Funcionário" 
+                    form={<AddEmployeeForm />}
+                />
 
-            <TableController 
-                tableTitle="Seus Funcionários" 
-                thereIsAddButton
-                // selector="employees"
-                // slice={useEmployees}
-                formTitle="Adicionar Novo Funcionário" 
-                form={<AddEmployeeForm />}
-            />
-
-            <EmployeeTable />
-        </>
+                <EmployeeTable />
+            </>
+        </FadeTransition>
     );
 }
 

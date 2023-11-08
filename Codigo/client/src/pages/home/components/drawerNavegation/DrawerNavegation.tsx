@@ -11,15 +11,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { drawerItens } from "./drawerItens";
-import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Switch } from '@mui/material';
-import { AccountCircle, LightMode, DarkMode } from '@mui/icons-material';
+import { Divider, ListItem, Stack, Switch } from '@mui/material';
+import { LightMode, DarkMode } from '@mui/icons-material';
 
 import FunctionalityRender from '../functionalityRender/FunctionalityRender';
 import { ColorModeContext } from '../../../../context/ColorModeContext';
 
-import { setFunctionality as setFunctionalityLC } from '../../utils/setFunctionality';
 import { getFunctionality } from '../../utils/getFunctionality';
 import Profile from './Profile';
+import DrawerItemButton from './DrawerItemButton';
 
 const drawerMaxWidth: number = 300
 export let drawerWidth: number = drawerMaxWidth;
@@ -178,29 +178,7 @@ export default function DrawerNavegation() {
         <List>
           {drawerItens.map((item, index) => (
             <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-                onClick={() => {
-                  const func = { path: item.path, name: item.name }
-                  setFunctionality(func);
-                  setFunctionalityLC(JSON.stringify(func))
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <item.icon color="secondary" />
-                </ListItemIcon>
-                <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
+              <DrawerItemButton open={open} item={item} handleFunctionality={setFunctionality} />
             </ListItem>
           ))}
         </List>

@@ -1,19 +1,19 @@
-import { useProducts } from "../../../../reduxReducers/slicers/sliceProducts";
 import TableController from "../../components/TableController";
 import StockTable from "./components/StockTable";
+import FadeTransition from "../../components/FadeTransition";
 
 function ManageStock() {
-    return (
-        <>
 
-            <TableController 
-                tableTitle="Seu Estoque de Produtos"
-                // selector="products"
-                // slice={useProducts}
-                thereIsAddButton={false}
-            />
-            <StockTable />
-        </>
+    return (
+        <FadeTransition>
+            <>
+                <TableController 
+                    tableTitle="Seu Estoque de Produtos"
+                    thereIsAddButton={false}
+                />
+                <StockTable />
+            </>
+        </FadeTransition>
     );
 }
 

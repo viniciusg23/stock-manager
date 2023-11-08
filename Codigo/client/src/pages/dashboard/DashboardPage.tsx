@@ -1,6 +1,8 @@
 import { Typography } from "@mui/material";
 
-function Dashboard() {
+function DashboardPage() {
+    //TODO abrir nova aba no navegador para a dashboard
+
     return (
         <>
             <Typography>Dashboard não implementada</Typography>
@@ -8,4 +10,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default DashboardPage;

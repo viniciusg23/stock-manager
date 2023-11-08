@@ -1,27 +1,23 @@
 import ProductsTable from "./components/ProductsTable";
 import TableController from "../../components/TableController";
 import ProductForm from "./components/ProductForm";
-import { useProducts } from "../../../../reduxReducers/slicers/sliceProducts";
+import FadeTransition from "../../components/FadeTransition";
 
 function ManageProducts() {
 
-    
-
     return (
-        <>
-
-            <TableController 
-                tableTitle="Seus Produtos"
-                thereIsAddButton
-                // selector="products"
-                // slice={useProducts}
-                formTitle="Adicionar Novo Produto" 
-                form={<ProductForm control="create"/>}
-            />
-            
-            <ProductsTable />
-
-        </>
+        <FadeTransition>
+            <>
+                <TableController 
+                        tableTitle="Seus Produtos"
+                        thereIsAddButton
+                        formTitle="Adicionar Novo Produto" 
+                        form={<ProductForm control="create"/>}
+                    />
+                    
+                <ProductsTable />
+            </>
+        </FadeTransition>
     );
 }
 

@@ -37,7 +37,7 @@ app.use("/user", userRouter);
 
 app.use("/employee", employeeRouter);
 
-app.use("/sell", sellRouter);
+app.use("/sale", sellRouter);
 
 app.use("/category", categoryRouter);
 

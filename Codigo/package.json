@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/react-transition-group": "^4.4.9",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.9",
     "dotenv": "^16.3.1",

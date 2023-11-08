@@ -1,23 +1,23 @@
-import { useCategories } from "../../../../reduxReducers/slicers/sliceCategories";
 import TableController from "../../components/TableController";
 import CategoryForm from "./components/CategoryForm";
 import CategoryTable from "./components/CategoryTable";
+import FadeTransition from "../../components/FadeTransition";
 
 function ManageCategories() {
+
     return (
-        <>
+        <FadeTransition>
+            <>
+                <TableController 
+                    tableTitle="Suas Categorias de Produtos"
+                    thereIsAddButton
+                    formTitle="Adicionar Nova Categoria"
+                    form={<CategoryForm />}
+                />
 
-            <TableController 
-                tableTitle="Suas Categorias de Produtos"
-                thereIsAddButton
-                // selector="categories"
-                // slice={useCategories}
-                formTitle="Adicionar Nova Categoria"
-                form={<CategoryForm />}
-            />
-
-            <CategoryTable />
-        </>
+                <CategoryTable />
+            </>
+        </FadeTransition>
     );
 }
 

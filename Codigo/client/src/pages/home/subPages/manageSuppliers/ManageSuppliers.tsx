@@ -1,23 +1,24 @@
-import { useSuppliers } from "../../../../reduxReducers/slicers/sliceSuppliers";
 import TableController from "../../components/TableController";
 import SupplierForm from "./components/SupplierForm";
 import SuppliersTable from "./components/SuppliersTable";
+import FadeTransition from "../../components/FadeTransition";
 
 function ManageSuppliers() {
+
+    
     return (
-        <>
+        <FadeTransition>
+            <>
+                <TableController
+                    tableTitle="Seus Fornecedores"
+                    thereIsAddButton
+                    formTitle="Adicionar Novo Fornecedor"
+                    form={<SupplierForm />}
+                />
 
-            <TableController
-                tableTitle="Seus Fornecedores"
-                thereIsAddButton
-                // selector="suppliers"
-                // slice={useSuppliers}
-                formTitle="Adicionar Novo Fornecedor"
-                form={<SupplierForm />}
-            />
-
-            <SuppliersTable />
-        </>
+                <SuppliersTable />
+            </>
+        </FadeTransition>  
     );
 }
 

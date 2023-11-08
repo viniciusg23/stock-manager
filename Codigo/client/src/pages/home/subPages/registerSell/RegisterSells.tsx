@@ -1,9 +1,12 @@
 import RegisterSells from "../../../components/RegisterSells";
+import FadeTransition from "../../components/FadeTransition";
 
 function SystemSellsRegister() {
 
     return (
-        <RegisterSells format="system" />
+        <FadeTransition>
+            <RegisterSells format="system" />
+        </FadeTransition>
     );
     
 }
