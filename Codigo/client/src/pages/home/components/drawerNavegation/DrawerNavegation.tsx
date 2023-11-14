@@ -140,7 +140,7 @@ export default function DrawerNavegation() {
           }} />
 
           <Typography variant="h6" noWrap component="div">
-            Nome do Sistema
+            Complemento Outlet
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: "1em" }}>
