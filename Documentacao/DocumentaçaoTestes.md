@@ -76,3 +76,14 @@
 | **Pré-requisito:** Usuário está na aba "Dashboard" | ---------------------------------------------------------------------------- |
 | -------------------------------------------------- | -------------------------------------------------------------------- |
 
+## Caso de teste 8 - Dark Mode 
+
+| Passos                                         | Resultado Esperado                                        |
+|-----------------------------------------------|----------------------------------------------------------|
+| **Pré-requisito:**  Usuário está utilizando o sistema no tema claro |  |
+| 1. Usuário clica no toggle para mudar o tema da tela | Usuário visualiza a página com tema escuro |
+
+## Evidências → 
+
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/2de24dd1-62ad-4ea1-bda7-303b363f4422">
+
