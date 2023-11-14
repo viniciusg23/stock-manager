@@ -98,6 +98,16 @@
 
 <img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/237e82de-5c81-4ece-93de-eb2d95fca374">
 
+## Caso de teste 10 - Registrar Vendas
+
+| Passos                                            | Resultado esperado                                                |
+|---------------------------------------------------|------------------------------------------------------------------|
+| **Pré-requisito:** Usuário está na aba "Registrar Vendas" | -------------------------------------------|
+| | |
+
+## Evidências → 
+
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/bd4d43f0-08de-43da-be09-0d2d11667504">
 
 
 
