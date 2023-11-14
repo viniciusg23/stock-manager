@@ -3,6 +3,16 @@ import { ISupplierRepository } from "../ISupplierRepository";
 import { SupplierModel } from "../../../models/Supplier";
 
 export class MongoDBSupplierRepository implements ISupplierRepository {
+    
+    async findById(id: string): Promise<Supplier | null> {
+        const dbResult = await SupplierModel.findOne({_id: id});
+
+        if(!dbResult){
+            return null;
+        }
+
+        return new Supplier(dbResult.name, dbResult.description, dbResult._id.toString());
+    }
 
     async findByName(name: string): Promise<Supplier | null> {
         const dbResult = await SupplierModel.findOne({name: name});

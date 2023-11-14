@@ -1,8 +1,18 @@
 import { Product, getMonthValue } from "../../../entities/Product";
 import { ProductModel } from "../../../models/Product";
+import { ICategoryRepository } from "../../categoryRepository/ICategoryRepository";
+import { ISupplierRepository } from "../../supplierRepository/ISupplierRepository";
+import { MongoDBSupplierRepository } from "../../supplierRepository/implementation/MongoDBSupplierRepository";
 import { IProductRepository } from "../IProductRepository";
 
 export class MongoDBProductRepository implements IProductRepository {
+    private supplierRepository: ISupplierRepository;
+    private categoryRepository: ICategoryRepository;
+
+    public constructor(supplierRepository: ISupplierRepository, categoryRepository: ICategoryRepository){
+        this.supplierRepository = supplierRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     async findByName(name: string): Promise<Product | null> {
         const findProduct = await ProductModel.findOne({name: name});
@@ -13,14 +23,14 @@ export class MongoDBProductRepository implements IProductRepository {
 
         return new Product(
             findProduct.isFiscal,
-            findProduct.category,
+            await this.categoryRepository.findById(findProduct.category),
             findProduct.name,
             findProduct.quantity,
             findProduct.costPrice,
             findProduct.salePrice,
             getMonthValue(findProduct.purchaseMonth)!,
             findProduct.purchaseYear,
-            findProduct.supplier,
+            await this.supplierRepository.findById(findProduct.supplier),
             findProduct.code,
             findProduct._id.toString()
         );
@@ -37,14 +47,14 @@ export class MongoDBProductRepository implements IProductRepository {
 
         return new Product(
             findProduct.isFiscal,
-            findProduct.category,
+            await this.categoryRepository.findById(findProduct.category),
             findProduct.name,
             findProduct.quantity,
             findProduct.costPrice,
             findProduct.salePrice,
             getMonthValue(findProduct.purchaseMonth)!,
             findProduct.purchaseYear,
-            findProduct.supplier,
+            await this.supplierRepository.findById(findProduct.supplier),
             findProduct.code,
             findProduct._id.toString()
         );
@@ -60,14 +70,14 @@ export class MongoDBProductRepository implements IProductRepository {
 
         return new Product(
             findProduct.isFiscal,
-            findProduct.category,
+            await this.categoryRepository.findById(findProduct.category),
             findProduct.name,
             findProduct.quantity,
             findProduct.costPrice,
             findProduct.salePrice,
             getMonthValue(findProduct.purchaseMonth)!,
             findProduct.purchaseYear,
-            findProduct.supplier,
+            await this.supplierRepository.findById(findProduct.supplier),
             findProduct.code,
             findProduct._id.toString()
         );
@@ -78,11 +88,7 @@ export class MongoDBProductRepository implements IProductRepository {
     }
 
     async remove(id: string): Promise<void> {
-
-        console.log(id);
         const product = await ProductModel.deleteOne({_id: id});
-
-        console.log(product);
 
         if(!product){
             throw new Error("Cannot remove this product");
@@ -97,14 +103,14 @@ export class MongoDBProductRepository implements IProductRepository {
         for(const findProduct of allProductsDB) {
             allProducts.push(new Product(
                 findProduct.isFiscal,
-                findProduct.category,
+                await this.categoryRepository.findById(findProduct.category),
                 findProduct.name,
                 findProduct.quantity,
                 findProduct.costPrice,
                 findProduct.salePrice,
                 getMonthValue(findProduct.purchaseMonth)!,
                 findProduct.purchaseYear,
-                findProduct.supplier,
+                await this.supplierRepository.findById(findProduct.supplier),
                 findProduct.code,
                 findProduct._id.toString()
             ));
@@ -121,14 +127,14 @@ export class MongoDBProductRepository implements IProductRepository {
         }
 
         findedProduct.isFiscal = product.isIsFiscal();
-        findedProduct.category = product.getCategory();
+        findedProduct.category = product.getCategory()!.getId()!;
         findedProduct.name = product.getName();
         findedProduct.quantity = product.getQuantity();
         findedProduct.costPrice = product.getCostPrice();
         findedProduct.salePrice = product.getSalePrice();
         findedProduct.purchaseMonth = product.getPurchaseMonth();
         findedProduct.purchaseYear = product.getPurchaseYear();
-        findedProduct.supplier = product.getSupplier();
+        findedProduct.supplier = product.getSupplier()!.getId()!;
 
 
         await findedProduct.save();

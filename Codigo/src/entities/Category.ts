@@ -26,7 +26,7 @@ export class Category {
         this.fiscalCode = fiscalCode;
     }
 
-    public getId?(): string | undefined{
+    public getId(): string | undefined{
         return this.id;
     }
 

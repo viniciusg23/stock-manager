@@ -9,7 +9,7 @@ function ManageCategories() {
         <FadeTransition>
             <>
                 <TableController 
-                    tableTitle="Suas Categorias de Produtos"
+                    tableTitle="Categorias de Produtos"
                     thereIsAddButton
                     formTitle="Adicionar Nova Categoria"
                     form={<CategoryForm />}

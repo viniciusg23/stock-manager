@@ -55,11 +55,11 @@ function ProductsTable() {
             const row: ProductRow = {
                 code: product.code,
                 isFiscal: product.isFiscal ? "Sim" : "Não",
-                category: product.category,
+                category: product.category ? product.category.name : "Indefinido",
                 name: product.name,
                 costPrice: product.costPrice,
                 purchaseDate: formatDate(product.purchaseMonth, product.purchaseYear),
-                supplier: product.supplier,
+                supplier: product.supplier ? product.supplier.name : "Indefinido",
                 action: <ProductController product={product} />
             }
 

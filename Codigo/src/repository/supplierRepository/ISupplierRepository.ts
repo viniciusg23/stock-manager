@@ -1,11 +1,9 @@
 import { Supplier } from "../../entities/Supplier";
+import { IRepository } from "../IRepository";
 
 /**
  * methods to interect with the database
  */
-export interface ISupplierRepository {
+export interface ISupplierRepository extends IRepository<Supplier>{
     findByName(name: string): Promise<Supplier | null>;
-    create(supplier: Supplier): Promise<void>;
-    remove(id: string): Promise<void>;
-    findAll(): Promise<Supplier[]>;
 }

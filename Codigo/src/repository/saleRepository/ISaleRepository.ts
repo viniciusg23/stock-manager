@@ -1,7 +1,6 @@
 import { Sale } from "../../entities/Sale";
+import { IRepository } from "../IRepository";
 
-export interface ISaleRepository {
-    create(sale: Sale): Promise<void>;
-    findAll(): Promise<Sale[]>;
+export interface ISaleRepository extends IRepository<Sale>{
     findAllLast30Days(): Promise<Sale[]>;
 }

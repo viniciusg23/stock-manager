@@ -1,7 +1,10 @@
+import { Category } from "./Category";
+import { Supplier } from "./Supplier";
+
 export class Product {
   private code: string;
   private isFiscal: boolean;
-  private category: string;
+  private category: Category | null;
   private name: string;
   private quantity: number;
   private costPrice: number;
@@ -20,19 +23,19 @@ export class Product {
     | "Novembro"
     | "Dezembro";
   private purchaseYear: number;
-  private supplier: string;
+  private supplier: Supplier | null;
   private id?: string;
 
   constructor(
     isFiscal: boolean,
-    category: string,
+    category: Category | null,
     name: string,
     quantity: number,
     costPrice: number,
     salePrice: number,
     purchaseMonth: number,
     purchaseYear: number,
-    supplier: string,
+    supplier: Supplier | null,
     code?: string,
     id?: string
   ) {
@@ -87,11 +90,11 @@ export class Product {
     this.isFiscal = isFiscal;
   }
 
-  public getCategory(): string {
+  public getCategory(): Category | null {
     return this.category;
   }
 
-  public setCategory(category: string): void {
+  public setCategory(category: Category | null): void {
     this.category = category;
   }
 
@@ -167,11 +170,11 @@ export class Product {
     this.purchaseYear = purchaseYear;
   }
 
-  public getSupplier(): string {
+  public getSupplier(): Supplier | null {
     return this.supplier;
   }
 
-  public setSupplier(supplier: string): void {
+  public setSupplier(supplier: Supplier | null): void {
     this.supplier = supplier;
   }
 

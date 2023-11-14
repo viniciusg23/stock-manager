@@ -25,11 +25,11 @@ export class Supplier {
         this.description = description;
     }
 
-    public getid(): string | undefined {
+    public getId(): string | undefined {
         return this.id;
     }
 
-    public setid(id: string): void {
+    public setId(id: string): void {
         this.id = id;
     }
 }

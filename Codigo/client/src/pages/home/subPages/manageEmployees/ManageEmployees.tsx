@@ -9,7 +9,7 @@ function ManageEmployees() {
         <FadeTransition>
             <>            
                 <TableController 
-                    tableTitle="Seus Funcionários" 
+                    tableTitle="Funcionários" 
                     thereIsAddButton
                     formTitle="Adicionar Novo Funcionário" 
                     form={<AddEmployeeForm />}

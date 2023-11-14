@@ -14,6 +14,7 @@ import userRouter from "./routers/userRouter";
 import employeeRouter from "./routers/employeeRouter";
 import sellRouter from "./routers/sellRouter";
 import categoryRouter from "./routers/categoryRouter";
+import etlRouter from "./routers/etlRouter";
 
 
 const environment = config.get<string>("env")
@@ -40,6 +41,8 @@ app.use("/employee", employeeRouter);
 app.use("/sale", sellRouter);
 
 app.use("/category", categoryRouter);
+
+app.use("/etl", etlRouter);
 
 
 

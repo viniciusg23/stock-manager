@@ -10,7 +10,7 @@ function ManageSuppliers() {
         <FadeTransition>
             <>
                 <TableController
-                    tableTitle="Seus Fornecedores"
+                    tableTitle="Fornecedores"
                     thereIsAddButton
                     formTitle="Adicionar Novo Fornecedor"
                     form={<SupplierForm />}

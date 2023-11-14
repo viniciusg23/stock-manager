@@ -14,14 +14,14 @@ const initialFormValues: Product = {
     id: "",
     code: "",
     isFiscal: false,
-    category: "",
+    category: null,
     name: "",
     quantity: 0,
     costPrice: 0,
     salePrice: 0,
     purchaseMonth: 'Janeiro',
     purchaseYear: new Date().getFullYear(),
-    supplier: "",
+    supplier: null,
 };
 
 interface IStockFormProps {

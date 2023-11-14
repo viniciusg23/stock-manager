@@ -1,8 +1,11 @@
+import { Employee } from "./Employee";
+import { Product } from "./Product";
+
 export class Sale {
-    private productId: string;
+    private product: Product | null;
     private quantity: number;
     private salePrice: number;
-    private employeeId: string;
+    private employee: Employee | null;
     private totalPrice: number;
     private buyerName: string;
     private id?: string;
@@ -11,20 +14,20 @@ export class Sale {
 
 
     public constructor(
-        productId: string,
+        product: Product | null,
         quantity: number,
         salePrice: number,
-        employeeId: string,
+        employee: Employee | null,
         totalPrice: number,
         buyerName: string,
         buyerEmail?: string,
         buyerNumber?: string,
         id?: string
     ) {
-        this.productId = productId;
+        this.product = product;
         this.quantity = quantity;
         this.salePrice = salePrice;
-        this.employeeId = employeeId;
+        this.employee = employee;
         this.totalPrice = totalPrice;
         this.buyerName = buyerName;
         this.buyerEmail = buyerEmail;
@@ -32,12 +35,12 @@ export class Sale {
         this.id = id;
     }
 
-    public getProductId(): string {
-        return this.productId;
+    public getProduct(): Product | null {
+        return this.product;
     }
 
-    public setProductId(productId: string): void {
-        this.productId = productId;
+    public setProduct(product: Product | null): void {
+        this.product = product;
     }
 
     public getQuantity(): number {
@@ -56,12 +59,12 @@ export class Sale {
         this.salePrice = salePrice;
     }
 
-    public getEmployeeId(): string {
-        return this.employeeId;
+    public getEmployee(): Employee | null {
+        return this.employee;
     }
 
-    public setEmployeeId(employeeId: string): void {
-        this.employeeId = employeeId;
+    public setEmployee(employee: Employee | null): void {
+        this.employee = employee;
     }
 
     public getTotalPrice(): number {

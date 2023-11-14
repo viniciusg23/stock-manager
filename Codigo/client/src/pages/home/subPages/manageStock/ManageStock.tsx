@@ -8,7 +8,7 @@ function ManageStock() {
         <FadeTransition>
             <>
                 <TableController 
-                    tableTitle="Seu Estoque de Produtos"
+                    tableTitle="Estoque de Produtos"
                     thereIsAddButton={false}
                 />
                 <StockTable />

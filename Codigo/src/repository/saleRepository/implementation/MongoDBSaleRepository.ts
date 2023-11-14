@@ -1,19 +1,36 @@
 import { Sale } from "../../../entities/Sale";
 import { SaleModel } from "../../../models/Sale";
+import { IEmployeeRepository } from "../../employeeRepository/IEmployeeRepository";
+import { IProductRepository } from "../../productRepository/IProductRepository";
 import { ISaleRepository } from "../ISaleRepository";
 
 export class MongoDBSaleRepository implements ISaleRepository {
+    private productRepository: IProductRepository;
+    private employeeRepository: IEmployeeRepository;
+
+    public constructor(productRepository: IProductRepository, employeeRepository: IEmployeeRepository){
+        this.productRepository = productRepository;
+        this.employeeRepository = employeeRepository
+    }
+
+    //TODO
+    findById(id: string): Promise<Sale | null> {
+        throw new Error("Method not implemented.");
+    }
+    remove(id: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 
     async create(sale: Sale): Promise<void> {
         await SaleModel.create({
-            productId: sale.getProductId(),
+            productId: sale.getProduct()!.getId()!,
             quantity: sale.getQuantity(),
             salePrice: sale.getSalePrice(),
             totalPrice: sale.getTotalPrice(),
-            employeeId: sale.getEmployeeId(),
+            employeeId: sale.getEmployee()!.getId()!,
             buyerName: sale.getBuyerName(),
-            buyerEmail: sale.getBuyerEmail() ? sale.getBuyerEmail() : undefined,
-            buyerNumber: sale.getBuyerNumber() ? sale.getBuyerNumber() : undefined
+            buyerEmail: sale.getBuyerEmail() ? sale.getBuyerEmail() : null,
+            buyerNumber: sale.getBuyerNumber() ? sale.getBuyerNumber() : null
         });
     }
 
@@ -23,10 +40,10 @@ export class MongoDBSaleRepository implements ISaleRepository {
         
         for(const sale of allSalesDB){
             allSales.push(new Sale(
-                sale.productId,
-                Number(sale.quantity),
+                await this.productRepository.findById(sale.productId),
+                sale.quantity,
                 sale.salePrice,
-                sale.employeeId,
+                await this.employeeRepository.findById(sale.employeeId),
                 sale.totalPrice,
                 sale.buyerName,
                 sale.buyerEmail,
@@ -53,10 +70,10 @@ export class MongoDBSaleRepository implements ISaleRepository {
         
         for(const sale of result){
             allSales.push(new Sale(
-                sale.productId,
-                Number(sale.quantity),
+                await this.productRepository.findById(sale.productId),
+                sale.quantity,
                 sale.salePrice,
-                sale.employeeId,
+                await this.employeeRepository.findById(sale.employeeId),
                 sale.totalPrice,
                 sale.buyerName,
                 sale.buyerEmail,

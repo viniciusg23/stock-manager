@@ -12,7 +12,10 @@ export class PercentageOfSalesByCategoryController implements Controller {
     public async handle(req: Request, res: Response){
         try {
             
-            throw new Error("Not implemented");
+            const result = await this.percentageOfSalesByCategoryUseCase.execute();
+            const arrayResult = Array.from(result, ([key, value]) => ({ category: key, percentage: value }));
+            
+            return res.json({message: "All data found", result: arrayResult});
             
         } catch (error: any) {
             return res.status(400).json({

@@ -8,9 +8,9 @@ import { ISaleRepository } from "../../../repository/saleRepository/ISaleReposit
 import { MongoDBSaleRepository } from "../../../repository/saleRepository/implementation/MongoDBSaleRepository";
 import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
 import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
-import { Controller } from "../../IController";
-import { ViewSaleController } from "./ViewSaleController";
-import { ViewSaleUseCase } from "./ViewSaleUseCase";
+import { PercentageOfSalesByCategoryController } from "./PercentageOfSalesByCategoryController";
+import { PercentageOfSalesByCategoryUseCase } from "./PercentageOfSalesByCategoryUseCase";
+
 
 const supplierRepository: ISupplierRepository = new MongoDBSupplierRepository();
 const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();
@@ -21,7 +21,8 @@ const employeeRepository: IEmployeeRepository = new MongoDBEmployeeRepository();
 
 const saleRepository: ISaleRepository = new MongoDBSaleRepository(productRepository, employeeRepository);
 
-const viewSaleUseCase: ViewSaleUseCase = new ViewSaleUseCase(saleRepository);
-const viewSaleController: Controller = new ViewSaleController(viewSaleUseCase);
+const percentageOfSalesByCategoryUseCase: PercentageOfSalesByCategoryUseCase = new PercentageOfSalesByCategoryUseCase(saleRepository);
 
-export {viewSaleUseCase, viewSaleController};
+const percentageOfSalesByController: PercentageOfSalesByCategoryController = new PercentageOfSalesByCategoryController(percentageOfSalesByCategoryUseCase);
+
+export {percentageOfSalesByCategoryUseCase, percentageOfSalesByController};

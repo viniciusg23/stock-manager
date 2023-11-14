@@ -9,7 +9,7 @@ function ManageProducts() {
         <FadeTransition>
             <>
                 <TableController 
-                        tableTitle="Seus Produtos"
+                        tableTitle="Produtos"
                         thereIsAddButton
                         formTitle="Adicionar Novo Produto" 
                         form={<ProductForm control="create"/>}

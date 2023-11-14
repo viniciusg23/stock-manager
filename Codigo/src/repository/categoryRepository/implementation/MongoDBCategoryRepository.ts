@@ -3,6 +3,16 @@ import { CategoryModel } from "../../../models/Category";
 import { ICategoryRepository } from "../ICategoryRepository";
 
 export class MongoDBCategoryRepository implements ICategoryRepository {
+
+    async findById(id: string): Promise<Category | null> {
+        const findedCategory = await CategoryModel.findOne({_id: id});
+
+        if(findedCategory){
+            return new Category(findedCategory.name, findedCategory.fiscalCode, findedCategory._id.toString());
+        }
+        return null;
+    }
+
     async findByName(name: string): Promise<Category | null> {
         const findedCategory = await CategoryModel.findOne({name: name});
 

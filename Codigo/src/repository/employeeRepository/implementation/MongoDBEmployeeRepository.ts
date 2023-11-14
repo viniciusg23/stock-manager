@@ -3,6 +3,16 @@ import { EmployeeModel } from "../../../models/Employee";
 import { IEmployeeRepository } from "../IEmployeeRepository";
 
 export class MongoDBEmployeeRepository implements IEmployeeRepository {
+
+    async findById(id: string): Promise<Employee | null> {
+        const findedEmployee = await EmployeeModel.findOne({_id: id});
+
+        if(!findedEmployee){
+            return null;
+        }
+
+        return new Employee(findedEmployee.name, findedEmployee.job, findedEmployee._id.toString());
+    }
     
     async findByName(name: string): Promise<Employee | null> {
         const findedEmployee = await EmployeeModel.findOne({name: name});
