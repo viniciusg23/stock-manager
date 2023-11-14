@@ -25,6 +25,9 @@
 
 ## Evidências ->
 
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/d9c92244-54b2-4407-872e-f6cd7ae4ef35">
+
+
 ## Caso de teste 4 - Gerenciar Estoque
 
 | Passos                                            | Resultado esperado                                                |
