@@ -13,7 +13,7 @@ const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();
 
 const productRepository: IProductRepository = new MongoDBProductRepository(supplierRepository, categoryRepository);
 
-const editProductUseCase: EditProductUseCase = new EditProductUseCase(productRepository);
+const editProductUseCase: EditProductUseCase = new EditProductUseCase(productRepository, categoryRepository, supplierRepository);
 
 const editProductController: IController = new EditProductController(editProductUseCase);
 

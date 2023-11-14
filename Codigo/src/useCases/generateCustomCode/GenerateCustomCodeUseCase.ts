@@ -153,7 +153,7 @@ function gerarCodigo(objeto: Product): Promise<string> {
     }
     novoCodigo += incluirLetraParaAno(objeto.getPurchaseYear());
     novoCodigo += incluirLetraParaMes(objeto.getPurchaseMonth());
-    novoCodigo += obterNumeroParaCategoria(objeto.getCategory());
+    novoCodigo += obterNumeroParaCategoria(objeto.getCategory()!.getName());
     novoCodigo += incluir3LetrasParaNome(objeto.getName());
     novoCodigo += formatarPreco(objeto.getSalePrice());
     resolve(novoCodigo.toUpperCase());

@@ -3,6 +3,13 @@ import { beforeAll, afterAll, describe, expect, test } from "vitest";
 import { connect, disconnect } from "../../../../config/db";
 import { MongoDBProductRepository } from "./MongoDBProductRepository";
 import { Product } from "../../../entities/Product";
+import { Category } from "../../../entities/Category";
+import { Supplier } from "../../../entities/Supplier";
+import { ICategoryRepository } from "../../categoryRepository/ICategoryRepository";
+import { MongoDBCategoryRepository } from "../../categoryRepository/implementation/MongoDBCategoryRepository";
+import { ISupplierRepository } from "../../supplierRepository/ISupplierRepository";
+import { MongoDBSupplierRepository } from "../../supplierRepository/implementation/MongoDBSupplierRepository";
+import { IProductRepository } from "../IProductRepository";
 
 
 beforeAll(async () => {
@@ -17,23 +24,25 @@ afterAll(async () => {
 
 describe("manage products in database", () => {
     test("create product", async () => {
-        const mongoDBSupplierRepository = new MongoDBProductRepository();
+        const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();
+        const supplierRepository: ISupplierRepository = new MongoDBSupplierRepository();
+        const productRepository: IProductRepository = new MongoDBProductRepository(supplierRepository, categoryRepository);
         const product = new Product(
             true,
-            "Camisa",
+            new Category("Camisa", "12,232,23"),
             "Camisa do Bob Esponja",
             100,
             40,
             60,
             4,
             2023,
-            "supplier 1",
+            new Supplier("Alice", "Sem descrição"),
             "1"
         );
 
-        await mongoDBSupplierRepository.create(product);
+        await productRepository.create(product);
         
-        const findProduct = await mongoDBSupplierRepository.findByCode("1");
+        const findProduct = await productRepository.findByCode("1");
 
         expect(findProduct).not.toBeNull();
         expect(findProduct!.getName()).toBe("Camisa do Bob Esponja");

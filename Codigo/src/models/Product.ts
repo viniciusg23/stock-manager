@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { EnumMonth } from "../entities/product/EnumMonth";
+import { EnumMonth } from "../entities/Product";
 
 const productSchema = new Schema(
   {

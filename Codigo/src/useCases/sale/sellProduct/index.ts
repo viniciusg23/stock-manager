@@ -22,9 +22,9 @@ const productRepository: IProductRepository = new MongoDBProductRepository(suppl
 const employeeRepository: IEmployeeRepository = new MongoDBEmployeeRepository();
 
 const saleRepository: ISaleRepository = new MongoDBSaleRepository(productRepository, employeeRepository);
-const editProductUseCase: EditProductUseCase = new EditProductUseCase(productRepository);
+const editProductUseCase: EditProductUseCase = new EditProductUseCase(productRepository, categoryRepository, supplierRepository);
 
-const sellProductUseCase: SellProductUseCase = new SellProductUseCase(saleRepository, productRepository, editProductUseCase);
+const sellProductUseCase: SellProductUseCase = new SellProductUseCase(saleRepository, productRepository, employeeRepository, editProductUseCase);
 
 const sellProductController: IController = new SellProductController(sellProductUseCase);
 

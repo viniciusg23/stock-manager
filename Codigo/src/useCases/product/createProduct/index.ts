@@ -13,7 +13,7 @@ const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();
 
 const productRepository: IProductRepository = new MongoDBProductRepository(supplierRepository, categoryRepository);
 
-const createProductUseCase: CreateProductUseCase = new CreateProductUseCase(productRepository);
+const createProductUseCase: CreateProductUseCase = new CreateProductUseCase(productRepository, categoryRepository, supplierRepository);
 
 const createProductController: IController = new CreateProductController(createProductUseCase);
 

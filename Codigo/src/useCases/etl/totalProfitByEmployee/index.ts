@@ -10,7 +10,7 @@ import { ISupplierRepository } from "../../../repository/supplierRepository/ISup
 import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
 import { IController } from "../../IController";
 import { TotalProfitByEmployeeController } from "./TotalProfitByEmployeeController";
-import { TotalProfitByEmployeeUseCase } from "./totalProfitByEmployeeUseCase";
+import { TotalProfitByEmployeeUseCase } from "./TotalSaleByEmployeeUseCase";
 
 const supplierRepository: ISupplierRepository = new MongoDBSupplierRepository();
 const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();

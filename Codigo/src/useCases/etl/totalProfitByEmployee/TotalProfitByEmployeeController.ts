@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { IController } from "../../IController";
-import { TotalProfitByEmployeeUseCase } from "./totalProfitByEmployeeUseCase";
+import { TotalProfitByEmployeeUseCase } from "./TotalSaleByEmployeeUseCase";
 
 export class TotalProfitByEmployeeController implements IController {
     private totalProfitByEmployeeUseCase: TotalProfitByEmployeeUseCase;

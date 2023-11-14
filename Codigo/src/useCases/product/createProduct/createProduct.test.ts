@@ -5,6 +5,10 @@ import { IProductRepository } from "../../../repository/productRepository/IProdu
 import { MongoDBProductRepository } from "../../../repository/productRepository/implementation/MongoDBProductRepository";
 import { CreateProductUseCase } from "./CreateProductUseCase";
 import { ICreateProductRequestDTO } from "./CreateProductDTO";
+import { ICategoryRepository } from "../../../repository/categoryRepository/ICategoryRepository";
+import { MongoDBCategoryRepository } from "../../../repository/categoryRepository/implementation/MongoDBCategoryRepository";
+import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
+import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
 
 
 beforeAll(async () => {
@@ -18,8 +22,11 @@ afterAll(async () => {
 
 
 test("create Product test", async () => {
-    const mongoDBProductRepository: IProductRepository = new MongoDBProductRepository();
-    const createProductUseCase: CreateProductUseCase = new CreateProductUseCase(mongoDBProductRepository);
+    const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();
+    const supplierRepository: ISupplierRepository = new MongoDBSupplierRepository();
+    const productRepository: IProductRepository = new MongoDBProductRepository(supplierRepository, categoryRepository);
+    
+    const createProductUseCase: CreateProductUseCase = new CreateProductUseCase(productRepository, categoryRepository, supplierRepository);
 
     const prod: ICreateProductRequestDTO = {
         isFiscal: true,
@@ -35,7 +42,7 @@ test("create Product test", async () => {
 
     await createProductUseCase.execute(prod);
 
-    const findedProduct = await mongoDBProductRepository.findByName("Camisa do Free Fire");
+    const findedProduct = await productRepository.findByName("Camisa do Free Fire");
 
     expect(findedProduct).not.toBeNull();
     expect(findedProduct!.getName()).toBe("Camisa do Free Fire");

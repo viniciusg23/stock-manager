@@ -1,4 +1,4 @@
-import { getMonthValue } from "../../../entities/product/EnumMonth";
+import { getMonthValue } from "../../../entities/Product";
 import { Product } from "../../../entities/Product";
 import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
 
