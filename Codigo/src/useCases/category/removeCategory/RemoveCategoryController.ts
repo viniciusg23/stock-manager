@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { RemoveCategoryUseCase } from "./RemoveCategoryUseCase";
 
-export class RemoveCategoryController implements Controller {
+export class RemoveCategoryController implements IController {
     private removeCategoryUseCase: RemoveCategoryUseCase;
 
     public constructor(removeCategoryUseCase: RemoveCategoryUseCase){

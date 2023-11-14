@@ -1,7 +1,4 @@
-import { Category } from "../../../entities/Category";
 import { Product } from "../../../entities/Product";
-import { ICategoryRepository } from "../../../repository/categoryRepository/ICategoryRepository";
-import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
 import { ISaleRepository } from "../../../repository/saleRepository/ISaleRepository";
 
 export class PercentageOfSalesByCategoryUseCase {

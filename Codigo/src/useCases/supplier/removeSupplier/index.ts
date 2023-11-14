@@ -1,5 +1,5 @@
 import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { RemoveSupplierController } from "./RemoveSupplierController";
 import { RemoveSupplierUseCase } from "./RemoveSupplierUseCase";
 
@@ -9,7 +9,7 @@ const removeSupplierUseCase = new RemoveSupplierUseCase(
   mongoDBSupplierRepository
 ); // Corrected instantiation
 
-const removeSupplierController: Controller = new RemoveSupplierController(
+const removeSupplierController: IController = new RemoveSupplierController(
   removeSupplierUseCase
 );
 

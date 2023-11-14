@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { ViewProductUseCase } from "./ViewProductUseCase";
 
-export class ViewProductController implements Controller {
+export class ViewProductController implements IController {
 
     private viewProductsUseCase: ViewProductUseCase;
 

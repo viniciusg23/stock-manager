@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 
-export class CreateCategoryController implements Controller {
+export class CreateCategoryController implements IController {
     private createCategoryUseCase: CreateCategoryUseCase;
 
     public constructor(createCategoryUseCase: CreateCategoryUseCase){

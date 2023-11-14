@@ -4,7 +4,7 @@ import { IProductRepository } from "../../../repository/productRepository/IProdu
 import { MongoDBProductRepository } from "../../../repository/productRepository/implementation/MongoDBProductRepository";
 import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
 import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { RemoveProductController } from "./RemoveProductController";
 import { RemoveProductUseCase } from "./RemoveProductUseCase";
 
@@ -16,6 +16,6 @@ const productRepository: IProductRepository = new MongoDBProductRepository(suppl
 
 const removeProductUseCase: RemoveProductUseCase = new RemoveProductUseCase(productRepository);
 
-const removeProductController: Controller = new RemoveProductController(removeProductUseCase);
+const removeProductController: IController = new RemoveProductController(removeProductUseCase);
 
 export { removeProductUseCase, removeProductController };

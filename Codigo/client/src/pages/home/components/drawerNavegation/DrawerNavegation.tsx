@@ -18,7 +18,7 @@ import FunctionalityRender from '../functionalityRender/FunctionalityRender';
 import { ColorModeContext } from '../../../../context/ColorModeContext';
 
 import { getFunctionality } from '../../utils/getFunctionality';
-import Profile from './Profile';
+import Profile from '../../../components/Profile';
 import DrawerItemButton from './DrawerItemButton';
 
 const drawerMaxWidth: number = 300

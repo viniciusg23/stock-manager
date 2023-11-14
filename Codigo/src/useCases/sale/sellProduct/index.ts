@@ -8,6 +8,7 @@ import { ISaleRepository } from "../../../repository/saleRepository/ISaleReposit
 import { MongoDBSaleRepository } from "../../../repository/saleRepository/implementation/MongoDBSaleRepository";
 import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
 import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
+import { IController } from "../../IController";
 import { EditProductUseCase } from "../../product/editProduct/EditProductUseCase";
 import { SellProductController } from "./SellProductController";
 import { SellProductUseCase } from "./SellProductUseCase";
@@ -25,6 +26,6 @@ const editProductUseCase: EditProductUseCase = new EditProductUseCase(productRep
 
 const sellProductUseCase: SellProductUseCase = new SellProductUseCase(saleRepository, productRepository, editProductUseCase);
 
-const sellProductController: SellProductController = new SellProductController(sellProductUseCase);
+const sellProductController: IController = new SellProductController(sellProductUseCase);
 
 export {sellProductUseCase, sellProductController};

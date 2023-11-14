@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { RegisterUseCase } from "./RegisterUseCase";
 
-export class RegisterController implements Controller {
+export class RegisterController implements IController {
     private registerUseCase: RegisterUseCase;
 
     public constructor(registerUseCase: RegisterUseCase){

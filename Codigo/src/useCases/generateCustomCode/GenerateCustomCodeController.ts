@@ -1,9 +1,9 @@
 import { Response, Request } from "express";
-import { Controller } from "../IController";
+import { IController } from "../IController";
 import { gerarPlanilha } from "./GenerateCustomCodeUseCase";
 import { ViewProductUseCase } from "../product/viewProduct/ViewProductUseCase";
 
-export class GenerateCustomCodeController implements Controller {
+export class GenerateCustomCodeController implements IController {
 
     private viewProductsUseCase: ViewProductUseCase;
 

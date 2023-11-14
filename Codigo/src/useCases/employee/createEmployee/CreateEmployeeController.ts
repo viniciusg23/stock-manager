@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { CreateEmployeeUseCase } from "./CreateEmployeeUseCase";
+import { IController } from "../../IController";
 
-export class CreateEmployeeController {
+export class CreateEmployeeController implements IController{
     private createEmployeeUseCase: CreateEmployeeUseCase;
 
     public constructor(createEmployeeUseCase: CreateEmployeeUseCase){

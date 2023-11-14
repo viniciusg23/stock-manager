@@ -9,8 +9,8 @@ import { MongoDBSaleRepository } from "../../../repository/saleRepository/implem
 import { ISupplierRepository } from "../../../repository/supplierRepository/ISupplierRepository";
 import { MongoDBSupplierRepository } from "../../../repository/supplierRepository/implementation/MongoDBSupplierRepository";
 import { IController } from "../../IController";
-import { ViewSaleController } from "./ViewSaleController";
-import { ViewSaleUseCase } from "./ViewSaleUseCase";
+import { TotalProfitByEmployeeController } from "./TotalProfitByEmployeeController";
+import { TotalProfitByEmployeeUseCase } from "./totalProfitByEmployeeUseCase";
 
 const supplierRepository: ISupplierRepository = new MongoDBSupplierRepository();
 const categoryRepository: ICategoryRepository = new MongoDBCategoryRepository();
@@ -21,7 +21,9 @@ const employeeRepository: IEmployeeRepository = new MongoDBEmployeeRepository();
 
 const saleRepository: ISaleRepository = new MongoDBSaleRepository(productRepository, employeeRepository);
 
-const viewSaleUseCase: ViewSaleUseCase = new ViewSaleUseCase(saleRepository);
-const viewSaleController: IController = new ViewSaleController(viewSaleUseCase);
+const totalProfitByEmployeeUseCase: TotalProfitByEmployeeUseCase = new TotalProfitByEmployeeUseCase(saleRepository);
 
-export {viewSaleUseCase, viewSaleController};
+const totalProfitByEmployeeController: IController = new TotalProfitByEmployeeController(totalProfitByEmployeeUseCase);
+
+export {totalProfitByEmployeeUseCase, totalProfitByEmployeeController};
+

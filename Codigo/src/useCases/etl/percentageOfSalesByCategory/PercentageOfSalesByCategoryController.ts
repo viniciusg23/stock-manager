@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { PercentageOfSalesByCategoryUseCase } from "./PercentageOfSalesByCategoryUseCase";
 
-export class PercentageOfSalesByCategoryController implements Controller {
+export class PercentageOfSalesByCategoryController implements IController {
     private percentageOfSalesByCategoryUseCase: PercentageOfSalesByCategoryUseCase;
 
     public constructor(percentageOfSalesByCategoryUseCase: PercentageOfSalesByCategoryUseCase){
@@ -14,7 +14,7 @@ export class PercentageOfSalesByCategoryController implements Controller {
             
             const result = await this.percentageOfSalesByCategoryUseCase.execute();
             const arrayResult = Array.from(result, ([key, value]) => ({ category: key, percentage: value }));
-            
+
             return res.json({message: "All data found", result: arrayResult});
             
         } catch (error: any) {

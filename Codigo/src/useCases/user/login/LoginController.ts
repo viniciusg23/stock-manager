@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { LoginUseCase } from "./LoginUseCase";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 
-export class LoginController implements Controller {
+export class LoginController implements IController {
 
     private loginUseCase: LoginUseCase;
 

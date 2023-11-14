@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Controller } from "../../IController";
+import { IController } from "../../IController";
 import { ViewCategoryUseCase } from "./ViewCategoryUseCase";
 
-export class ViewCategoryController implements Controller {
+export class ViewCategoryController implements IController {
     private viewCategoryUseCase: ViewCategoryUseCase;
 
     public constructor(viewCategoryUseCase: ViewCategoryUseCase){
