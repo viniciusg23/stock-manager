@@ -87,3 +87,16 @@
 
 <img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/2de24dd1-62ad-4ea1-bda7-303b363f4422">
 
+## Caso de teste 9 - Registrar Nova Viagem
+
+| Passos                                            | Resultado esperado                                                |
+|---------------------------------------------------|------------------------------------------------------------------|
+| **Pré-requisito:** Usuário está na aba "Registrar Nova Viagem" | Usuário visualiza tabela com as colunas "Código", "Nome", "Quantidade", "Preço de Custo", "Preço de Venda", "Lucro" e "Ações"; |
+| 1 - Usuário clica no botão de seta para a direita; | Usuário visualiza a segunda página da tabela com as mesmas colunas e suas respectivas informações. |
+
+## Evidências → 
+
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/694c27a1-bf3e-42c0-a238-388070876d02">
+
+
+
