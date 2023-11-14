@@ -35,8 +35,8 @@ function StockController(props: StockControllerProps) {
     const generateQrCode = async () => {
         try {
             const options = { 
-                method: 'GET',
-                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                method: "GET",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}`},
             };
     
             const response = await fetch(`/product/create-qrcode/${product.id}`, options);
@@ -79,12 +79,12 @@ function StockController(props: StockControllerProps) {
             </Form>
             <ButtonGroup variant="contained" disableElevation>
                 <Tooltip title="Editar">
-                    <IconButton color='info' sx={{backgroundColor: "info"}} onClick={() => setIsEditOpen(true)}>
+                    <IconButton color="info" sx={{backgroundColor: "info"}} onClick={() => setIsEditOpen(true)}>
                         <Edit />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Gerar QR Code">
-                    <IconButton color='success' onClick={generateQrCode}>
+                    <IconButton color="success" onClick={generateQrCode}>
                         <QrCode2 />
                     </IconButton>
                 </Tooltip>

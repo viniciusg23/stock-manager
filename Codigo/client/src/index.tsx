@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import EntryPage from './pages/entry/EntryPage';
-import HomePage from './pages/home/HomePage';
-import AgilSell from './pages/agilSell/AgilSell';
-import DashboardPage from './pages/dashboard/DashboardPage';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import EntryPage from "./pages/entry/EntryPage";
+import HomePage from "./pages/home/HomePage";
+import AgilSell from "./pages/agilSell/AgilSell";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 
 const router = createBrowserRouter([
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
 ])
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 root.render(

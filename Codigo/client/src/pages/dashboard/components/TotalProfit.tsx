@@ -3,7 +3,7 @@ import { enqueueSnackbar } from "notistack";
 import { UnauthorizationError } from "../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Paper, Typography } from "@mui/material";
-import { LocalAtm } from '@mui/icons-material';
+import { LocalAtm } from "@mui/icons-material";
 import { formatNumber } from "../utils/formatNumber";
 import { totalProfit } from "../../../api/etl";
 

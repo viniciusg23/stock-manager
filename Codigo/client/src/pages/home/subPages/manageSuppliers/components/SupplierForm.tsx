@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { Box, Button } from '@mui/material';
-import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
-import { useNavigate } from 'react-router-dom';
-import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
-import { useDispatch } from 'react-redux';
-import { enqueueSnackbar } from 'notistack';
-import { fetchSuppliers } from '../../../../../reduxActions/fetchSuppliers';
-import { AppDispatch } from '../../../../../reduxReducers/store';
-import { Supplier } from '../../../../../entities/Supplier';
+import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import { Box, Button } from "@mui/material";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { useNavigate } from "react-router-dom";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { useDispatch } from "react-redux";
+import { enqueueSnackbar } from "notistack";
+import { fetchSuppliers } from "../../../../../reduxActions/fetchSuppliers";
+import { AppDispatch } from "../../../../../reduxReducers/store";
+import { Supplier } from "../../../../../entities/Supplier";
 
 
 const initialSupplier: Supplier = {
@@ -41,12 +41,12 @@ function SupplierForm(){
             });
     
             const options = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                method: "POST",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}`},
                 body: body
             };
               
-            const jsonData = await fetch('/supplier/create', options);
+            const jsonData = await fetch("/supplier/create", options);
             const data = await jsonData.json();
     
             enqueueSnackbar(data.message, {variant: "success"});
@@ -74,9 +74,9 @@ function SupplierForm(){
                 gap: 2,
             }}
         >
-            <TextField color='secondary' id="name" label="Nome do Fornecedor" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
+            <TextField color="secondary" id="name" label="Nome do Fornecedor" variant="outlined" fullWidth value={formValues.name} onChange={handleChange("name")} />
             
-            <TextField color='secondary' id="description" label="Descrição do Fornecedor" variant="outlined" fullWidth value={formValues.description} onChange={handleChange('description')} />
+            <TextField color="secondary" id="description" label="Descrição do Fornecedor" variant="outlined" fullWidth value={formValues.description} onChange={handleChange("description")} />
             
             <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Registrar

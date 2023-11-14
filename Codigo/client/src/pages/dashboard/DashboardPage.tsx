@@ -2,22 +2,23 @@ import { Box, Container, Typography } from "@mui/material";
 import NavBar from "./components/NavBar";
 import TotalProfit from "./components/TotalProfit";
 import PercentageOfSalesByCategory from "./components/PercentageOfSalesByCategory";
-import { Chart, ArcElement, Legend, Tooltip } from 'chart.js'
+import { Chart, ArcElement, Legend, Tooltip, LinearScale, CategoryScale, BarElement } from "chart.js"
+import TotalSalesByEmployee from "./components/TotalSalesByEmployee";
 
 
 function DashboardPage() {
     //TODO abrir nova aba no navegador para a dashboard
-    Chart.register(ArcElement, Tooltip, Legend);
+    Chart.register(ArcElement, Tooltip, Legend, LinearScale, CategoryScale, BarElement);
 
 
     return (
         <Box sx={{ 
                 backgroundColor: "background.default",
-                height: "100vh"
+                // height: "100vh",
             }}
         >
             <NavBar />
-            <Container sx={{marginTop: "2em"}}>
+            <Container sx={{paddingY: "2em"}}>
                 <Box 
                     sx={{
                         display: "flex",
@@ -29,11 +30,10 @@ function DashboardPage() {
                     <TotalProfit />
                     <TotalProfit />
                     <TotalProfit />
-                    <TotalProfit />
 
 
                 </Box>
-                {/* <Typography>Dashboard não implementada</Typography> */}
+
                 <Box 
                     sx={{
                         marginTop: "2em",
@@ -43,6 +43,7 @@ function DashboardPage() {
                         wrap: "wrap"
                     }}>
                     <PercentageOfSalesByCategory />
+                    <TotalSalesByEmployee />
                 </Box>
             </Container>
         </Box>

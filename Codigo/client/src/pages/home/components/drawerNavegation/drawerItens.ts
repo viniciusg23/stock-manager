@@ -1,4 +1,4 @@
-import * as Icons from '@mui/icons-material';
+import * as Icons from "@mui/icons-material";
 
 export interface DrawerItem {
     name: string;

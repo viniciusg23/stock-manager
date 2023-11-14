@@ -8,10 +8,10 @@ import Table from "../../../components/Table";
 
 
 interface ICategoryColumn{
-    id: 'id' | 'name' | 'fiscalCode' | "action";
+    id: "id" | "name" | "fiscalCode" | "action";
     label: string;
     minWidth: number
-    align?: 'right';
+    align?: "right";
 }
 
 interface ICategoryRow{

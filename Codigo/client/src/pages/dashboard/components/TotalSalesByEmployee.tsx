@@ -1,17 +1,18 @@
+import { Paper, Typography, Divider, Box } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { useState, useEffect } from "react";
+import { Bar } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
+import { totalSaleByEmployee } from "../../../api/etl";
 import { UnauthorizationError } from "../../../errors/UnauthorizationError";
-import { percentageOfSalesByCategory } from "../../../api/etl";
-import { Box, Divider, Paper, Typography } from "@mui/material";
-import { Chart, Doughnut } from "react-chartjs-2";
 
 interface IData {
-    category: string,
-    percentage: number
+    employee: string,
+    totalSale: number
 }
 
-function PercentageOfSalesByCategory() {
+
+function TotalSalesByEmployee() {
 
     const [data, setData] = useState<IData[]>([]);
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function PercentageOfSalesByCategory() {
         const fetchData = async () => {
             try {
 
-                const result = await percentageOfSalesByCategory();
+                const result = await totalSaleByEmployee();
 
                 setData(result);
 
@@ -38,15 +39,15 @@ function PercentageOfSalesByCategory() {
         fetchData();
     }, []);
 
-    const categories = data.map(item => item.category);
-    const percentages = data.map(item => item.percentage);
+    const employees = data.map(item => item.employee);
+    const totalSales = data.map(item => item.totalSale);
 
     const chartData = {
-        labels: categories,
+        labels: employees,
         datasets: [
             {
-                label: "# Porcentagem de Vendas",
-                data: percentages,
+                label: "Total Vendido",
+                data: totalSales,
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
                     "rgba(54, 162, 235, 0.2)",
@@ -64,27 +65,34 @@ function PercentageOfSalesByCategory() {
                     "rgba(255, 159, 64, 1)",
                 ],
                 borderWidth: 1,
-            },
+            }
         ],
     };
 
+    const chartOptions = {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
 
     return (
         <Paper
             elevation={0}
             sx={{
-                width: "40%"
+                width: "60%"
             }}
         >
             <Typography textAlign="left" sx={{ padding: ".75em", fontSize: "1.5em", fontWeight: 600 }}>
-                Categorias mais vendidas
+                Total de Vendas por Funcionários
             </Typography>
             <Divider />
             <Box sx={{ padding: "2em" }}>
-                <Doughnut data={chartData} />
+                <Bar data={chartData} options={chartOptions} />
             </Box>
         </Paper>
     );
 }
 
-export default PercentageOfSalesByCategory;
+export default TotalSalesByEmployee;

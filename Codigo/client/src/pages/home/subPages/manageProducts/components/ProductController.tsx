@@ -39,8 +39,8 @@ function ProductController(props: ProductControllerProps) {
             });
     
             const options = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                method: "POST",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}`},
                 body: body
             };
               
@@ -74,12 +74,12 @@ function ProductController(props: ProductControllerProps) {
 
             <ButtonGroup variant="contained" disableElevation>
                 <Tooltip title="Editar">
-                    <IconButton color='info' sx={{backgroundColor: "info"}} onClick={handleOpen}>
+                    <IconButton color="info" sx={{backgroundColor: "info"}} onClick={handleOpen}>
                         <Edit />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Excluir">
-                    <IconButton color='error' onClick={removeProduct}>
+                    <IconButton color="error" onClick={removeProduct}>
                         <Delete />
                     </IconButton>
                 </Tooltip>

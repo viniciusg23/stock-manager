@@ -25,8 +25,8 @@ function SupplierController(props: SupplierControllerProps) {
             });
     
             const options = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                method: "POST",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}`},
                 body: body
             };
               
@@ -57,7 +57,7 @@ function SupplierController(props: SupplierControllerProps) {
     return (
         <ButtonGroup variant="contained" disableElevation>
             <Tooltip title="Excluir">
-                <IconButton color='error' onClick={removeSupplier}>
+                <IconButton color="error" onClick={removeSupplier}>
                     <Delete />
                 </IconButton>
             </Tooltip>

@@ -35,13 +35,13 @@ export function ColorModeContextProvider({children} : any){
         if(mode === "light"){
             return createTheme({
                 palette: {
-                    mode: 'light',
+                    mode: "light",
                     primary: {
-                        main: '#a60910',
+                        main: "#a60910",
                         contrastText: "#fff"
                     },
                     secondary: {
-                        main: '#ff4148',
+                        main: "#ff4148",
                     },
                     background: {
                         default: "#eeeeee",
@@ -55,13 +55,13 @@ export function ColorModeContextProvider({children} : any){
         else{
             return createTheme({
                 palette: {
-                    mode: 'dark',
+                    mode: "dark",
                     primary: {
-                        main: '#a60910',
+                        main: "#a60910",
                         contrastText: "#fff"
                     },
                     secondary: {
-                        main: '#ff4148',
+                        main: "#ff4148",
                     },
                     background: {
                         paper: "#424242",

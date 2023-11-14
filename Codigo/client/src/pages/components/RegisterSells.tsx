@@ -83,7 +83,7 @@ function RegisterSells(props: IRegisterSellsProps) {
             })
     
             const options = {
-                method: 'POST',
+                method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: body
             };

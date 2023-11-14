@@ -29,11 +29,11 @@ function Table(props: TableProps) {
         <>
             {
                 isLoading ? (
-                    <Paper elevation={0} sx={{ display: 'flex', justifyContent: "center" }}>
+                    <Paper elevation={0} sx={{ display: "flex", justifyContent: "center" }}>
                         <CircularProgress color="secondary" />
                     </Paper>
                 ) : (
-                    <Paper elevation={0} sx={{ width: '100%', overflow: 'hidden' }}>
+                    <Paper elevation={0} sx={{ width: "100%", overflow: "hidden" }}>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <MUITable size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
@@ -41,7 +41,7 @@ function Table(props: TableProps) {
                                         {columns.map((column) => (
                                             <TableCell
                                                 key={column.id}
-                                                align={column.align || 'left'}
+                                                align={column.align || "left"}
                                                 style={{ minWidth: column.minWidth }}
                                             >
                                                 {column.label}
@@ -60,7 +60,7 @@ function Table(props: TableProps) {
                                                         return (
                                                             <TableCell 
                                                                 key={column.id} 
-                                                                align={column.align || 'left'}
+                                                                align={column.align || "left"}
                                                             >
                                                                 {value}
                                                             </TableCell>

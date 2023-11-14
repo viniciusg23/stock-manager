@@ -8,7 +8,7 @@ const env = process.env.ENV
 const jwt = process.env.JWT_SECRET;
 
 export default {
-  port: 3001,
+  port: 3000,
   dbUri: `mongodb+srv://${dbUser}:${dbPassword}@cluster0.p6dcaiz.mongodb.net/${env}?retryWrites=true&w=majority`,
   env: env,
   jwt: jwt,

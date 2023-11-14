@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { Box, Button, useTheme } from '@mui/material';
-import { getAuthorizationToken } from '../../../utils/getAuthorizationToken';
-import { UnauthorizationError } from '../../../../../errors/UnauthorizationError';
-import { useNavigate } from 'react-router-dom';
-import { AppDispatch } from '../../../../../reduxReducers/store';
-import { useDispatch } from 'react-redux';
-import { enqueueSnackbar } from 'notistack';
-import { fetchCategories } from '../../../../../reduxActions/fetchCategories';
-import { Category } from '../../../../../entities/Category';
+import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import { Box, Button, useTheme } from "@mui/material";
+import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../../../../reduxReducers/store";
+import { useDispatch } from "react-redux";
+import { enqueueSnackbar } from "notistack";
+import { fetchCategories } from "../../../../../reduxActions/fetchCategories";
+import { Category } from "../../../../../entities/Category";
 
 
 const initialCategory: Category = {
@@ -42,12 +42,12 @@ function CategoryForm(){
             });
     
             const options = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${getAuthorizationToken()}`},
+                method: "POST",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}`},
                 body: body
             };
               
-            const jsonData = await fetch('/category/create', options)
+            const jsonData = await fetch("/category/create", options)
             const data = await jsonData.json();
     
             enqueueSnackbar(data.message, {variant: "success"});
@@ -75,9 +75,9 @@ function CategoryForm(){
                 gap: 2,
             }}
         >
-            <TextField color='secondary' id="name" label="Nome da Categoria" variant="outlined" fullWidth value={formValues.name} onChange={handleChange('name')} />
+            <TextField color="secondary" id="name" label="Nome da Categoria" variant="outlined" fullWidth value={formValues.name} onChange={handleChange("name")} />
             
-            <TextField color='secondary' id="category" label="Código Fiscal da Categoria" variant="outlined" fullWidth value={formValues.fiscalCode} onChange={handleChange('fiscalCode')} />
+            <TextField color="secondary" id="category" label="Código Fiscal da Categoria" variant="outlined" fullWidth value={formValues.fiscalCode} onChange={handleChange("fiscalCode")} />
             
             <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Registrar

@@ -11,7 +11,7 @@ interface ISupplierColumn{
     id: "id" | "name" | "description" | "action";
     label: string;
     minWidth: number
-    align?: 'right';
+    align?: "right";
 }
 
 interface ISupplierRow{

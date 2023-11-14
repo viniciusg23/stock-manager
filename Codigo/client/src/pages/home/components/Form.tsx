@@ -1,9 +1,9 @@
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import { Divider, IconButton, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import { Divider, IconButton, Typography } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 
 interface FormProps {
@@ -34,14 +34,14 @@ export default function Form(props: FormProps) {
             <Fade in={isOpen}>
                 <Box 
                     sx={{
-                        position: 'absolute' as 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
+                        position: "absolute" as "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
                         width: "80%",
                         minWidth: 400,
                         maxWidth: 700,
-                        bgcolor: 'background.paper',
+                        bgcolor: "background.paper",
                         boxShadow: 24,
                         p: 4,
                         borderRadius: 2

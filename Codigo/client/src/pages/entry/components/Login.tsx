@@ -1,6 +1,6 @@
-import { useState, ChangeEvent, useEffect } from 'react';
-import { Alert, Box, Button, TextField } from '@mui/material';
-import { ArrowForwardIos } from '@mui/icons-material';
+import { useState, ChangeEvent, useEffect } from "react";
+import { Alert, Box, Button, TextField } from "@mui/material";
+import { ArrowForwardIos } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 
@@ -31,12 +31,12 @@ function Login() {
 
     const handleLogin = async () => {
         const options = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             body: `{"name":"${username}","password":"${password}"}`
         };
           
-        const data = await fetch('/user/login', options);
+        const data = await fetch("/user/login", options);
         const jsonData = await data.json();
 
         console.log(jsonData);

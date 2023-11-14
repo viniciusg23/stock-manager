@@ -1,9 +1,9 @@
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { AccountCircle } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useState, MouseEvent } from 'react';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { AccountCircle } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useState, MouseEvent } from "react";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -28,10 +28,10 @@ export default function Profile() {
             <IconButton
                 size="large"
                 aria-label="account of current user"
-                aria-controls={open ? 'basic-menu' : undefined}
+                aria-controls={open ? "basic-menu" : undefined}
                 aria-haspopup="true"
                 color="inherit"
-                aria-expanded={open ? 'true' : undefined}
+                aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
             >
                 <AccountCircle />
@@ -42,7 +42,7 @@ export default function Profile() {
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{
-                    'aria-labelledby': 'basic-button',
+                    "aria-labelledby": "basic-button",
                 }}
             >
                 <MenuItem onClick={handleClose}>Configurações</MenuItem>

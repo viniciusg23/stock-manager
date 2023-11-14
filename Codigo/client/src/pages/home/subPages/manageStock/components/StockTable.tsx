@@ -11,10 +11,10 @@ import { fetchProducts } from "../../../../../reduxActions/fetchProducts";
 
 
 interface IStockColumn{
-    id: 'code' | 'name' | 'costPrice' | "salePrice" | "quantity" | 'supplier' | "action" | "profit";
+    id: "code" | "name" | "costPrice" | "salePrice" | "quantity" | "supplier" | "action" | "profit";
     label: string;
     minWidth: number
-    align?: 'right';
+    align?: "right";
 }
 
 interface IStockRow{
