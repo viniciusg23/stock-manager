@@ -34,6 +34,9 @@
 
 ## Evidências → 
 
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/08b05fee-116c-4f79-b83f-025bb96163cc">
+
+
 ## Caso de teste 5 - Gerenciar Fornecedores
 
 | Passos                                            | Resultado esperado                                                |
