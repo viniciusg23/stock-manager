@@ -54,3 +54,6 @@
 | 1 - Usuário clica no botão de seta para a direita; | Usuário visualiza a segunda página da tabela com as mesmas colunas e suas respectivas informações. |
 
 ## Evidências → 
+
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/c052fc3a-20c6-4a85-93e9-d91cbca50edb">
+
