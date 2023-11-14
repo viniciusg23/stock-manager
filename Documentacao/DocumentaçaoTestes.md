@@ -7,7 +7,8 @@
 
 ## Evidências → 
 
-<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/a30c330a-dc70-4922-984e-f0545fc3d4d5">
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/f68a9ffd-c783-478f-abf1-16bcce8bb897">
+
 
 
 ## Caso de teste 2 - Gerenciar Funcionários
