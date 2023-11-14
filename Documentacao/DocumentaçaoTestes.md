@@ -19,6 +19,9 @@
 
 ## Evidências → 
 
+<img width="1440" alt="image" src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti4-0648100-complemento/assets/103442333/e0f35704-f2de-41a0-ba54-735ab1ad724e">
+
+
 ## Caso de teste 3 - Gerenciar Produtos
 
 | Passos                                            | Resultado Esperado                                                  |
