@@ -13,12 +13,26 @@ import { useCategories } from "../../../../../reduxReducers/slicers/sliceCategor
 import { useSuppliers } from "../../../../../reduxReducers/slicers/sliceSuppliers";
 import { fetchSuppliers } from "../../../../../reduxActions/fetchSuppliers";
 
+interface IFormValues {
+    [key: string]: any
+    id: string
+    code: string
+    isFiscal: boolean
+    category: any
+    name: string
+    quantity: number
+    costPrice: number
+    salePrice: number
+    purchaseMonth: string
+    purchaseYear: number
+    supplier: any
+}
 
 const months: Array<"Janeiro" | "Fevereiro" | "Marco" | "Abril" | "Maio" | "Junho" | "Julho" | "Agosto" | "Setembro" | "Outubro" | "Novembro" | "Dezembro"> = [
     "Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
-const initialFormValues: Product = {
+const initialFormValues: IFormValues = {
     id: "null",
     code: "null",
     isFiscal: false,
@@ -44,7 +58,7 @@ function ProductForm(props: IProductFormProps){
     const {suppliers} = useSelector(useSuppliers);
 
     if(control === "edit" && product){
-        initialFormValues.id = product.id;
+        initialFormValues.id = product.id!;
         initialFormValues.code = product.code;
         initialFormValues.isFiscal = product.isFiscal;
         initialFormValues.category = product.category;
@@ -60,7 +74,7 @@ function ProductForm(props: IProductFormProps){
     const navigate = useNavigate();
     const theme = useTheme()
 
-    const [formValues, setFormValues] = useState<Product>(initialFormValues);
+    const [formValues, setFormValues] = useState<IFormValues>(initialFormValues);
     const [category, setCategory] = useState<string>("");
     const [supplier, setSupplier] = useState<string>("");
 
@@ -104,6 +118,8 @@ function ProductForm(props: IProductFormProps){
                 purchaseYear: formValues.purchaseYear,
                 supplier: supplier
             });
+
+            console.log(body)
     
             const options = {
                 method: "POST",
@@ -129,6 +145,7 @@ function ProductForm(props: IProductFormProps){
                 return navigate("/");
             }
 
+            console.log(error)
             enqueueSnackbar(error.message, {variant: "error"});
         } finally {
             dispatch(fetchProducts())
@@ -152,8 +169,6 @@ function ProductForm(props: IProductFormProps){
             }}
         >
             <TextField color="secondary" id="name" label="Nome do Produto" variant="outlined" fullWidth value={formValues.name} onChange={handleChange("name")} />
-            
-            {/* <TextField color="secondary" id="category" label="Categoria do Produto" variant="outlined" fullWidth value={formValues.category} onChange={handleChange("category")} /> */}
 
             <FormControl sx={{ my: 1 }} fullWidth>
                 <InputLabel color="secondary" id="select-category-label">Selecionar Categoria</InputLabel>

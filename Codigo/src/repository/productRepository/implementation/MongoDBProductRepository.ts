@@ -82,9 +82,20 @@ export class MongoDBProductRepository implements IProductRepository {
             findProduct._id.toString()
         );
     }
-
+    
     async create(product: Product): Promise<void> {
-        await ProductModel.create(product);
+        await ProductModel.create({
+            name: product.getName(),
+            code: product.getCode(),
+            isFiscal: product.isIsFiscal(),
+            category: product.getCategory()?.getId(),
+            quantity: product.getQuantity(),
+            costPrice: product.getCostPrice(),
+            salePrice: product.getSalePrice(),
+            purchaseMonth: product.getPurchaseMonth(),
+            purchaseYear: product.getPurchaseYear(),
+            supplier: product.getSupplier()?.getId()
+        });
     }
 
     async remove(id: string): Promise<void> {

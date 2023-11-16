@@ -15,10 +15,10 @@ export class TotalProfitByEmployeeUseCase {
 
         for(const sale of allSales){
             const employee: Employee | null = sale.getEmployee();
-            if(!employee) break;
+            if(!employee) continue;
 
             const employeeName: string = employee.getName();
-            if(!employeeName) break;
+            if(!employeeName) continue;
 
             if(!result.has(employeeName)){
                 result.set(employeeName, 0);

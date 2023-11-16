@@ -1,10 +1,11 @@
 import { enqueueSnackbar } from "notistack";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UnauthorizationError } from "../../../errors/UnauthorizationError";
-import { percentageOfSalesByCategory } from "../../../api/etl";
+
 import { Box, Divider, Paper, Typography } from "@mui/material";
-import { Chart, Doughnut } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
+import { percentageOfSalesByCategory } from "../../../../../api/etl";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 
 interface IData {
     category: string,
@@ -71,7 +72,7 @@ function PercentageOfSalesByCategory() {
 
     return (
         <Paper
-            elevation={0}
+            elevation={2}
             sx={{
                 width: "40%"
             }}
@@ -80,7 +81,7 @@ function PercentageOfSalesByCategory() {
                 Categorias mais vendidas
             </Typography>
             <Divider />
-            <Box sx={{ padding: "2em" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "1em" }}>
                 <Doughnut data={chartData} />
             </Box>
         </Paper>

@@ -52,3 +52,35 @@ export async function totalSaleByEmployee(): Promise<TotalSaleByEmployeeResponse
 
     return data.result;
 }
+
+export async function totalProductsSold(): Promise<number> {
+    const options = {
+        method: "GET",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}` },
+    };
+
+    const response = await fetch("/etl/total-product-sold", options)
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+
+    return data.result;
+}
+
+export async function totalProductsInStock(): Promise<number> {
+    const options = {
+        method: "GET",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${getAuthorizationToken()}` },
+    };
+
+    const response = await fetch("/etl/total-products-stock", options)
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+
+    return data.result;   
+}

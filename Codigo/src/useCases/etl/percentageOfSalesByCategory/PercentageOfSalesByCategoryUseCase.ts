@@ -16,10 +16,10 @@ export class PercentageOfSalesByCategoryUseCase {
 
         for(const sale of allSales){
             const product: Product | null = sale.getProduct();
-            if(!product) break;
+            if(!product) continue;
 
             const categoryName: string | undefined = product.getCategory()?.getName();
-            if(!categoryName) break;
+            if(!categoryName) continue;
 
             if(!result.has(categoryName)){
                 result.set(categoryName, 0);

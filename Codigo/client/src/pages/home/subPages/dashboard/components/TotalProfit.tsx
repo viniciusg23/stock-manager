@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { enqueueSnackbar } from "notistack";
-import { UnauthorizationError } from "../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Paper, Typography } from "@mui/material";
 import { LocalAtm } from "@mui/icons-material";
 import { formatNumber } from "../utils/formatNumber";
-import { totalProfit } from "../../../api/etl";
+import { totalProfit } from "../../../../../api/etl";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 
 function TotalProfit() {
 
@@ -35,7 +35,7 @@ function TotalProfit() {
 
     return (
         <Paper 
-            elevation={0}
+            elevation={2}
             sx={{
                 width: "100%", 
                 padding: "1.5em",

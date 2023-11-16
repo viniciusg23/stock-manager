@@ -3,8 +3,9 @@ import { enqueueSnackbar } from "notistack";
 import { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
-import { totalSaleByEmployee } from "../../../api/etl";
-import { UnauthorizationError } from "../../../errors/UnauthorizationError";
+import { totalSaleByEmployee } from "../../../../../api/etl";
+import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
+
 
 interface IData {
     employee: string,
@@ -79,7 +80,7 @@ function TotalSalesByEmployee() {
 
     return (
         <Paper
-            elevation={0}
+            elevation={2}
             sx={{
                 width: "60%"
             }}
@@ -88,7 +89,7 @@ function TotalSalesByEmployee() {
                 Total de Vendas por Funcionários
             </Typography>
             <Divider />
-            <Box sx={{ padding: "2em" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "1em" }}>
                 <Bar data={chartData} options={chartOptions} />
             </Box>
         </Paper>

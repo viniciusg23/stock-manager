@@ -6,8 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EntryPage from "./pages/entry/EntryPage";
 import HomePage from "./pages/home/HomePage";
 import AgilSell from "./pages/agilSell/AgilSell";
-import DashboardPage from "./pages/dashboard/DashboardPage";
-
 
 const router = createBrowserRouter([
   {
@@ -27,10 +25,7 @@ const router = createBrowserRouter([
         path: "/agil-sell/:id",
         element: <AgilSell />
       },
-      {
-        path: "/dashboard",
-        element: <DashboardPage />
-      }
+
 
     ]
   }

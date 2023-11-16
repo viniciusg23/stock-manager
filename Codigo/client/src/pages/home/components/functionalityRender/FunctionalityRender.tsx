@@ -6,35 +6,31 @@ import ManageEmployees from "../../subPages/manageEmployees/ManageEmployees";
 import ManageStock from "../../subPages/manageStock/ManageStock";
 import RegisterSells from "../../subPages/registerSell/RegisterSells";
 import ManageCategories from "../../subPages/manageCategories/ManageCategories";
+import Dashboard from "../../subPages/dashboard/Dashboard";
+import ManageTravel from "../../subPages/travel/ManageTravel";
 
+
+interface ISubPagesMap {
+    [key: string]: JSX.Element;
+}
+  
+const subPagesMapping: ISubPagesMap = {
+    product: <ManageProducts />,
+    supplier: <ManageSuppliers />,
+    employee: <ManageEmployees />,
+    stock: <ManageStock />,
+    sell: <RegisterSells />,
+    categories: <ManageCategories />,
+    dashboard: <Dashboard />,
+    travel: <ManageTravel />
+};
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {
     const { functionality, functionalityName } = props;
 
-    let componentToRender = <div></div>;
 
-    switch (functionality) {
-        case "product":
-            componentToRender = <ManageProducts />;
-            break;
-        case "supplier": 
-            componentToRender = <ManageSuppliers />
-            break;
-        case "employee": 
-            componentToRender = <ManageEmployees />
-            break;
-        case "stock":
-            componentToRender = <ManageStock />
-            break;
-        case "sell":
-            componentToRender = <RegisterSells />
-            break;
-        case "categories":
-            componentToRender = <ManageCategories />
-            break;
-        default:
-            componentToRender = <ManageStock />
-    }
+    const componentToRender = subPagesMapping[functionality] || <ManageStock />;
+
 
     return (
         <Box

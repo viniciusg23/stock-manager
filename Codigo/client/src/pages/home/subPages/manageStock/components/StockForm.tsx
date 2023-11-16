@@ -64,14 +64,14 @@ function StockForm(props: IStockFormProps){
                 id: formValues.id,
                 code: formValues.code,
                 isFiscal: formValues.isFiscal,
-                category: formValues.category,
+                category: formValues.category?.id,
                 name: formValues.name,
                 quantity: formValues.quantity,
                 costPrice: formValues.costPrice,
                 salePrice: formValues.salePrice,
                 purchaseMonth: monthNameToNumber(formValues.purchaseMonth),
                 purchaseYear: formValues.purchaseYear,
-                supplier: formValues.supplier
+                supplier: formValues.supplier?.id
             });
     
             const options = {
