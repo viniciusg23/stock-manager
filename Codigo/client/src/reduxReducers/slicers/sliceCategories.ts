@@ -50,6 +50,6 @@ export default sliceCategories.reducer;
 
 export const { updateCategories, addCategory, removeCategory } = sliceCategories.actions;
 
-export const useCategories = (state: any) => {
+export const useCategories = (state: any): ISliceCategoriesState => {
     return state.categories as ISliceCategoriesState;
 }

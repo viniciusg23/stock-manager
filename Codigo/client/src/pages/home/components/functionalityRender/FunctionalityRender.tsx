@@ -8,6 +8,7 @@ import RegisterSells from "../../subPages/registerSell/RegisterSells";
 import ManageCategories from "../../subPages/manageCategories/ManageCategories";
 import Dashboard from "../../subPages/dashboard/Dashboard";
 import ManageTravel from "../../subPages/travel/ManageTravel";
+import ViewSales from "../../subPages/viewSales/ViewSales";
 
 
 interface ISubPagesMap {
@@ -22,7 +23,8 @@ const subPagesMapping: ISubPagesMap = {
     sell: <RegisterSells />,
     categories: <ManageCategories />,
     dashboard: <Dashboard />,
-    travel: <ManageTravel />
+    travel: <ManageTravel />,
+    sales: <ViewSales />
 };
 
 function FunctionalityRender(props: { functionality: string, functionalityName: string }) {

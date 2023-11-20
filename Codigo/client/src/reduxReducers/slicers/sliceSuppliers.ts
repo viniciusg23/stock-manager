@@ -50,6 +50,6 @@ export default sliceSuppliers.reducer;
 
 export const { updateSuppliers, addSupplier, removeSupplier } = sliceSuppliers.actions;
 
-export const useSuppliers = (state: any) => {
+export const useSuppliers = (state: any): ISliceSuppliersState => {
     return state.suppliers as ISliceSuppliersState;
 }

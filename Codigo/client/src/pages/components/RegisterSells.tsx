@@ -10,6 +10,7 @@ import { fetchProducts } from "../../reduxActions/fetchProducts";
 import { useEmployees } from "../../reduxReducers/slicers/sliceEmployees";
 import { useProducts } from "../../reduxReducers/slicers/sliceProducts";
 import { AppDispatch } from "../../reduxReducers/store";
+import { registerSell } from "../../api/sales";
 
 
 interface IRegisterSellsProps {
@@ -81,15 +82,8 @@ function RegisterSells(props: IRegisterSellsProps) {
                 buyerEmail: buyerEmail ? buyerEmail : undefined,
                 buyerNumber: buyerNumber ? buyerNumber : undefined
             })
-    
-            const options = {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: body
-            };
-                          
-            const response = await fetch("/sale/sell", options);
-            const data = await response.json();
+
+            const data = await registerSell(body);
     
             enqueueSnackbar(data.message, {variant: "success"});
             

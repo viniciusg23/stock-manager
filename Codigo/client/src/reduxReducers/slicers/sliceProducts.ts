@@ -53,6 +53,6 @@ export const { updateProducts, addProduct, removeProduct } = sliceProducts.actio
 
 // export { fetchProducts };
 
-export const useProducts = (state: any) => {
+export const useProducts = (state: any): ISliceProductsState => {
     return state.products as ISliceProductsState;
 }

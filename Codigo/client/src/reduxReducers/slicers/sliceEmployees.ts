@@ -50,6 +50,6 @@ export default sliceEmployees.reducer;
 
 export const { updateEmployees, addEmployee, removeEmployee } = sliceEmployees.actions;
 
-export const useEmployees = (state: any) => {
+export const useEmployees = (state: any): ISliceEmployeesState => {
     return state.employees as ISliceEmployeesState;
 }
