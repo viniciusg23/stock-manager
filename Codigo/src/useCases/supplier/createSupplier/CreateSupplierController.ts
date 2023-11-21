@@ -24,9 +24,9 @@ export class CreateSupplierController implements IController{
             });
             
             return res.status(201).send();
-        } catch (error: any) {
+        } catch (error) {
             return res.status(400).json({
-                message: error.message || "Unexpected error in Create Supplier."
+                message: error || "Unexpected error in Create Supplier."
             });
         }
 

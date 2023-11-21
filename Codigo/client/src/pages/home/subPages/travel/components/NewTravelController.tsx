@@ -1,5 +1,6 @@
-import { Explore, AttachMoney, Add } from "@mui/icons-material";
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, Button, Tooltip } from "@mui/material";
+import { Explore, AttachMoney, Add, Close } from "@mui/icons-material";
+import { FormControl, InputLabel, OutlinedInput, InputAdornment, Button, Tooltip, Box } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 interface INewTravelControllerProps {
     travelName: string;
@@ -15,53 +16,82 @@ function NewTravelController(props: INewTravelControllerProps) {
     const {
         travelName,
         setTravelName,
-        travelCost, 
+        travelCost,
         setTravelCost,
         travelOptions,
         setTravelOptions
     } = props;
 
+    const toggleTravelOptions = () => {
+        if(!travelName && !travelCost){
+            enqueueSnackbar("Todos os campos devem ser preenchidos corretamente.", {variant: "error"})
+        }
+        else{
+            setTravelOptions(prev => !prev);
+        }
+    }
+
     return (
         <>
-            <div style={{ display: "flex", alignItems: "end", gap: "1em" }}>
-                <FormControl>
-                    <InputLabel htmlFor="travel-name">Nome da Viagem</InputLabel>
-                    <OutlinedInput
-                        size="small"
-                        type="text"
-                        id="travel-name"
-                        startAdornment={<InputAdornment position="start"><Explore /></InputAdornment>}
-                        label="Nome da Viagem"
-                        onChange={(event) => setTravelName(event.target.value)}
-                        value={travelName}
-                    />
-                </FormControl>
+            {travelOptions ? (
+                <Box mt="1em">
+                    <Tooltip title="Cancelar registro dessa viagem" placement="top">
+                        <Button
+                            variant="contained"
+                            color="error"
+                            endIcon={<Close />}
+                            onClick={toggleTravelOptions}
+                        >
+                            Cancelar Viagem
+                        </Button>
+                    </Tooltip>
+                </Box>
+                
+            ) : (
+                <Box display="flex" alignItems="center" gap="1.5em" mt="1em">
 
-                <FormControl>
-                    <InputLabel htmlFor="total-spend">Total Gasto</InputLabel>
-                    <OutlinedInput
-                        size="small"
-                        type="number"
-                        id="total-spend"
-                        startAdornment={<InputAdornment position="start"><AttachMoney /></InputAdornment>}
-                        label="Total Gasto"
-                        onChange={(event) => setTravelCost(event.target.value)}
-                        value={travelCost}
-                    />
-                </FormControl>
-            </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "1em" }}>
+                        <FormControl>
+                            <InputLabel htmlFor="travel-name">Nome da Viagem</InputLabel>
+                            <OutlinedInput
+                                size="small"
+                                type="text"
+                                id="travel-name"
+                                startAdornment={<InputAdornment position="start"><Explore /></InputAdornment>}
+                                label="Nome da Viagem"
+                                onChange={(event) => setTravelName(event.target.value)}
+                                value={travelName}
+                            />
+                        </FormControl>
 
-            <Tooltip title="Adicionar Viagen" placement="top">
-                <Button
-                    variant="contained"
-                    color="success"
-                    endIcon={<Add />}
-                    onClick={() => setTravelOptions(true)}
-                >
-                    Adicionar Viagen
-                </Button>
-            </Tooltip>
+                        <FormControl>
+                            <InputLabel htmlFor="total-spend">Total Gasto</InputLabel>
+                            <OutlinedInput
+                                size="small"
+                                type="number"
+                                id="total-spend"
+                                startAdornment={<InputAdornment position="start"><AttachMoney /></InputAdornment>}
+                                label="Total Gasto"
+                                onChange={(event) => setTravelCost(event.target.value)}
+                                value={travelCost}
+                            />
+                        </FormControl>
+                    </div>
+
+                    <Tooltip title="Adicionar Viagen" placement="top">
+                        <Button
+                            variant="contained"
+                            color="success"
+                            endIcon={<Add />}
+                            onClick={toggleTravelOptions}
+                        >
+                            Adicionar Viagen
+                        </Button>
+                    </Tooltip>
+                </Box>
+            )}
         </>
+
     );
 }
 

@@ -19,9 +19,9 @@ export class RemoveSupplierController implements IController {
       await this.removeSupplierUseCase.execute(id);
 
       return res.status(201).json({ message: "Supplier excluded" });
-    } catch (error: any) {
+    } catch (error) {
       return res.status(400).json({
-        message: error.message || "Unexpected error in Remove Supplier.",
+          message: error || "Unexpected error in Create Supplier."
       });
     }
   }
