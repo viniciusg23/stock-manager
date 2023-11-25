@@ -7,7 +7,8 @@ import ProductPurchasedOnTravel from "./components/ProductPurchasedOnTravel";
 import { enqueueSnackbar } from "notistack";
 import NewPurchaseForm from "./components/NewPurchaseForm";
 import SpendController from "./components/SpendController";
-import PDFBody from "./components/PDFBody"
+import PDFBody from "./components/PDFBody";
+import { PictureAsPdf } from "@mui/icons-material";
 export interface IPurchasedProduct {
   id: number;
   product: Product;
@@ -71,7 +72,6 @@ function ManageTravel() {
       0
     );
     setActualCost(total);
-
   }, [purchasedProducts]);
 
   return (
@@ -172,9 +172,20 @@ function ManageTravel() {
                     />
                   );
                 })}
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="success"
+                  onClick={(e) => {
+                    let totalValue = total;
+                    PDFBody(purchasedProducts, totalValue);
+                  }}
+                >
+                  <PictureAsPdf />
+                  Gerar PDF
+                </Button>
               </>
             )}
-
           </Box>
         </Box>
       </>
