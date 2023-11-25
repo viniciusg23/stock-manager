@@ -19,7 +19,7 @@ interface IRegisterSellsProps {
 }
 
 function RegisterSells(props: IRegisterSellsProps) {
-    const {format, productId} = props;
+    const {format} = props;
 
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();

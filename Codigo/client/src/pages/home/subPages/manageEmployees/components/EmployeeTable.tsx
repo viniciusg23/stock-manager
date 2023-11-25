@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import Table from "../../../components/Table";
 import EmployeeController from "./EmployeeController";
-import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
-import { useNavigate } from "react-router-dom";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../../../reduxReducers/store";
 import { useEmployees } from "../../../../../reduxReducers/slicers/sliceEmployees";
 import { fetchEmployees } from "../../../../../reduxActions/fetchEmployees";
+import { enqueueSnackbar } from "notistack";
 
 interface IEmployeeColumn{
     id: "id" | "name" | "job" | "action";
@@ -38,6 +36,7 @@ function EmployeeTable() {
 
 
     useEffect(() => {
+        if(error) enqueueSnackbar(error, {variant: "error"});
         dispatch(fetchEmployees());
     }, []);
 

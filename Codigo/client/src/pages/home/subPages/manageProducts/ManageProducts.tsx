@@ -2,8 +2,21 @@ import ProductsTable from "./components/ProductsTable";
 import TableController from "../../components/TableController";
 import ProductForm from "./components/ProductForm";
 import FadeTransition from "../../components/FadeTransition";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../../../reduxReducers/store";
+import { fetchProducts } from "../../../../reduxActions/fetchProducts";
+import { search, useProducts } from "../../../../reduxReducers/slicers/sliceProducts";
 
 function ManageProducts() {
+
+    const [query, setQuery] = useState<string>("");
+    const dispatch = useDispatch<AppDispatch>();
+
+
+    useEffect(() => {
+        dispatch(fetchProducts()).then(() => dispatch(search(query)));
+    }, [query]);
 
     return (
         <FadeTransition>
@@ -13,6 +26,7 @@ function ManageProducts() {
                         thereIsAddButton
                         formTitle="Adicionar Novo Produto" 
                         form={<ProductForm control="create"/>}
+                        setQuery={setQuery}
                     />
                     
                 <ProductsTable />

@@ -5,6 +5,7 @@ import { AppDispatch } from "../../../../../reduxReducers/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuppliers } from "../../../../../reduxActions/fetchSuppliers";
 import { useSuppliers } from "../../../../../reduxReducers/slicers/sliceSuppliers";
+import { enqueueSnackbar } from "notistack";
 
 
 interface ISupplierColumn{
@@ -33,11 +34,10 @@ function SuppliersTable() {
     const [rows, setRows] = useState<ISupplierRow[]>([]);
     const {loading, suppliers, error} = useSelector(useSuppliers);
 
-    console.log(suppliers);
-
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
+        if(error) enqueueSnackbar(error, {variant: "error"});
         dispatch(fetchSuppliers())
     }, []);
 

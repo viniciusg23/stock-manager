@@ -112,10 +112,10 @@ function ProductForm(props: IProductFormProps){
                 category: category,
                 name: formValues.name,
                 quantity: 0,
-                costPrice: formValues.costPrice,
+                costPrice: Number(formValues.costPrice),
                 salePrice: 0,
                 purchaseMonth: monthNameToNumber(formValues.purchaseMonth),
-                purchaseYear: formValues.purchaseYear,
+                purchaseYear: Number(formValues.purchaseYear),
                 supplier: supplier
             });
 

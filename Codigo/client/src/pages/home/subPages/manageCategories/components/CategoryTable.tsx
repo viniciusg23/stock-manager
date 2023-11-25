@@ -5,6 +5,7 @@ import { AppDispatch } from "../../../../../reduxReducers/store";
 import { fetchCategories } from "../../../../../reduxActions/fetchCategories";
 import CategoryController from "./CategoryController";
 import Table from "../../../components/Table";
+import { enqueueSnackbar } from "notistack";
 
 
 interface ICategoryColumn{
@@ -36,6 +37,7 @@ function CategoryTable() {
 
 
     useEffect(() => {
+        if(error) enqueueSnackbar(error, {variant: "error"});
         dispatch(fetchCategories());
     }, []);
 

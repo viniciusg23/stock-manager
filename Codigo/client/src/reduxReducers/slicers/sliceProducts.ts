@@ -20,15 +20,13 @@ const sliceProducts = createSlice({
     name: "products",
     initialState: INITIAL_STATE,
     reducers: {
-        updateProducts(state, { payload }: PayloadAction<Product[]>) {
-            state.products = payload;
+        search(state, { payload }: PayloadAction<string>) {
+            const query = payload.toLowerCase();
+            state.products = state.products.filter((product) => {
+                // Aqui você pode ajustar a lógica de comparação conforme necessário
+                return product.name.toLowerCase().includes(query);
+            });
         },
-        addProduct(state, { payload }: PayloadAction<Product>) {
-            state.products.push(payload);
-        },
-        removeProduct(state, { payload }: PayloadAction<Product>) {
-            state.products = state.products.filter(obj => obj.id !== payload.id);
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.pending, (state) => {
@@ -49,9 +47,7 @@ const sliceProducts = createSlice({
 
 export default sliceProducts.reducer;
 
-export const { updateProducts, addProduct, removeProduct } = sliceProducts.actions;
-
-// export { fetchProducts };
+export const { search } = sliceProducts.actions;
 
 export const useProducts = (state: any): ISliceProductsState => {
     return state.products as ISliceProductsState;

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useProducts } from "../../../../../reduxReducers/slicers/sliceProducts";
 import { fetchProducts } from "../../../../../reduxActions/fetchProducts";
 import { AppDispatch } from "../../../../../reduxReducers/store";
+import { enqueueSnackbar } from "notistack";
 
 interface ProductColumn{
     id: "code" | "isFiscal" | "category" | "name" | "costPrice" | "purchaseDate" | "supplier" | "action";
@@ -18,7 +19,7 @@ interface ProductRow{
     isFiscal: string;
     category: string;
     name: string;
-    costPrice: number;
+    costPrice: string;
     purchaseDate: string;
     supplier: string;
     action: JSX.Element;
@@ -44,6 +45,7 @@ function ProductsTable() {
     const [rows, setRows] = useState<ProductRow[]>([]);
 
     useEffect(() => {
+        if(error) enqueueSnackbar(error, {variant: "error"});
         dispatch(fetchProducts())
     }, [])
 
@@ -57,7 +59,7 @@ function ProductsTable() {
                 isFiscal: product.isFiscal ? "Sim" : "Não",
                 category: product.category ? product.category.name : "Indefinido",
                 name: product.name,
-                costPrice: product.costPrice,
+                costPrice: product.costPrice.toFixed(2),
                 purchaseDate: formatDate(product.purchaseMonth, product.purchaseYear),
                 supplier: product.supplier ? product.supplier.name : "Indefinido",
                 action: <ProductController product={product} />
@@ -72,9 +74,6 @@ function ProductsTable() {
 
     return (
         <>
-
-            
-
             <Table isLoading={loading} columns={columns} rows={rows} />
         </>
     );

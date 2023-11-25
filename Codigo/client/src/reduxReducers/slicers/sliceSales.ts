@@ -19,15 +19,12 @@ const sliceSales = createSlice({
     name: "sales",
     initialState: INITIAL_STATE,
     reducers: {
-        updateSales(state, { payload }: PayloadAction<Sale[]>) {
-            state.sales = payload;
+        search(state, { payload }: PayloadAction<string>) {
+            const query = payload.toLowerCase();
+            state.sales = state.sales.filter((sale) => {
+                return sale.product?.name.toLowerCase().includes(query);
+            });
         },
-        addSale(state, { payload }: PayloadAction<Sale>) {
-            state.sales.push(payload);
-        },
-        removeSale(state, { payload }: PayloadAction<Sale>) {
-            state.sales = state.sales.filter(obj => obj.id !== payload.id);
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchSales.pending, (state) => {
@@ -48,7 +45,7 @@ const sliceSales = createSlice({
 
 export default sliceSales.reducer;
 
-export const { updateSales, addSale, removeSale } = sliceSales.actions;
+export const { search } = sliceSales.actions;
 
 export const useSales = (state: any): ISliceSalesState => {
     return state.sales as ISliceSalesState;

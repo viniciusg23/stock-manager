@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import Table from "../../../components/Table";
 import StockController from "./StockController";
-import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useProducts } from "../../../../../reduxReducers/slicers/sliceProducts";
 import { AppDispatch } from "../../../../../reduxReducers/store";
 import { fetchProducts } from "../../../../../reduxActions/fetchProducts";
+import { enqueueSnackbar } from "notistack";
+import { Typography } from "@mui/material";
 
 
 interface IStockColumn{
@@ -20,10 +19,10 @@ interface IStockColumn{
 interface IStockRow{
     code: string
     name: string;
-    costPrice: number;
-    salePrice: number;
+    costPrice: string;
+    salePrice: string;
     quantity: number;
-    profit: number;
+    profit: JSX.Element;
     action: JSX.Element;
 }
 
@@ -47,21 +46,24 @@ function StockTable() {
 
 
     useEffect(() => {
-        dispatch(fetchProducts())
+        if(error) enqueueSnackbar(error, {variant: "error"});
+        dispatch(fetchProducts());
     }, []);
 
     useEffect(() => {
         const rows: IStockRow[] = [];
 
         for(const product of products){
+            const profit = product.salePrice - product.costPrice;
+
             const row: IStockRow = {
                 code: product.code,
                 quantity: product.quantity,
                 name: product.name,
-                costPrice: product.costPrice,
-                salePrice: product.salePrice,
+                costPrice: product.costPrice.toFixed(2),
+                salePrice: product.salePrice.toFixed(2),
                 action: <StockController product={product} />,
-                profit: product.salePrice - product.costPrice
+                profit: <Typography color={profit < 1 ? "red" : "green"}>{profit.toFixed(2)}</Typography>
             }
 
             rows.push(row);

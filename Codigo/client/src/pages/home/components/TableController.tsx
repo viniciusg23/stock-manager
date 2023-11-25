@@ -2,14 +2,12 @@ import { Add, Search } from "@mui/icons-material";
 import { Box, Typography, FormControl, InputLabel, Input, InputAdornment, IconButton, Button, Tooltip } from "@mui/material";
 import Form from "./Form";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useProducts } from "../../../reduxReducers/slicers/sliceProducts";
-
 
 
 interface ITableControllerProps {
     tableTitle: string;
     thereIsAddButton: boolean;
+    setQuery: (value: string) => void;
     formTitle?: string;
     form?: JSX.Element;
 }
@@ -17,7 +15,7 @@ interface ITableControllerProps {
 
 function TableController(props: ITableControllerProps) {
 
-    const {tableTitle, formTitle, form, thereIsAddButton} = props;
+    const {tableTitle, formTitle, form, thereIsAddButton, setQuery} = props;
     
     
     const [searchValue, setSearchValue] = useState<string>("");
@@ -32,7 +30,8 @@ function TableController(props: ITableControllerProps) {
     }
 
     const handleSearch = () => {
-        console.log(searchValue)
+        setQuery(searchValue);
+        // console.log(searchValue)
     }
 
 

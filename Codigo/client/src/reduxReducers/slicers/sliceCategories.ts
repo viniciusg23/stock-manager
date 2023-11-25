@@ -19,14 +19,11 @@ const sliceCategories = createSlice({
     name: "categories",
     initialState: INITIAL_STATE,
     reducers: {
-        updateCategories(state, { payload }: PayloadAction<Category[]>) {
-            state.categories = payload;
-        },
-        addCategory(state, { payload }: PayloadAction<Category>) {
-            state.categories.push(payload);
-        },
-        removeCategory(state, { payload }: PayloadAction<Category>) {
-            state.categories = state.categories.filter(obj => obj.id !== payload.id);
+        search(state, { payload }: PayloadAction<string>) {
+            const query = payload.toLowerCase();
+            state.categories = state.categories.filter((category) => {
+                return category.name.toLowerCase().includes(query);
+            });
         }
     },
     extraReducers: (builder) => {
@@ -48,7 +45,7 @@ const sliceCategories = createSlice({
 
 export default sliceCategories.reducer;
 
-export const { updateCategories, addCategory, removeCategory } = sliceCategories.actions;
+export const { search } = sliceCategories.actions;
 
 export const useCategories = (state: any): ISliceCategoriesState => {
     return state.categories as ISliceCategoriesState;

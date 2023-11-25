@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSales } from "../../../../../reduxActions/fetchSales";
 import { useSales } from "../../../../../reduxReducers/slicers/sliceSales";
 import SaleController from "./SaleController";
+import { enqueueSnackbar } from "notistack";
 
 
 interface ISaleColumn{
@@ -39,13 +40,11 @@ function SaleTable() {
     const [rows, setRows] = useState<ISaleRow[]>([]);
     const {loading, sales, error} = useSelector(useSales);
 
-    console.log(sales)
-
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
+        if(error) enqueueSnackbar(error, {variant: "error"});
         dispatch(fetchSales());
-        // console.log(sales);
     }, []);
 
     useEffect(() => {

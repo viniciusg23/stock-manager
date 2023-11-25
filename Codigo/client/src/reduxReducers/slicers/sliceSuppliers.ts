@@ -19,14 +19,11 @@ const sliceSuppliers = createSlice({
     name: "suppliers",
     initialState: INITIAL_STATE,
     reducers: {
-        updateSuppliers(state, { payload }: PayloadAction<Supplier[]>) {
-            state.suppliers = payload;
-        },
-        addSupplier(state, { payload }: PayloadAction<Supplier>) {
-            state.suppliers.push(payload);
-        },
-        removeSupplier(state, { payload }: PayloadAction<Supplier>) {
-            state.suppliers = state.suppliers.filter(obj => obj.id !== payload.id);
+        search(state, { payload }: PayloadAction<string>) {
+            const query = payload.toLowerCase();
+            state.suppliers = state.suppliers.filter((supplier) => {
+                return supplier.name.toLowerCase().includes(query);
+            });
         }
     },
     extraReducers: (builder) => {
@@ -48,7 +45,7 @@ const sliceSuppliers = createSlice({
 
 export default sliceSuppliers.reducer;
 
-export const { updateSuppliers, addSupplier, removeSupplier } = sliceSuppliers.actions;
+export const { search } = sliceSuppliers.actions;
 
 export const useSuppliers = (state: any): ISliceSuppliersState => {
     return state.suppliers as ISliceSuppliersState;
