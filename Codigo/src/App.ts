@@ -1,4 +1,7 @@
-require("dotenv").config();
+// require("dotenv").config();
+
+import dotenv from "dotenv";
+dotenv.config();
 
 import express from "express";
 import config from "config";
