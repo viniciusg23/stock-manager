@@ -9,6 +9,7 @@ import NewPurchaseForm from "./components/NewPurchaseForm";
 import SpendController from "./components/SpendController";
 import PDFBody from "./components/PDFBody";
 import { PictureAsPdf } from "@mui/icons-material";
+
 export interface IPurchasedProduct {
   id: number;
   product: Product;
@@ -18,9 +19,7 @@ export interface IPurchasedProduct {
 }
 
 function ManageTravel() {
-  const [purchasedProducts, setPurchasedProducts] = useState<
-    IPurchasedProduct[]
-  >([]);
+  const [purchasedProducts, setPurchasedProducts] = useState<IPurchasedProduct[]>([]);
 
   const [travelName, setTravelName] = useState<string>("");
   const [travelCost, setTravelCost] = useState<string>("");
@@ -177,7 +176,7 @@ function ManageTravel() {
                   variant="contained"
                   color="success"
                   onClick={(e) => {
-                    let totalValue = total;
+                    const totalValue: number = purchasedProducts.map((purchase) => purchase.total).reduce((acc, currentValue) => acc + currentValue, 0);
                     PDFBody(purchasedProducts, totalValue);
                   }}
                 >

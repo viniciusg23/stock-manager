@@ -85,7 +85,7 @@ function NewTravelController(props: INewTravelControllerProps) {
                             endIcon={<Add />}
                             onClick={toggleTravelOptions}
                         >
-                            Adicionar Viagen
+                            Adicionar Viagem
                         </Button>
                     </Tooltip>
                 </Box>
