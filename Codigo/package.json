@@ -14,7 +14,10 @@
     "build-client": "npm run build --prefix client",
     "win-build": "npm run setup && npm run build-server && npm run build-client && npm run win-move-build",
     "win-move-build": "xcopy /s /y client\\build dist\\src\\client\\",
-    "win-prod": "npm run win-build && node ./dist/src/App.js"
+    "win-prod": "npm run win-build && node ./dist/src/App.js",
+    "build": "npm run setup && npm run build-server && npm run build-client && npm run move-build",
+    "move-build": "cp -r client/build dist/src/client/",
+    "prod": "npm run build && node ./dist/src/App.js"
   },
   "author": "",
   "license": "ISC",
