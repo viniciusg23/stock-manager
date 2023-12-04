@@ -1,4 +1,4 @@
-import { getAuthorizationToken } from "../pages/home/utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../utils/getAuthorizationToken";
 
 type TotalProfitResponse = string;
 export async function totalProfit(): Promise<TotalProfitResponse> {

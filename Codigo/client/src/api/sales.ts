@@ -1,5 +1,5 @@
 import { Sale } from "../entities/Sale";
-import { getAuthorizationToken } from "../pages/home/utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../utils/getAuthorizationToken";
 
 export async function registerSell(body: string){
 
@@ -11,6 +11,12 @@ export async function registerSell(body: string){
                   
     const response = await fetch("/sale/sell", options);
     const data = await response.json();
+
+
+    if(!response.ok){
+        throw new Error(data.message);
+    }
+
 
     return data;
 }

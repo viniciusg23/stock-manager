@@ -6,7 +6,7 @@ function AgilSell() {
     const {id} = useParams();
 
     return (
-        <RegisterSells format="agil" productId={id} /> 
+        <RegisterSells format="agil" productId={id} />
     );
 }
 

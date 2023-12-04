@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Box, Button } from "@mui/material";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { useDispatch } from "react-redux";
 import { enqueueSnackbar } from "notistack";
 import { fetchSuppliers } from "../../../../../reduxActions/fetchSuppliers";

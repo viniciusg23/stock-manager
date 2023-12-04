@@ -3,7 +3,7 @@ import { ButtonGroup, Tooltip, IconButton, Box, Button } from "@mui/material";
 import Form from "../../../components/Form";
 import { LegacyRef, RefObject, useRef, useState } from "react";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../../../../entities/Product";
 import StockForm from "./StockForm";

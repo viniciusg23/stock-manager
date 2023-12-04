@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button, useTheme } from "@mui/material";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../../../../reduxReducers/store";

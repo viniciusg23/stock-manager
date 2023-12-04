@@ -3,6 +3,7 @@ export interface ISellProductDTO {
 	quantity: number;
 	salePrice: number;
 	employeeId: string;
+	systemPassword: string;
 	buyerName: string;
 	buyerEmail?: string;
 	buyerNumber?: string;

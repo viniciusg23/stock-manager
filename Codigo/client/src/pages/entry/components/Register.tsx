@@ -1,19 +1,17 @@
 import { ChangeEvent, useState } from "react";
-import { Alert, Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { ArrowForwardIos } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
 
 
 
 
 function Register(props: {option: React.Dispatch<React.SetStateAction<"login" | "register">>}) {
 
-    const navigate = useNavigate();
-
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordVerify, setPasswordVerify] = useState<string>("");
-
+    const [systemPassword, setSystemPassword] = useState<string>("")
+;
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
     };
@@ -26,13 +24,16 @@ function Register(props: {option: React.Dispatch<React.SetStateAction<"login" | 
         setPasswordVerify(event.target.value);
     }
 
+    const handleSystemPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSystemPassword(event.target.value);
+    };
+
     const handleRegister = async () => {
-        //TODO: implement register request
         const options = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: `{"name":"${username}","password":"${password}"}`
-          };
+            body: `{"name":"${username}","password":"${password}", "systemPassword": "${systemPassword}"}`
+        };
           
         const data = await fetch("/user/register", options);
 
@@ -74,6 +75,16 @@ function Register(props: {option: React.Dispatch<React.SetStateAction<"login" | 
                     fullWidth 
                     value={passwordVerify}
                     onChange={handlePasswordVerifyChange}
+                />
+                <TextField 
+                    color="secondary" 
+                    id="system-password" 
+                    label="Senha do Sistema" 
+                    type="password" 
+                    variant="standard" 
+                    fullWidth 
+                    value={systemPassword}
+                    onChange={handleSystemPasswordChange}
                 />
                 <Button color="secondary" variant="contained" endIcon={<ArrowForwardIos />} fullWidth sx={{ marginTop: 3 }} onClick={handleRegister}>
                     Registrar

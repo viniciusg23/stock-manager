@@ -3,7 +3,7 @@ import { ButtonGroup, Tooltip, IconButton } from "@mui/material";
 import Form from "../../../components/Form";
 import { useState } from "react";
 import ProductForm from "./ProductForm";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";

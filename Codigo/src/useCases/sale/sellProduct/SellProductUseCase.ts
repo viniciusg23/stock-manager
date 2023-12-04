@@ -1,3 +1,4 @@
+import config from "config";
 import { Sale } from "../../../entities/Sale";
 import { EnumMonth } from "../../../entities/Product";
 import { IProductRepository } from "../../../repository/productRepository/IProductRepository";
@@ -20,6 +21,11 @@ export class SellProductUseCase {
     }
 
     public async execute(data: ISellProductDTO){
+
+        if(data.systemPassword !== config.get<string>("systemPassword")){
+            throw new Error("Invalid System password.");
+        }
+
         const totalPrice = data.quantity * data.salePrice;
         const sale = new Sale(
             await this.productRepository.findById(data.productId), 

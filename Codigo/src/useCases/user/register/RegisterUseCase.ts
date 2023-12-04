@@ -1,3 +1,4 @@
+import config from "config";
 import { User } from "../../../entities/User";
 import { IUserRepository } from "../../../repository/userRepository/IUserRepository";
 import { IRegisterDTO } from "./RegisterDTO";
@@ -16,6 +17,10 @@ export class RegisterUseCase {
 
         if(verifyUser){
             throw new Error("User already exists.");
+        }
+
+        if(data.systemPassword !== config.get<string>("systemPassword")){
+            throw new Error("Invalid System Passsword");
         }
 
         const hashedPassword = hashSync(data.password, 10);

@@ -1,4 +1,4 @@
-import { Box, Button, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,12 +19,12 @@ interface IRegisterSellsProps {
 }
 
 function RegisterSells(props: IRegisterSellsProps) {
-    const {format} = props;
+    const { format, productId } = props;
 
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
-    const {products} = useSelector(useProducts);
-    const {employees} = useSelector(useEmployees);
+    const { products } = useSelector(useProducts);
+    const { employees } = useSelector(useEmployees);
 
     const [availableQuantity, setAvailableQuantity] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -34,8 +34,39 @@ function RegisterSells(props: IRegisterSellsProps) {
     const [buyerNumber, setBuyerNumber] = useState<string>("");
 
 
+    const [systemPasswordModal, setSystemPasswordModal] = useState<boolean>(false);
+    const [systemPassword, setSystemPassword] = useState<string>("");
+
+
     const [selectedProductId, setSelectedProductId] = useState("");
     const [selectedProductSalePrice, setSelectedProductSalePrice] = useState<number>(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await dispatch(fetchProducts());
+                await dispatch(fetchEmployees());
+      
+                if (productId) {
+                    setSelectedProductId(productId);
+        
+                    const selectedProduct = products.find((product) => product.id === selectedProductId);
+        
+                    if (selectedProduct) {
+                        setAvailableQuantity(Number(selectedProduct.quantity));
+                        setSelectedProductSalePrice(Number(selectedProduct.salePrice));
+                    }
+                    
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                enqueueSnackbar("Houve um erro ao buscar pelo produto", {variant: "error"})
+            }
+          };
+
+        fetchData();
+    }, []);
+
     useEffect(() => {
         const selectedProduct = products.find(product => product.id === selectedProductId);
 
@@ -60,16 +91,18 @@ function RegisterSells(props: IRegisterSellsProps) {
         }
     }, [selectedQuantity]);
 
+
+
     const handleSell = async () => {
         try {
 
-            if(
+            if (
                 selectedProductId === "" ||
                 selectedQuantity < 1 ||
                 selectedProductSalePrice < 1 ||
                 selectedEmployee === "" ||
                 buyerName === ""
-            ){
+            ) {
                 throw new Error("Invalid fields");
             }
 
@@ -80,39 +113,65 @@ function RegisterSells(props: IRegisterSellsProps) {
                 employeeId: selectedEmployee,
                 buyerName: buyerName,
                 buyerEmail: buyerEmail ? buyerEmail : undefined,
-                buyerNumber: buyerNumber ? buyerNumber : undefined
+                buyerNumber: buyerNumber ? buyerNumber : undefined,
+                systemPassword: systemPassword
             })
 
             const data = await registerSell(body);
-    
-            enqueueSnackbar(data.message, {variant: "success"});
-            
+
+
+            enqueueSnackbar(data.message, { variant: "success" });
+            setSystemPasswordModal(false);
+
         }
         catch (error: any | UnauthorizationError) {
-            if(error instanceof UnauthorizationError){
+            if (error instanceof UnauthorizationError) {
                 alert("Sessão finalizada");
                 return navigate("/");
             }
 
-            enqueueSnackbar(error.message, {variant: "error"});
+            enqueueSnackbar(error.message, { variant: "error" });
         }
         finally {
             window.location.reload();
         }
     }
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-        dispatch(fetchEmployees());
-    }, []);
+    
 
 
     return (
         <>
-            <Typography 
-                align={format === "system" ? "left" : "center"}  
+
+            <Dialog open={systemPasswordModal} onClose={() => setSystemPasswordModal(false)}>
+                <DialogTitle>Realizar Venda</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Para realizar uma venda é necessário informar a senha padrão do sistema. Caso tenha alguma dúvida entre em contato com o proprierário do Sistema.
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="system-password"
+                        label="Senha do Sistema"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                        onChange={(event) => setSystemPassword(event.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setSystemPasswordModal(false)}>Cancelar</Button>
+                    <Button onClick={handleSell}>Vender</Button>
+                </DialogActions>
+            </Dialog>
+      
+
+            <Typography
+                align={format === "system" ? "left" : "center"}
                 variant="h5"
                 bgcolor={format !== "system" ? "primary.main" : ""}
+                padding={format !== "system" ? ".75em" : ""}
                 color={format !== "system" ? "white" : ""}
             >
                 Registrar Nova Venda
@@ -169,7 +228,7 @@ function RegisterSells(props: IRegisterSellsProps) {
 
                 <Typography mt="1em" align="left" variant="h6">Informações do Comprador</Typography>
                 <Box mt="1em" display="flex" flexDirection={format === "system" ? "row" : "column"} gap="1em">
-                    <TextField 
+                    <TextField
                         sx={{ my: 1 }}
                         label="Nome do Comprador"
                         type="text"
@@ -183,7 +242,7 @@ function RegisterSells(props: IRegisterSellsProps) {
                     />
 
                     <TextField
-                        sx={{ my: 1 }} 
+                        sx={{ my: 1 }}
                         label="Email do Comprador"
                         type="email"
                         color="secondary"
@@ -195,7 +254,7 @@ function RegisterSells(props: IRegisterSellsProps) {
                         fullWidth
                     />
 
-                    <TextField 
+                    <TextField
                         sx={{ my: 1 }}
                         label="Número do Comprador"
                         type="tel"
@@ -223,12 +282,12 @@ function RegisterSells(props: IRegisterSellsProps) {
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
-                
+
                 </Box>
 
 
                 <Typography mt="1em" align="left" variant="h6">Finalizar Venda</Typography>
-                <Box 
+                <Box
                     sx={{
                         mt: "1em",
                         display: "flex",
@@ -236,17 +295,17 @@ function RegisterSells(props: IRegisterSellsProps) {
                         gap: "1.5em",
                     }}
                 >
-                    <Button 
-                        fullWidth={format === "agil" ? true : false} 
-                        color="success" 
-                        variant="contained" 
-                        size="large" 
-                        endIcon={<ShoppingCartCheckout />} 
-                        onClick={handleSell}
+                    <Button
+                        fullWidth={format === "agil" ? true : false}
+                        color="success"
+                        variant="contained"
+                        size="large"
+                        endIcon={<ShoppingCartCheckout />}
+                        onClick={() => setSystemPasswordModal(true)}
                     >
                         Vender
                     </Button>
-                    
+
                 </Box>
             </Box>
         </>

@@ -1,4 +1,4 @@
-import { UnauthorizationError } from "../../../errors/UnauthorizationError";
+import { UnauthorizationError } from "../errors/UnauthorizationError";
 
 export const getAuthorizationToken = () => {
     const token = localStorage.getItem("authorization");

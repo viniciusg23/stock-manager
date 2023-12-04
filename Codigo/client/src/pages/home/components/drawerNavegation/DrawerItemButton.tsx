@@ -1,5 +1,5 @@
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { setFunctionality } from "../../utils/setFunctionality";
+import { setFunctionality } from "../../../../utils/setFunctionality";
 import { DrawerItem } from "./drawerItens";
 
 interface IDrawerItemButtonProps {

@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, useEffect } from "react";
-import { Alert, Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { ArrowForwardIos } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { userValidate } from "../../../utils/userValidate";
 
 
 function Login() {
@@ -20,14 +21,21 @@ function Login() {
     };
 
     useEffect(() => {
-        //TODO: verificar se ja existe token de login no localstorage
-        const token = window.localStorage.getItem("authorization");
 
-        if(token){
-            return navigate("/home");
-        }
-        
-    }, []);
+        const checkLoginStatus = async () => {
+            try {
+                const isLoggedIn = await userValidate();
+                if (isLoggedIn) {
+                    return navigate("/home");
+                }
+            } catch (error) {
+                console.error("Erro ao validar usuário:", error);
+            }
+        };
+      
+        checkLoginStatus();
+
+    }, [navigate]);
 
     const handleLogin = async () => {
         const options = {
@@ -38,8 +46,6 @@ function Login() {
           
         const data = await fetch("/user/login", options);
         const jsonData = await data.json();
-
-        console.log(jsonData);
 
         if(!data.ok){
             alert(jsonData.message);

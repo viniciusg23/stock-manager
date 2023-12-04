@@ -1,7 +1,7 @@
 import { Edit, Delete } from "@mui/icons-material";
 import { ButtonGroup, Tooltip, IconButton } from "@mui/material";
 import { Employee } from "../../../../../entities/Employee";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { enqueueSnackbar } from "notistack";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { fetchEmployees } from "../../../../../reduxActions/fetchEmployees";

@@ -1,7 +1,7 @@
 import { Edit, Delete } from "@mui/icons-material";
 import { ButtonGroup, Tooltip, IconButton } from "@mui/material";
 import { Supplier } from "../../../../../entities/Supplier";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { enqueueSnackbar } from "notistack";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";

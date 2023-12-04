@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Category } from "../../../../../entities/Category";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../../reduxReducers/store";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { enqueueSnackbar } from "notistack";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { fetchCategories } from "../../../../../reduxActions/fetchCategories";

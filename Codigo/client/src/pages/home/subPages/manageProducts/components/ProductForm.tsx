@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { TextField, Typography, Box, Button, useTheme, MenuItem, Switch, Stack, Select, FormControl, InputLabel } from "@mui/material";
-import { getAuthorizationToken } from "../../../utils/getAuthorizationToken";
+import { getAuthorizationToken } from "../../../../../utils/getAuthorizationToken";
 import { UnauthorizationError } from "../../../../../errors/UnauthorizationError";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
