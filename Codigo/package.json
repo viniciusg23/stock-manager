@@ -14,10 +14,10 @@
     "build-client": "npm run build --prefix client",
     "win-build": "npm run setup && npm run build-server && npm run build-client && npm run win-move-build",
     "win-move-build": "xcopy /s /y client\\build dist\\src\\client\\",
-    "win-prod": "npm run win-build && node ./dist/src/App.js",
+    "win-prod": "set ENV=production && npm run win-build && node ./dist/src/App.js",
     "build": "npm run setup && npm run build-server && npm run build-client && npm run move-build",
     "move-build": "cp -r client/build dist/src/client/",
-    "prod": "npm run build && node ./dist/src/App.js"
+    "prod": "set ENV=production && npm run build && pm2 start ./dist/src/App.js --name complemento"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.4.4",
     "morgan": "^1.10.0",
+    "pm2": "^5.3.0",
     "qrcode": "^1.5.3",
     "winston": "^3.10.0"
   },
