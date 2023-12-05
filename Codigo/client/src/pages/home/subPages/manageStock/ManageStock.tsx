@@ -15,7 +15,7 @@ function ManageStock() {
 
     useEffect(() => {
         dispatch(fetchProducts()).then(() => dispatch(search(query)));
-    }, [query]);
+    }, [dispatch, query]);
 
     return (
         <FadeTransition>

@@ -16,7 +16,7 @@ function ManageSuppliers() {
 
     useEffect(() => {
         dispatch(fetchSuppliers()).then(() => dispatch(search(query)));
-    }, [query]);
+    }, [dispatch, query]);
 
     
     return (

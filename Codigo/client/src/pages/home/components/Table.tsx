@@ -37,7 +37,7 @@ function Table(props: TableProps) {
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <MUITable size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
-                                    <TableRow>
+                                    <TableRow key="head">
                                         {columns.map((column) => (
                                             <TableCell
                                                 key={column.id}

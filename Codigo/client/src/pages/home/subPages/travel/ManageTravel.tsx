@@ -176,8 +176,10 @@ function ManageTravel() {
                   variant="contained"
                   color="success"
                   onClick={(e) => {
-                    const totalValue: number = purchasedProducts.map((purchase) => purchase.total).reduce((acc, currentValue) => acc + currentValue, 0);
-                    PDFBody(purchasedProducts, totalValue);
+                      const totalValue: number = purchasedProducts.map((purchase) => purchase.total).reduce((acc, currentValue) => acc + currentValue, 0);
+
+                      const pdfBody = { produtos: purchasedProducts, valorTotal: totalValue };                    
+                      PDFBody(pdfBody);
                   }}
                 >
                   <PictureAsPdf />

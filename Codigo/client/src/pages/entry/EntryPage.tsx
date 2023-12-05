@@ -52,17 +52,25 @@ function EntryPage() {
                         item 
                         xs={6}
                         className="entry-background"
+                        sx={{display: "flex", flexDirection: "column", alignItems: "center"}}
                     >
+                        <div>
+                            <Typography 
+                                color="white" 
+                                fontSize="3rem" 
+                                textAlign="center"
+                                letterSpacing={5}
+                            >
+                                COMPLEMENTO
+                            </Typography>
+                        </div>
+                        
                         <Typography 
                             color="white" 
-                            fontSize={"3rem"} 
-                            textAlign="center"
-                            letterSpacing={5}
-                            display="block"
+                            fontSize="1rem" 
+                            textAlign="center" 
+                            mt="1em"
                         >
-                            COMPLEMENTO
-                        </Typography>
-                        <Typography color="white" fontSize={"1rem"} textAlign="center" mt={"1em"}>
                             Gerencie seu Estoque
                         </Typography>
                     </Grid>

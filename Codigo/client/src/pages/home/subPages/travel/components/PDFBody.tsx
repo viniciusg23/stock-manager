@@ -1,7 +1,16 @@
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
+import { IPurchasedProduct } from '../ManageTravel';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
-export default function PDFBody(produtos, valorTotal) {
+interface IPDFBodyProps {
+    produtos: IPurchasedProduct[];
+    valorTotal: number;
+}
+
+export default function PDFBody(props: IPDFBodyProps) {
+    const {produtos, valorTotal} = props;
+
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const title = [
@@ -50,7 +59,7 @@ export default function PDFBody(produtos, valorTotal) {
         }
     ];
 
-    function footer (currentPage, pageCount){
+    function footer (currentPage: any, pageCount: any){
         return {
             layout: 'noBorders',
             margin: [14, 0, 14, 22],
@@ -86,7 +95,7 @@ export default function PDFBody(produtos, valorTotal) {
         };
     }
 
-    const docDefinitions = {
+    const docDefinitions: unknown = {
         pageSize: 'A4',
         pageMargins: [15,50,15,40],
 
@@ -95,5 +104,5 @@ export default function PDFBody(produtos, valorTotal) {
         footer: footer
     }
 
-    pdfMake.createPdf(docDefinitions).open();
+    pdfMake.createPdf(docDefinitions as TDocumentDefinitions).open();
 }

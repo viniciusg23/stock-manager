@@ -16,7 +16,7 @@ function ManageCategories() {
 
     useEffect(() => {
         dispatch(fetchCategories()).then(() => dispatch(search(query)));
-    }, [query]);
+    }, [dispatch, query]);
 
     return (
         <FadeTransition>

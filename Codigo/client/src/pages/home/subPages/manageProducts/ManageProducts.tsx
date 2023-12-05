@@ -3,10 +3,10 @@ import TableController from "../../components/TableController";
 import ProductForm from "./components/ProductForm";
 import FadeTransition from "../../components/FadeTransition";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../reduxReducers/store";
 import { fetchProducts } from "../../../../reduxActions/fetchProducts";
-import { search, useProducts } from "../../../../reduxReducers/slicers/sliceProducts";
+import { search } from "../../../../reduxReducers/slicers/sliceProducts";
 
 function ManageProducts() {
 
@@ -16,7 +16,7 @@ function ManageProducts() {
 
     useEffect(() => {
         dispatch(fetchProducts()).then(() => dispatch(search(query)));
-    }, [query]);
+    }, [dispatch, query]);
 
     return (
         <FadeTransition>

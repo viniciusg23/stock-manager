@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import TableController from "../../components/TableController";
 import AddEmployeeForm from "./components/AddEmployeeForm";
 import EmployeeTable from "./components/EmployeeTable";
 import FadeTransition from "../../components/FadeTransition";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { search } from "../../../../reduxReducers/slicers/sliceEmployees";
 import { AppDispatch } from "../../../../reduxReducers/store";
 import { fetchEmployees } from "../../../../reduxActions/fetchEmployees";
@@ -16,7 +16,7 @@ function ManageEmployees() {
 
     useEffect(() => {
         dispatch(fetchEmployees()).then(() => dispatch(search(query)));
-    }, [query]);
+    }, [dispatch, query]);
 
     return (
         <FadeTransition>
@@ -36,7 +36,3 @@ function ManageEmployees() {
 }
 
 export default ManageEmployees;
-
-function useState<T>(arg0: string): [any, any] {
-    throw new Error("Function not implemented.");
-}
