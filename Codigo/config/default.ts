@@ -6,7 +6,7 @@ const PORT = 3000;
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 
-const env = process.env.ENV ? process.env.ENV.replace(/\s/g, "") : "development";
+const env = process.env.ENVIROMENT ? process.env.ENVIROMENT.replace(/\s/g, "") : "development";
 
 const jwt = process.env.JWT_SECRET;
 

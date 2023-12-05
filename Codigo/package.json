@@ -17,7 +17,7 @@
     "win-prod": "set ENV=production && npm run win-build && node ./dist/src/App.js",
     "build": "npm run setup && npm run build-server && npm run build-client && npm run move-build",
     "move-build": "cp -r client/build dist/src/client/",
-    "prod": "set ENV=production && npm run build && pm2 start ./dist/src/App.js --name complemento"
+    "prod": "npm run build && pm2 start ./dist/src/App.js --name complemento --env production"
   },
   "author": "",
   "license": "ISC",

@@ -3,6 +3,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { ArrowForwardIos } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { userValidate } from "../../../utils/userValidate";
+import { enqueueSnackbar } from "notistack";
 
 
 function Login() {
@@ -48,7 +49,8 @@ function Login() {
         const jsonData = await data.json();
 
         if(!data.ok){
-            alert(jsonData.message);
+            enqueueSnackbar(jsonData.message, {variant: "error"})
+            return;
         }
 
         window.localStorage.setItem("authorization", jsonData.authorization);
