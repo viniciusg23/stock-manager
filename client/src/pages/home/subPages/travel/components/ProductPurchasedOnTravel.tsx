@@ -14,7 +14,7 @@ function ProductPurchasedOnTravel(props: IProductPurchasedOnTravelProps) {
     return (
         <Paper
             sx={{
-                backgroundColor: "primary.main",
+                backgroundColor: "secondary.main",
                 color: "white",
                 padding: "0.5em",
                 display: "flex",
@@ -41,7 +41,7 @@ function ProductPurchasedOnTravel(props: IProductPurchasedOnTravelProps) {
             </Box>
             <Box>
                 <IconButton aria-label="delete" onClick={() => handleRemoveProduct(id)}>
-                    <Delete htmlColor="#fff"/>
+                    <Delete htmlColor="#fff" />
                 </IconButton>
             </Box>
         </Paper>

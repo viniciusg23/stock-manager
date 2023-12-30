@@ -37,15 +37,19 @@ export function ColorModeContextProvider({children} : any){
                 palette: {
                     mode: "light",
                     primary: {
-                        main: "#a60910",
+                        main: "#27ae60",
                         contrastText: "#fff"
                     },
                     secondary: {
-                        main: "#ff4148",
+                        main: "#3d8e63",
                     },
                     background: {
                         default: "#eeeeee",
                         paper: "#fff"
+                    },
+                    success: {
+                        main: "#27ae60",
+                        contrastText: "#fff"
                     },
                     getContrastText: () => {return "#000"}
                     
@@ -57,15 +61,19 @@ export function ColorModeContextProvider({children} : any){
                 palette: {
                     mode: "dark",
                     primary: {
-                        main: "#a60910",
+                        main: "#27ae60",
                         contrastText: "#fff"
                     },
                     secondary: {
-                        main: "#ff4148",
+                        main: "#3d8e63",
                     },
                     background: {
                         paper: "#424242",
                         default: "#303030"
+                    },
+                    success: {
+                        main: "#27ae60",
+                        contrastText: "#fff"
                     },
                     getContrastText: () => {return "#fff"}
                 },

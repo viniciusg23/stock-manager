@@ -9,6 +9,7 @@ function SpendController(props: ISpendControllerProps) {
 
     const {actualCost, travelCost} = props;
 
+
     return (
         <Box
             sx={{
@@ -19,7 +20,13 @@ function SpendController(props: ISpendControllerProps) {
         >
             <Paper sx={{ flexGrow: 1 }}>
                 <Typography>Atual:</Typography>
-                <Typography>R${actualCost}</Typography>
+                <Typography 
+                    sx={{
+                        color: actualCost < travelCost ? "warning.main" : actualCost == travelCost ? "success.main" : "secondary.main"
+                    }}
+                >
+                    R${actualCost}
+                </Typography>
             </Paper>
             <Paper sx={{ flexGrow: 1 }}>
                 <Typography>Total:</Typography>

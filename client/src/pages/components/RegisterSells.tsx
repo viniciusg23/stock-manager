@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FilledInput, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FilledInput, FormControl, Input, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,10 +28,12 @@ function RegisterSells(props: IRegisterSellsProps) {
 
     const [availableQuantity, setAvailableQuantity] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [expectedTotalPrice, setExpectedTotalPrice] = useState<number>(0);
     const [selectedEmployee, setSelectedEmployee] = useState<string>("");
     const [buyerName, setBuyerName] = useState<string>("");
     const [buyerEmail, setBuyerEmail] = useState<string>("");
     const [buyerNumber, setBuyerNumber] = useState<string>("");
+    const [discount, setDiscount] = useState<string>("");
 
 
     const [systemPasswordModal, setSystemPasswordModal] = useState<boolean>(false);
@@ -84,12 +86,21 @@ function RegisterSells(props: IRegisterSellsProps) {
     useEffect(() => {
         const product = products.find(product => product.id === selectedProductId);
         if (product) {
-            setTotalPrice(Number(selectedQuantity) * selectedProductSalePrice);
+            setExpectedTotalPrice(Number(selectedQuantity) * selectedProductSalePrice);
         }
         else {
-            setTotalPrice(0);
+            setExpectedTotalPrice(0);
         }
     }, [selectedQuantity]);
+
+    useEffect(() => {
+        setTotalPrice(Number(expectedTotalPrice));
+    }, [expectedTotalPrice])
+    
+    useEffect(() => {
+        const discountedPrice = Number(expectedTotalPrice) * (Number(discount) / 100);
+        setTotalPrice(Number(expectedTotalPrice) - discountedPrice);
+    }, [discount, expectedTotalPrice]);
 
 
 
@@ -177,31 +188,37 @@ function RegisterSells(props: IRegisterSellsProps) {
                 Registrar Nova Venda
             </Typography>
 
-            <Box padding={format !== "system" ? "1em" : ""}>
-                <Typography mt="1em" align="left" variant="h6">Informações do Produto</Typography>
-                <Box mt="1em" display="flex" flexDirection={format === "system" ? "row" : "column"} gap="1em">
+            <Box 
+                sx={{
+                    padding: format !== "system" ? "1em" : "",
+                    display: "flex",
+                    flexDirection: format !== "system" ? "column" : "row",
+                    gap: "1.5em",
+                }}
+            >
+                <Box mt="1em" display="flex" flexDirection="column" gap="1em" width="100%">
+                    <Typography mt="1em" align="left" variant="h6">Informações do Produto</Typography>
+
+                
                     <FormControl sx={{ my: 1 }} fullWidth>
-                        <InputLabel color="secondary" id="select-product-label">Selecionar Produto</InputLabel>
-                        <Select
-                            color="secondary"
-                            labelId="select-product-label"
-                            value={selectedProductId}
-                            label="Selecionar Produto"
-                            onChange={(event) => setSelectedProductId(event.target.value)}
-                        >
-                            {products.map((product) => (
-                                <MenuItem key={product.id} value={product.id}>{product.name}</MenuItem>
-                            ))}
-                        </Select>
+                        <Autocomplete
+                            fullWidth
+                            disablePortal
+                            id="combo-box-demo"
+                            options={products}
+                            getOptionLabel={(option) => option.name}
+                            onChange={(event: React.ChangeEvent<{}>, value: any) => setSelectedProductId(value.id)}
+                            renderInput={(params) => <TextField {...params} label="Produto *" />}
+                        />
                     </FormControl>
 
                     <FormControl sx={{ my: 1 }} fullWidth>
-                        <InputLabel color="secondary" id="select-quantity-label">Selecionar Quantidade</InputLabel>
+                        <InputLabel color="secondary" id="select-quantity-label">Selecionar Quantidade *</InputLabel>
                         <Select
                             color="secondary"
                             labelId="select-quantity-label"
                             value={selectedQuantity}
-                            label="Selecionar Quantidade"
+                            label="Selecionar Quantidade *"
                             onChange={(event) => setSelectedQuantity(Number(event.target.value))}
                         >
                             {Array.from({ length: availableQuantity }, (_, index) => (
@@ -211,12 +228,12 @@ function RegisterSells(props: IRegisterSellsProps) {
                     </FormControl>
 
                     <FormControl sx={{ my: 1 }} fullWidth>
-                        <InputLabel color="secondary" id="select-employee-label">Selecionar Funcionário</InputLabel>
+                        <InputLabel color="secondary" id="select-employee-label">Selecionar Funcionário *</InputLabel>
                         <Select
                             color="secondary"
                             labelId="select-employee-label"
                             value={selectedEmployee}
-                            label="Selecionar Funcionário"
+                            label="Selecionar Funcionário *"
                             onChange={(event) => setSelectedEmployee(event.target.value)}
                         >
                             {employees.map((employee) => (
@@ -226,17 +243,19 @@ function RegisterSells(props: IRegisterSellsProps) {
                     </FormControl>
                 </Box>
 
-                <Typography mt="1em" align="left" variant="h6">Informações do Comprador</Typography>
-                <Box mt="1em" display="flex" flexDirection={format === "system" ? "row" : "column"} gap="1em">
+                <Box mt="1em" display="flex" flexDirection="column" gap="1em" width="100%">
+                    <Typography mt="1em" align="left" variant="h6">Informações do Comprador</Typography>
+
+
                     <TextField
                         sx={{ my: 1 }}
-                        label="Nome do Comprador"
+                        label="Nome do Comprador *"
                         type="text"
                         color="secondary"
                         id="buyer-name"
                         name="buyerName"
                         value={buyerName}
-                        variant="filled"
+                        
                         onChange={(event) => setBuyerName(event.target.value)}
                         fullWidth
                     />
@@ -249,7 +268,7 @@ function RegisterSells(props: IRegisterSellsProps) {
                         id="buyer-email"
                         name="buyerEmail"
                         value={buyerEmail}
-                        variant="filled"
+                        
                         onChange={(event) => setBuyerEmail(event.target.value)}
                         fullWidth
                     />
@@ -262,39 +281,44 @@ function RegisterSells(props: IRegisterSellsProps) {
                         id="buyer-number"
                         name="buyerNumber"
                         value={buyerNumber}
-                        variant="filled"
+                        
                         onChange={(event) => setBuyerNumber(event.target.value)}
                         fullWidth
                     />
                 </Box>
 
-                <Typography mt="1em" align="left" variant="h6">Informações da Venda</Typography>
-                <Box mt="1em" display="flex" flexDirection={format === "system" ? "row" : "column"} gap="1em">
+                <Box mt="1em" display="flex" flexDirection="column" gap="1em" width="100%">
+                    <Typography mt="1em" align="left" variant="h6">Informações da Venda</Typography>
+
 
                     <FormControl sx={{ my: 1 }} variant="filled">
                         <InputLabel color="secondary" htmlFor="total-price">Valor Total</InputLabel>
                         <FilledInput
+                            contentEditable={false}
                             type="number"
                             color="secondary"
                             id="total-price"
                             value={totalPrice}
-                            onChange={(event) => setTotalPrice(Number(event.target.value))}
+                            onChange={(event) => {
+                                setExpectedTotalPrice(Number(event.target.value))
+                            }}
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
 
-                </Box>
+                    <TextField
+                        sx={{ my: 1 }}
+                        label="Porcentagem de Desconto"
+                        type="number"
+                        color="secondary"
+                        value={discount}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">%</InputAdornment>,
+                        }}
+                        onChange={(event) => setDiscount(event.target.value)}
 
+                    />
 
-                <Typography mt="1em" align="left" variant="h6">Finalizar Venda</Typography>
-                <Box
-                    sx={{
-                        mt: "1em",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1.5em",
-                    }}
-                >
                     <Button
                         fullWidth={format === "agil" ? true : false}
                         color="success"
@@ -305,8 +329,9 @@ function RegisterSells(props: IRegisterSellsProps) {
                     >
                         Vender
                     </Button>
-
                 </Box>
+
+
             </Box>
         </>
     );

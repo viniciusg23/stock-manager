@@ -50,20 +50,20 @@ function TotalSalesByEmployee() {
                 label: "Total Vendido",
                 data: totalSales,
                 backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(39, 174, 96, 0.5)",
+                    "rgba(52, 152, 219, 0.5)",
+                    "rgba(241, 196, 15, 0.5)",
+                    "rgba(231, 76, 60, 0.5)",
+                    "rgba(142, 68, 173, 0.5)",
+                    "rgba(255, 87, 34, 0.5)", 
                 ],
                 borderColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)",
-                    "rgba(255, 159, 64, 1)",
+                    "rgba(39, 174, 96, 1)",
+                    "rgba(52, 152, 219, 1)", 
+                    "rgba(241, 196, 15, 1)",
+                    "rgba(231, 76, 60, 1)", 
+                    "rgba(142, 68, 173, 1)", 
+                    "rgba(255, 87, 34, 1)", 
                 ],
                 borderWidth: 1,
             }
@@ -80,9 +80,10 @@ function TotalSalesByEmployee() {
 
     return (
         <Paper
-            elevation={2}
+            elevation={0}
             sx={{
-                width: "60%"
+                width: "60%",
+                border: "1px solid #00000015"
             }}
         >
             <Typography textAlign="left" sx={{ padding: ".75em", fontSize: "1.5em", fontWeight: 600 }}>

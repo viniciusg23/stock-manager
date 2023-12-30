@@ -140,7 +140,7 @@ export default function DrawerNavegation() {
           }} />
 
           <Typography variant="h6" noWrap component="div">
-            Complemento Outlet
+              Seu Gerenciador de Estoque
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: "1em" }}>

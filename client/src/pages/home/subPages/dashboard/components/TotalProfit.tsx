@@ -35,12 +35,13 @@ function TotalProfit() {
 
     return (
         <Paper 
-            elevation={2}
+            elevation={0}
             sx={{
                 width: "100%", 
                 padding: "1.5em",
                 display: "flex",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                border: "1px solid #00000015"
             }}
         >
             <div>

@@ -4,19 +4,21 @@ import { IPurchasedProduct } from '../ManageTravel';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
 interface IPDFBodyProps {
+    travelName: string;
+    travelCost: string;
     produtos: IPurchasedProduct[];
     valorTotal: number;
 }
 
-export default function PDFBody(props: IPDFBodyProps) {
-    const {produtos, valorTotal} = props;
+export default function PDFGenerator(props: IPDFBodyProps) {
+    const { travelName, travelCost, produtos, valorTotal } = props;
 
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const title = [
         {
             margin: [15,20,0,45],
-            text: 'RELATÓRIO DE VENDAS', 
+            text: 'RELATÓRIO DE PRODUTOS COMPRADOS', 
             style: 'reportName', 
             alignment: 'center',
             fontSize: 15,
@@ -35,6 +37,8 @@ export default function PDFBody(props: IPDFBodyProps) {
 
 
     const details = [
+        { text: `Nome da viagem: ${travelName}`, fontSize: 9, margin: [0, 4, 0, 0]},
+        { text: `Valor levado para viagem: R$${travelCost}`, fontSize: 9, margin: [0, 4, 0, 10] },
         {
             table: {
                 headerRows: 1,
@@ -84,7 +88,7 @@ export default function PDFBody(props: IPDFBodyProps) {
                       margin: [3, 0],
                     },
                     {
-                      text: '© Complemento',
+                      text: '© IStock',
                       fontSize: 7,
                       alignment: 'center',
                     },
@@ -98,9 +102,8 @@ export default function PDFBody(props: IPDFBodyProps) {
     const docDefinitions: unknown = {
         pageSize: 'A4',
         pageMargins: [15,50,15,40],
-
-        header: [title],
-        content: [details],
+        header: title,
+        content: details,
         footer: footer
     }
 

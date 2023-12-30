@@ -1,7 +1,7 @@
 import { Add, Search } from "@mui/icons-material";
 import { Box, Typography, FormControl, InputLabel, Input, InputAdornment, IconButton, Button, Tooltip } from "@mui/material";
 import Form from "./Form";
-import { useState } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 
 
 interface ITableControllerProps {
@@ -16,6 +16,7 @@ interface ITableControllerProps {
 function TableController(props: ITableControllerProps) {
 
     const {tableTitle, formTitle, form, thereIsAddButton, setQuery} = props;
+    // const [enterPressed, setEnterPressed] = useState(false);
     
     
     const [searchValue, setSearchValue] = useState<string>("");
@@ -31,8 +32,23 @@ function TableController(props: ITableControllerProps) {
 
     const handleSearch = () => {
         setQuery(searchValue);
-        // console.log(searchValue)
+        setSearchValue("");
     }
+
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+            if (event.key === "Enter") {
+                handleSearch();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyPress as unknown as EventListener);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyPress as unknown as EventListener);
+        };
+    }, [handleSearch]);
+    
 
 
 
@@ -54,6 +70,7 @@ function TableController(props: ITableControllerProps) {
                         <Input
                             id="standard-adornment-search"
                             type="text"
+                            value={searchValue}
                             onChange={(event) => setSearchValue(event.target.value)}
                             endAdornment={
                                 <InputAdornment position="end">

@@ -6,6 +6,7 @@ import { useProducts } from "../../../../../reduxReducers/slicers/sliceProducts"
 import { fetchProducts } from "../../../../../reduxActions/fetchProducts";
 import { AppDispatch } from "../../../../../reduxReducers/store";
 import { enqueueSnackbar } from "notistack";
+import { Typography } from "@mui/material";
 
 interface ProductColumn{
     id: "code" | "isFiscal" | "category" | "name" | "costPrice" | "purchaseDate" | "supplier" | "action";
@@ -19,7 +20,7 @@ interface ProductRow{
     isFiscal: string;
     category: string;
     name: string;
-    costPrice: string;
+    costPrice: JSX.Element;
     purchaseDate: string;
     supplier: string;
     action: JSX.Element;
@@ -59,7 +60,7 @@ function ProductsTable() {
                 isFiscal: product.isFiscal ? "Sim" : "Não",
                 category: product.category ? product.category.name : "Indefinido",
                 name: product.name,
-                costPrice: product.costPrice.toFixed(2),
+                costPrice: <Typography>R${product.costPrice.toFixed(2)}</Typography>,
                 purchaseDate: formatDate(product.purchaseMonth, product.purchaseYear),
                 supplier: product.supplier ? product.supplier.name : "Indefinido",
                 action: <ProductController product={product} />
@@ -82,5 +83,5 @@ function ProductsTable() {
 export default ProductsTable;
 
 function formatDate(month: string, year: number){
-    return month + "/" + year;
+    return month.substring(0, 3).toLowerCase() + "/" + year;
 }

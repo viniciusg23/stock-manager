@@ -19,8 +19,8 @@ interface IStockColumn{
 interface IStockRow{
     code: string
     name: string;
-    costPrice: string;
-    salePrice: string;
+    costPrice: JSX.Element;
+    salePrice: JSX.Element;
     quantity: number;
     profit: JSX.Element;
     action: JSX.Element;
@@ -60,10 +60,10 @@ function StockTable() {
                 code: product.code,
                 quantity: product.quantity,
                 name: product.name,
-                costPrice: product.costPrice.toFixed(2),
-                salePrice: product.salePrice.toFixed(2),
+                costPrice: <Typography>R${product.costPrice.toFixed(2)}</Typography>,
+                salePrice:  <Typography>R${product.salePrice.toFixed(2)}</Typography>,
                 action: <StockController product={product} />,
-                profit: <Typography color={profit < 1 ? "red" : "green"}>{profit.toFixed(2)}</Typography>
+                profit: <Typography color={profit < 1 ? "error.main" : "success.main"}>R${profit.toFixed(2)}</Typography>
             }
 
             rows.push(row);
