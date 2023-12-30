@@ -20,7 +20,7 @@ import categoryRouter from "./routers/categoryRouter";
 import etlRouter from "./routers/etlRouter";
 
 
-const environment = config.get<string>("env")
+const environment = config.get<string>("env");
 Logger.info("Server started on " + environment + " environment");
 
 const app = express();
