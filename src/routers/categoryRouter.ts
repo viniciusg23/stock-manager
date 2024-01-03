@@ -14,7 +14,7 @@ router.get("/view", (req, res) => {
     return viewCategoryController.handle(req, res);
 });
 
-router.post("/remove", (req, res) => {
+router.post("/remove", authMiddleware, (req, res) => {
     return removeCategoryController.handle(req, res);
 })
 

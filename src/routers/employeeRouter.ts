@@ -14,7 +14,7 @@ router.get("/view", (req, res) => {
     return viewEmployeeController.handle(req, res);
 });
 
-router.post("/remove", (req, res) => {
+router.post("/remove", authMiddleware, (req, res) => {
     return removeEmployeeController.handle(req, res);
 })
 

@@ -19,5 +19,4 @@ router.get("/view", authMiddleware, (req, res) => {
 
 
 
-
 export default router;

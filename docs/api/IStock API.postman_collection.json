@@ -1,0 +1,1217 @@
+{
+	"info": {
+		"_postman_id": "e9edd48e-3638-46bf-987b-1e556d55f243",
+		"name": "IStock API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27179689"
+	},
+	"item": [
+		{
+			"name": "User Actions",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"user\",\n\t\"password\": \"123\",\n\t\"systemPassword\": \"senha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "This endpoint allows you to register a new user. You need to make an HTTP POST request to `/user/register`\\` with the required payload in the raw request body.\n\n### Request Body\n\n- name (string, required): The name of the user.\n- password (string, required): The user's password.\n- systemPassword (string, required): The system password for registration.\n    \n\n### Response\n\n- Status: 201 - Created\n- message (string): A message confirming the successful registration.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"User created\"\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Admin\",\n\t\"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						},
+						"description": "### User Login\n\nThis endpoint is used to authenticate a user by providing their name and password.\n\n**Request Body**\n\n- name (text, required): The name of the user.\n- password (text, required): The password of the user.\n    \n\n**Response**\n\n- Status: 200 OK\n- message: A message indicating the result of the login attempt.\n- authorization: The authorization token for the authenticated user.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Login was sucefful.\",\n    \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW4iLCJpYXQiOjE3MDQxNjc1MjQsImV4cCI6MTcwNDc3MjMyNH0.em9qr7Fq63lZEpz2CvZZnKx0Ep9bdsgJpiCq6ZdRSjY\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manage Categories",
+			"item": [
+				{
+					"name": "Remove Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"65938a8612c51396aab7ac2a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/category/remove",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"remove"
+							]
+						},
+						"description": "This endpoint allows you to remove a category using an HTTP POST request to `/category/remove`. The request should include a payload with the raw request body type. The payload should contain the \"id\" parameter indicating the ID of the category to be removed.\n\n### Request Body\n\n- id (string, required): The ID of the category to be removed.\n    \n\n### Response\n\n- Status: 200\n- message (string): A message indicating the result of the removal operation.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Category removed.\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"categoria X\",\n\t\"fiscalCode\": \"12.123.12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/category/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"create"
+							]
+						},
+						"description": "### Create Category\n\nThis endpoint allows you to create a new category.\n\n#### Request Body\n\n- `name` (string, required): The name of the category.\n- `fiscalCode` (string, required): The fiscal code associated with the category.\n    \n\n#### Response\n\n- Status: 200\n- `message` (string): A message confirming the success of the category creation.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Category was suceffuly created.\"\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "View Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/category/view",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"view"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the list of categories from the specified URL. The request does not include a request body.\n\n### Response\n\n- Status: 200\n- The response includes a message and an array of categories, where each category contains a name, fiscal code, and ID.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All categories founded\",\n    \"categories\": [\n        {\n            \"name\": \"Brinco\",\n            \"fiscalCode\": \"12,123,12\",\n            \"id\": \"654bef730041c648ff868755\"\n        },\n        {\n            \"name\": \"Calça\",\n            \"fiscalCode\": \"33,333,33\",\n            \"id\": \"6552a57f57d36820f30580e1\"\n        },\n\n    ]\n}\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "Métodos disponíveis para manipulação das categorias de produtos no sistema."
+		},
+		{
+			"name": "Manage Suppliers",
+			"item": [
+				{
+					"name": "Remove Supplier",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"65938cfc12c51396aab7ac2f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/supplier/remove",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"supplier",
+								"remove"
+							]
+						},
+						"description": "### Remove Supplier\n\nThis endpoint is used to remove a supplier by sending an HTTP POST request to the specified URL.\n\n**Request Body**\n\n- id (string, required): The ID of the supplier to be removed.\n    \n\n**Response**\n\n- Status: 201\n- message (string): A message confirming the successful removal of the supplier.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Supplier excluded\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Suppliers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/supplier/view",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"supplier",
+								"view"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve information about suppliers from the server. The request does not include a request body.\n\n### Response\n\n- Status: 200\n- The response includes a message and a list of suppliers, where each supplier has a name, description, and an ID.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All suppliers founded\",\n    \"suppliers\": [\n        {\n            \"name\": \"Alice\",\n            \"description\": \"Alice de Belo Horizonte\",\n            \"id\": \"654bef860041c648ff86875d\"\n        },\n        {\n            \"name\": \"Lucas\",\n            \"description\": \"Nenhuma descrição\",\n            \"id\": \"655ca2ebada1f23147e3e5c4\"\n        }\n\n    ]\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Supplier",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG9ubyIsImlhdCI6MTcwNDA0MTk3MiwiZXhwIjoxNzA0NjQ2NzcyfQ.p58afvtmVaSJUNrNm_gBUv76g4vMkK_AjXgSvKSSgTc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Supplier for Example\",\n\t\"description\": \"Supplier created for Example\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/supplier/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"supplier",
+								"create"
+							]
+						},
+						"description": "This endpoint allows you to create a new supplier. The HTTP POST request should be sent to `/supplier/create` with a raw request body containing the supplier's name and description.\n\n### Request Body\n\n- `name` (string, required): The name of the supplier.\n- `description` (string, required): The description of the supplier.\n    \n\n### Response\n\nUpon successful creation, the endpoint will return a status code of 201 and a JSON response with a message confirming the action.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Supplier created successfully\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manage Products",
+			"item": [
+				{
+					"name": "Remove Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"65623210bc53759ffe360ffb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/remove",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"remove"
+							]
+						},
+						"description": "### Remove Product\n\nThis endpoint is used to remove a product.\n\n#### Request Body\n\n- id (string, required): The ID of the product to be removed.\n    \n\n#### Response\n\n- Status: 201\n- message (string): A message confirming the removal of the product.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Product excluded\"\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Create QR Code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/create-qrcode/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"create-qrcode",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65623232bc53759ffe361016",
+									"description": "Product ID"
+								}
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve a QR code for a specific product ID. The product ID is provided as a path parameter in the URL.\n\n### Request\n\n- Path parameter\n    - `id`: The ID of the product for which the QR code is to be generated.\n\n### Response\n\n- Status: 200 OK\n- `message`: A message related to the QR code generation.\n- `qrCode`: The generated QR code for the specified product ID.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"QR Code was sucefully created.\",\n    \"qrCode\": \"data:image/png;base64,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\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isFiscal\": true,\n    \"id\": \"65623210bc53759ffe360ffb\",\n    \"category\": \"654bef730041c648ff868755\",\n    \"name\": \"Example Product Edited\",\n    \"quantity\": 10,\n    \"costPrice\": 50.99,\n    \"salePrice\": 79.99,\n    \"purchaseMonth\": 10,\n    \"purchaseYear\": 2023,\n    \"supplier\": \"654bef860041c648ff86875d\",\n    \"code\": \"1EE1CHI06099\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/edit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"edit"
+							]
+						},
+						"description": "### Edit Product\n\nThis endpoint is used to edit a product.\n\n**Request Body**\n\n- `isFiscal` (boolean): Indicates if the product is fiscal.\n- `id` (string): The product ID.\n- `category` (string): The category of the product.\n- `name` (string): The name of the product.\n- `quantity` (integer): The quantity of the product.\n- `costPrice` (integer): The cost price of the product.\n- `salePrice` (integer): The sale price of the product.\n- `purchaseMonth` (integer): The month of purchase.\n- `purchaseYear` (integer): The year of purchase.\n- `supplier` (string): The supplier of the product.\n- `code` (string): The code of the product.\n    \n\n**Response**\n\n- `message` (string): A message indicating the status of the request.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Product Updated\"\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"isFiscal\": false,\n  \"category\": \"654bef730041c648ff868755\",\n  \"name\": \"Product Example\",\n  \"quantity\": 5,\n  \"costPrice\": 10.99,\n  \"salePrice\": 19.99,\n  \"purchaseMonth\": 3,\n  \"purchaseYear\": 2023,\n  \"supplier\": \"654bef860041c648ff86875d\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"create"
+							]
+						},
+						"description": "### Create Product\n\nThis endpoint is used to create a new product.\n\n#### Request Body\n\n- `isFiscal` (boolean, required): Indicates if the product is fiscal.\n- `category` (string, required): The category of the product.\n- `name` (string, required): The name of the product.\n- `quantity` (number, required): The quantity of the product.\n- `costPrice` (number, required): The cost price of the product.\n- `salePrice` (number, required): The sale price of the product.\n- `purchaseMonth` (number, required): The month of purchase.\n- `purchaseYear` (number, required): The year of purchase.\n- `supplier` (string, required): The supplier of the product.\n    \n\n#### Response\n\n- Status: 201\n- `message` (string): A message indicating the status of the product creation.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Product registered\"\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/view",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"view"
+							]
+						},
+						"description": "# Product View\n\nThis endpoint retrieves the details of products.\n\n### Response\n\n- `message` (string): A message related to the response.\n- `products` (array): An array of product objects, each containing the following fields:\n    - `code` (string): The code of the product.\n    - `isFiscal` (boolean): Indicates whether the product is fiscal.\n    - `category` (object): The category details of the product, containing the following fields:\n        - `name` (string): The name of the category.\n        - `fiscalCode` (string): The fiscal code of the category.\n        - `id` (string): The ID of the category.\n    - `name` (string): The name of the product.\n    - `quantity` (number): The quantity of the product.\n    - `costPrice` (number): The cost price of the product.\n    - `salePrice` (number): The sale price of the product.\n    - `purchaseMonth` (string): The month of purchase.\n    - `purchaseYear` (number): The year of purchase.\n    - `supplier` (object): The supplier details of the product, containing the following fields:\n        - `name` (string): The name of the supplier.\n        - `description` (string): The description of the supplier.\n        - `id` (string): The ID of the supplier.\n    - `id` (string): The ID of the product.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All products founded.\",\n    \"products\": [\n        {\n            \"code\": \"0.10215313967638062\",\n            \"isFiscal\": true,\n            \"category\": {\n                \"name\": \"Brinco\",\n                \"fiscalCode\": \"12,123,12\",\n                \"id\": \"654bef730041c648ff868755\"\n            },\n            \"name\": \"Brinco de Ouro\",\n            \"quantity\": 2,\n            \"costPrice\": 200,\n            \"salePrice\": 260,\n            \"purchaseMonth\": \"Janeiro\",\n            \"purchaseYear\": 2023,\n            \"supplier\": {\n                \"name\": \"Alice\",\n                \"description\": \"Alice de Belo Horizonte\",\n                \"id\": \"654bef860041c648ff86875d\"\n            },\n            \"id\": \"654bef980041c648ff868766\"\n        },\n        {\n            \"code\": \"0.46010644324847716\",\n            \"isFiscal\": true,\n            \"category\": {\n                \"name\": \"Calça\",\n                \"fiscalCode\": \"33,333,33\",\n                \"id\": \"6552a57f57d36820f30580e1\"\n            },\n            \"name\": \"Calça Jeans\",\n            \"quantity\": 13,\n            \"costPrice\": 120,\n            \"salePrice\": 220,\n            \"purchaseMonth\": \"Janeiro\",\n            \"purchaseYear\": 2023,\n            \"supplier\": {\n                \"name\": \"Alice\",\n                \"description\": \"Alice de Belo Horizonte\",\n                \"id\": \"654bef860041c648ff86875d\"\n            },\n            \"id\": \"6552a5a157d36820f30580ec\"\n        }\n    ]\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manage Employees",
+			"item": [
+				{
+					"name": "Remove Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"659453f72e44947328779654\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/remove",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"remove"
+							]
+						},
+						"description": "### Employee Removal\n\nThis endpoint is used to remove an employee via an HTTP POST request.\n\n#### Request\n\n- id (string, required): The ID of the employee to be removed.\n    \n\n#### Response\n\n- Status: 200 OK\n- message (string): A message confirming the successful removal of the employee.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Employee was suceffuly removed.\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "View Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/employee/view",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"view"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the details of all employees. The request does not include a request body.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All employees founded.\",\n    \"employees\": [\n        {\n            \"name\": \"Diego\",\n            \"job\": \"Vendedor\",\n            \"id\": \"6553d02ebacbddfdaaeacc5f\"\n        },\n        {\n            \"name\": \"Alice\",\n            \"job\": \"Vendedor\",\n            \"id\": \"65542c51ed888cd6b70b02f6\"\n        },\n        {\n            \"name\": \"Lucas\",\n            \"job\": \"Vendedor\",\n            \"id\": \"65562db05b47d2cc99aaeef7\"\n        }\n    ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Example Employee\",\n\t\"job\": \"Seller\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"create"
+							]
+						},
+						"description": "# Employee Create\n\nThis endpoint is used to create a new employee.\n\n**Request**\n\n- `name` (string, required): The name of the employee.\n- `job` (string, required): The job title of the employee.\n    \n\n**Response**\n\n- `message` (string): A message indicating the status of the request.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\":\"Employee was suceffuly created.\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales",
+			"item": [
+				{
+					"name": "View Sales",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/sale/view",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sale",
+								"view"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the details of a sale. The response will include a status code of 200, along with a message and an array of sales. Each sale in the array contains information about the product, quantity, sale price, employee involved, total price, and buyer name. The product details include code, fiscal status, category, name, quantity, cost price, sale price, purchase month, purchase year, supplier, and product ID. The category includes name, fiscal code, and ID, while the supplier details consist of name, description, and ID. The employee details include name, job, and ID. Each sale also has its own unique ID.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All sales found.\",\n    \"sales\": [\n        {\n            \"product\": {\n                \"code\": \"0.10215313967638062\",\n                \"isFiscal\": true,\n                \"category\": {\n                    \"name\": \"Brinco\",\n                    \"fiscalCode\": \"12,123,12\",\n                    \"id\": \"654bef730041c648ff868755\"\n                },\n                \"name\": \"Brinco de Ouro\",\n                \"quantity\": 1,\n                \"costPrice\": 200,\n                \"salePrice\": 260,\n                \"purchaseMonth\": \"Janeiro\",\n                \"purchaseYear\": 2023,\n                \"supplier\": {\n                    \"name\": \"Alice\",\n                    \"description\": \"Alice de Belo Horizonte\",\n                    \"id\": \"654bef860041c648ff86875d\"\n                },\n                \"id\": \"654bef980041c648ff868766\"\n            },\n            \"quantity\": 1,\n            \"salePrice\": 260,\n            \"employee\": {\n                \"name\": \"Vinícius\",\n                \"job\": \"Vendedor\",\n                \"id\": \"6552a63c57d36820f305810f\"\n            },\n            \"totalPrice\": 260,\n            \"buyerName\": \"Ana Paula\",\n            \"id\": \"6552a66057d36820f305811a\"\n        }\n    ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Sell",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"productId\": \"654bef980041c648ff868766\",\n\t\"quantity\": 1,\n\t\"salePrice\": 260,\n\t\"employeeId\": \"65542c51ed888cd6b70b02f6\",\n\t\"systemPassword\": \"senha\",\n\t\"buyerName\": \"João\",\n\t\"buyerEmail\": \"\",\n\t\"buyerNumber\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sale/sell",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sale",
+								"sell"
+							]
+						},
+						"description": "### Sell Product\n\nThis endpoint allows you to sell a product by making an HTTP POST request to the specified URL.\n\n#### Request Body\n\n- `productId` (string, required): The ID of the product to be sold.\n    \n- `quantity` (number, required): The quantity of the product being sold.\n    \n- `salePrice` (number, required): The sale price of the product.\n    \n- `employeeId` (string, required): The ID of the employee processing the sale.\n    \n- `systemPassword` (string, required): The password for system authentication.\n    \n- `buyerName` (string, required): The name of the buyer.\n    \n- `buyerEmail` (string, optional): The email of the buyer.\n    \n- `buyerNumber` (string, optional): The contact number of the buyer.\n    \n\n#### Response\n\nUpon a successful execution, the endpoint returns a status code of 200 along with a message indicating the success of the sale.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Sale successful\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ETL",
+			"item": [
+				{
+					"name": "Total Products in Stock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/etl/total-products-stock",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"etl",
+								"total-products-stock"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the total number of products in stock. The request does not require a request body.\n\n### Response\n\n- Status: 200\n- The response will include a JSON object with the following keys:\n    - message (string): A message related to the response.\n    - result (number): The total number of products in stock.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All data found.\",\n    \"result\": 33\n}\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Total Products Sold",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/etl/total-product-sold",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"etl",
+								"total-product-sold"
+							]
+						},
+						"description": "This endpoint retrieves the total number of products sold.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All data found.\",\n    \"result\": 8\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Total Profit By Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/etl/total-profit-employee",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"etl",
+								"total-profit-employee"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the total profit for each employee. The request does not require a request body.\n\nThe response will have a status code of 200, and it will include a message and an array of results. Each result will contain the employee's name and their total sale amount.\n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All data found\",\n    \"result\": [\n        {\n            \"employee\": \"Diego\",\n            \"totalSale\": 2070\n        },\n        {\n            \"employee\": \"Lucas\",\n            \"totalSale\": 780\n        },\n        {\n            \"employee\": \"Alice\",\n            \"totalSale\": 300\n        }\n    ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Total Profit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/etl/total-profit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"etl",
+								"total-profit"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the total profit related to ETL (Extract, Transform, Load) operations.\n\nThe request does not include a request body.\n\n### Response\n\n- Status: 200\n- message (string): A message related to the result.\n- result (string): The total profit related to ETL operations.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"Total profit in last 30 days.\",\n    \"result\": \"5350.00\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Percentage Of Sales By Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/etl/percentage-sales-category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"etl",
+								"percentage-sales-category"
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve the percentage sales for each category. The request does not contain a request body.\n\n### Response\n\n- Status: 200\n- The response will include a message and an array of objects containing the category and its corresponding percentage of sales.\n    \n\n**Response Example**\n\n``` json\n{\n    \"message\": \"All data found\",\n    \"result\": [\n        {\n            \"category\": \"Calça\",\n            \"percentage\": 0.6206896551724138\n        },\n        {\n            \"category\": \"Brinco\",\n            \"percentage\": 0.20689655172413793\n        },\n        {\n            \"category\": \"Sapato\",\n            \"percentage\": 0.1724137931034483\n        }\n    ]\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW4iLCJpYXQiOjE3MDQxNjc1MjQsImV4cCI6MTcwNDc3MjMyNH0.em9qr7Fq63lZEpz2CvZZnKx0Ep9bdsgJpiCq6ZdRSjY"
+		}
+	]
+}

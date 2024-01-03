@@ -110,7 +110,7 @@ function RegisterSells(props: IRegisterSellsProps) {
             if (
                 selectedProductId === "" ||
                 selectedQuantity < 1 ||
-                selectedProductSalePrice < 1 ||
+                totalPrice < 1 ||
                 selectedEmployee === "" ||
                 buyerName === ""
             ) {
@@ -120,7 +120,7 @@ function RegisterSells(props: IRegisterSellsProps) {
             const body = JSON.stringify({
                 productId: selectedProductId,
                 quantity: selectedQuantity,
-                salePrice: selectedProductSalePrice,
+                salePrice: totalPrice,
                 employeeId: selectedEmployee,
                 buyerName: buyerName,
                 buyerEmail: buyerEmail ? buyerEmail : undefined,

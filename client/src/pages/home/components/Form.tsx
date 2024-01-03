@@ -48,7 +48,7 @@ export default function Form(props: FormProps) {
                     }}
                 >
                     <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Typography  variant="h5" >{title}</Typography>
+                        <Typography variant="h5">{title}</Typography>
                         <IconButton aria-label="close" onClick={handleClose}>
                             <CloseIcon />
                         </IconButton>

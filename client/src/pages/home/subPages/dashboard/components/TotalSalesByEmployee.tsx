@@ -82,7 +82,7 @@ function TotalSalesByEmployee() {
         <Paper
             elevation={0}
             sx={{
-                width: "60%",
+                width: "70%",
                 border: "1px solid #00000015"
             }}
         >

@@ -26,13 +26,13 @@ export class SellProductUseCase {
             throw new Error("Invalid System password.");
         }
 
-        const totalPrice = data.quantity * data.salePrice;
+        // const totalPrice = data.quantity * data.salePrice;
         const sale = new Sale(
             await this.productRepository.findById(data.productId), 
             data.quantity, 
             data.salePrice, 
             await this.employeeRepository.findById(data.employeeId), 
-            totalPrice, 
+            data.salePrice, 
             data.buyerName, 
             data.buyerEmail, 
             data.buyerNumber

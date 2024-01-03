@@ -26,7 +26,7 @@ router.get("/total-product-sold", authMiddleware, (req, res) => {
 
 router.get("/total-products-stock", authMiddleware, (req, res) => {
     return totalOfProductsInStockController.handle(req, res);
-})
+});
 
 
 

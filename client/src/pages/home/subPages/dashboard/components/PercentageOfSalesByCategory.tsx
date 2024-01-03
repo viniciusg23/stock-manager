@@ -74,7 +74,7 @@ function PercentageOfSalesByCategory() {
         <Paper
             elevation={0}
             sx={{
-                width: "40%",
+                width: "30%",
                 border: "1px solid #00000015"
             }}
         >

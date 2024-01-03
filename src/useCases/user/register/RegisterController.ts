@@ -21,7 +21,7 @@ export class RegisterController implements IController {
 
             await this.registerUseCase.execute({name: name, password: password, systemPassword: systemPassword});
 
-            return res.status(201).send("User created");
+            return res.status(201).json({message: "User created"});
 
         } catch (error: any) {
             return res.status(400).json({

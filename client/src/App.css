@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
 .App {

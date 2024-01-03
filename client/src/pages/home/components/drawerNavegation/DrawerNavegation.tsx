@@ -165,7 +165,7 @@ export default function DrawerNavegation() {
           justifyContent: "space-between"
         }}>
 
-          <Typography ml={"1em"} color={theme.palette.primary.contrastText}>Funcionalidades</Typography>
+          <Typography ml={"1em"}>Funcionalidades</Typography>
 
           <IconButton onClick={handleDrawerClose} >
             <ChevronLeftIcon />
