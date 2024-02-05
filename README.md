@@ -55,6 +55,21 @@ SYSTEM_CONTROL_PASSWORD=your-system-password
 ENVIROMENT=development
 ```
 
+### 🐋 Docker
+Com o dockerfile já configurado, basta criar a imagem em seu sistema local com o comando:
+
+```bash
+docker build -t istock .
+```
+
+Isso pode demorar alguns minutos... Após a imagem criada basta apenas criar um novo container e seu gerenciador já estará disponível na porta que preferir.
+
+```bash
+docker run -p 5000:3000 -d istock
+```
+
+O valor `5000` pode ser alterado para o número da porta que deseja que seu sistema seja executado em sua máquina. Utilizando o valor `5000` após executar este comando o sistema já estará disponível em `http://localhost:5000/`.
+
 ### 🧪 Desenvolvimento
 
 Para executar o sistema em desenvolvimento:
