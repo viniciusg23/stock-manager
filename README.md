@@ -41,7 +41,7 @@ cd stock-manager
 Utilizando algum editor, crie um novo arquivo na raiz do diretório `stock-manager` chamado `.env` e nele adicione.
 ```bash
 #URI do MongoDB (Faça as mudanças necessárias)
-MONGODB_URI=mongodb+srv://user:password@maincluster.hqzp4yx.mongodb.net/database_name?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://user:password@yourcluster.mongodb.net/database_name?retryWrites=true&w=majority
 
 #Segredo do Json Web Token
 JWT_SECRET=your-secret
@@ -56,33 +56,14 @@ ENVIROMENT=development
 ```
 
 ### 🐋 Docker
-Com o dockerfile já configurado, basta criar a imagem em seu sistema local com o comando:
+Se você possui o docker instalado em seu computador, você pode fazer deploy do sistema com apenas um comando e poucos segundos:
 
 ```bash
-docker build -t istock .
-```
-
-Isso pode demorar alguns minutos... Após a imagem criada basta apenas criar um novo container e seu gerenciador já estará disponível na porta que preferir.
-
-```bash
-docker run -p 5000:3000 -d istock
+sudo docker run -p 5000:3000 --env-file .env -d viniciusgg/istock:v1.0.0
 ```
 
 O valor `5000` pode ser alterado para o número da porta que deseja que seu sistema seja executado em sua máquina. Utilizando o valor `5000` após executar este comando o sistema já estará disponível em `http://localhost:5000/`.
 
-### 🧪 Desenvolvimento
-
-Para executar o sistema em desenvolvimento:
-
-```bash
-# Instalação do node_modules
-npm run setup
-
-# Execução do ambiente de desenvolvimento
-npm run dev
-```
-
-Agora IStock está rodando em [http://localhost:3001/](http://localhost:3001/)
 
 ### 🚀 Produção
 
@@ -116,6 +97,20 @@ npx pm2 stop app_name
 # apaga o serviço
 npx pm2 delete app_name
 ```
+
+### 🧪 Desenvolvimento
+
+Para executar o sistema em desenvolvimento:
+
+```bash
+# Instalação do node_modules
+npm run setup
+
+# Execução do ambiente de desenvolvimento
+npm run dev
+```
+
+Agora IStock está rodando em [http://localhost:3001/](http://localhost:3001/)
 
 ## 📄 Informações da API
 Pode acessar uma documentação extensa da API em:
